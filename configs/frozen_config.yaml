@@ -1,0 +1,1047 @@
+project:
+  name: AURA-CXR
+  stage: original_study
+  seed: 42
+  selection_eligible: true
+data:
+  image_size: 224
+  rsna_total: 26684
+  train: 18678
+  validation: 2668
+  development: 21346
+  locked_test: 5338
+  locked_test_positive: 1203
+  locked_test_negative: 4135
+splits:
+  patient_level: true
+  outer_oof_folds: 5
+  development_only_for_selection: true
+  locked_test_evaluation_only: true
+preprocessing:
+  dicom_rescale: true
+  monochrome1_inversion: true
+  per_image_minmax: true
+  resize:
+  - 224
+  - 224
+  resize_method: PIL bilinear for base/EVA; skimage order=1 preserve_range antialiasing
+    for XRV after TorchXRayVision normalization
+radiomics:
+  wavelets:
+  - haar
+  - db4
+  - sym4
+  - coif3
+  selection: entropy_per_image
+  entropy:
+    coefficients: absolute nonzero level-1 LH/HL/HH
+    normalization: p=c/sum(c)
+    log_base: 2
+    epsilon: 1.0e-12
+    tie_policy: first candidate in listed order
+    coefficient_set: flatten+concatenate level-1 cH/cV/cD, then abs and exact-zero
+      removal
+    aggregation: single joint entropy
+    empty_case: 0.0
+    floating_tie_tolerance: null
+  wavelet_levels: 3
+  subband_order:
+  - LH1
+  - HL1
+  - HH1
+  - LH2
+  - HL2
+  - HH2
+  - LH3
+  - HL3
+  - HH3
+  - LL3
+  glcm:
+    levels: 256
+    distances:
+    - 1
+    - 2
+    - 3
+    angles_deg:
+    - 0
+    - 45
+    - 90
+    - 135
+    symmetric: true
+    normed: true
+    properties:
+    - contrast
+    - energy
+    - homogeneity
+    - dissimilarity
+    - correlation
+    - ASM
+    quantization:
+      method: per_subband_minmax_uint8
+      constant_subband: zeros
+      scale: 255
+      clip:
+      - 0
+      - 255
+      cast: uint8_truncation
+    property_order:
+    - contrast
+    - energy
+    - homogeneity
+    - dissimilarity
+    - correlation
+    - ASM
+    feature_order: subband -> property -> distance -> angle, C-order flatten
+    border_handling: no custom padding/crop; valid graycomatrix pairs only
+  lbp:
+    points: 24
+    radius: 3
+    method: uniform
+    bins: 26
+    histogram_density: true
+    input: preprocessed original image via to_uint8
+    range:
+    - 0
+    - 26
+    normalization: np.histogram density=True; effective L1 for unit-width bins
+  feature_dimension: 746
+  selected_learner: LightGBM
+  preprocessing:
+    internal_rsna:
+      source_format: DICOM
+      pixel_dtype: float32
+      rescale_slope: true
+      rescale_intercept: true
+      monochrome1_inversion: img.max() - img
+      windowing: null
+      per_image_minmax: true
+      constant_image: zeros
+      resize:
+      - 224
+      - 224
+      resize_library: Pillow
+      resize_interpolation: BILINEAR
+      output_dtype: float32
+      output_range:
+      - 0.0
+      - 1.0
+      channels: 1
+    external_kermany_note: dataset-specific grayscale loader uses Pillow default BICUBIC;
+      same downstream radiomics extractor and frozen model
+  wavelet:
+    library: PyWavelets
+    verified_runtime_version: 1.8.0
+    candidates:
+    - haar
+    - db4
+    - sym4
+    - coif3
+    mode_effective: symmetric
+    mode_source: implicit dwt2 default in original code
+    selection_level: 1
+    coefficient_mapping:
+      code_lh: cH
+      code_hl: cV
+      code_hh: cD
+  decomposition:
+    levels: 3
+    method: sequential dwt2 on current LL
+    mode_effective: symmetric
+    subband_order:
+    - LH1
+    - HL1
+    - HH1
+    - LH2
+    - HL2
+    - HH2
+    - LH3
+    - HL3
+    - HH3
+    - LL3
+    post_dwt_crop: false
+    post_dwt_resize: false
+  feature_schema:
+    dimension: 746
+    dtype: float32
+    concatenation: 720 GLCM then 26 LBP
+    schema_sha256: aef48a478b89b93dc92160959ba18d901775c26a08cfd50dbe33af8a9642f876
+    scaler: null
+    post_feature_selection: null
+    explicit_imputation: null
+  lightgbm:
+    library_version: 4.7.0
+    full_development_search_params:
+      learning_rate: 0.03401
+      max_leaf_nodes: 39
+      max_depth: 12
+      l2_regularization: 10.0
+      min_samples_leaf_frac: 0.001
+    full_development_effective_params:
+      boosting_type: gbdt
+      objective: binary
+      learning_rate: 0.03401
+      num_leaves: 39
+      search_depth: 12
+      max_depth: -1
+      reg_lambda: 10.0
+      reg_alpha: 0.0
+      min_child_samples: 21
+      min_child_weight: 0.001
+      min_split_gain: 0.0
+      n_estimators: 400
+      subsample: 0.9
+      subsample_freq: 1
+      colsample_bytree: 0.9
+      subsample_for_bin: 200000
+      max_bin: 255
+      class_weight: balanced
+      random_state: 42
+      n_jobs: -1
+      verbosity: -1
+      deterministic: false
+      force_col_wise: false
+      force_row_wise: false
+      device_type: cpu
+      importance_type: split
+      fit_sample_weight: null
+      fit_eval_set: null
+      fit_eval_metric: null
+      fit_callbacks: null
+      early_stopping: false
+      feature_scaler: null
+    model_sha256: 15d862c5c9ddfd088aebdbfd146b4cb133c089f577cd09ed73bf71058ab1c1b7
+  mrfo:
+    implementation: custom MRFOptimizer in train_aura.py
+    fitness: f1_macro
+    direction: maximize via minimizing negative mean score
+    inner_cv:
+      type: StratifiedKFold
+      shuffle: true
+      random_state: 42
+    final:
+      population: 15
+      iterations: 15
+      inner_cv: 3
+      seed: 42
+      subsample: 0
+      restart_patience: 6
+      restart_fraction: 0.35
+      epsilon: 1.0e-05
+    screening:
+      rows: 4000
+      folds: 3
+      inner_folds: 2
+      population: 8
+      iterations: 8
+      seeds:
+      - 42
+      - 123
+      top_k: 2
+    search_space: reproducibility/mrfo_search_space.csv
+mrfo:
+  fitness: f1_macro
+  seed: 42
+  final:
+    population: 15
+    iterations: 15
+    inner_cv: 3
+  screening:
+    rows: 4000
+    folds: 3
+    inner_folds: 2
+    population: 8
+    iterations: 8
+    seeds:
+    - 42
+    - 123
+    top_k: 2
+  bounds:
+    knn:
+      k_odd:
+      - 3
+      - 101
+      weights:
+      - uniform
+      - distance
+      metrics:
+      - euclidean
+      - manhattan
+      - minkowski
+      - chebyshev
+    svm:
+      log10_C:
+      - -2
+      - 3
+      log10_gamma:
+      - -4
+      - 0
+    histgb_lgbm:
+      log10_lr:
+      - -2.3
+      - -0.4
+      leaves:
+      - 15
+      - 255
+      depth:
+      - 2
+      - 12
+      log10_l2:
+      - -4
+      - 1
+      min_leaf_fraction:
+      - 0.001
+      - 0.05
+models:
+  efficientnetv2s:
+    framework: tensorflow
+    pretrained: ImageNet
+    image_size: 224
+    optimizer: Adam
+    phase1_lr: 0.0001
+    phase2_lr: 1.0e-05
+    batch_size: 64
+    max_epochs:
+    - 40
+    - 20
+    patience: 12
+  resnet50:
+    framework: tensorflow
+    pretrained: ImageNet
+    image_size: 224
+    optimizer: Adam
+    phase1_lr: 0.0001
+    phase2_lr: 1.0e-05
+    batch_size: 64
+    max_epochs:
+    - 40
+    - 20
+    patience: 12
+  xrv:
+    framework: pytorch
+    architecture: DenseNet121-XRV
+    upstream_weights: densenet121-res224-all
+    image_size: 224
+    optimizer: AdamW
+    lr: 0.0003
+    weight_decay: 0.0001
+    batch_size: 32
+    max_epochs: 60
+    patience: 12
+    dropout: 0.3
+    focal_gamma: 2.0
+    mc_passes: 30
+    inner_val_fraction: 0.1
+  eva_x:
+    framework: pytorch
+    architecture: EVA-X-S
+    upstream_checkpoint_identifier: eva_x_s_16.pt / verified merged520k source
+    image_size: 224
+    optimizer: AdamW
+    lr: 0.0001
+    weight_decay: 0.05
+    batch_size: 24
+    max_epochs: 60
+    patience: 12
+    dropout: 0.2
+    focal_gamma: 2.0
+    mc_passes: 30
+    inner_val_fraction: 0.1
+    normalization_mean:
+    - 0.5
+    - 0.5
+    - 0.5
+    normalization_std:
+    - 0.5
+    - 0.5
+    - 0.5
+    patch_size: 16
+training:
+  seed: 42
+  class_weighting: balanced
+  scheduler: CosineAnnealingLR for XRV/EVA; ReduceLROnPlateau/phase logic retained
+    in canonical TF snapshot
+  gradient_clip_norm: 5.0
+  final_refit_rule: development-derived median/best epoch information; see canonical
+    source snapshot
+oof:
+  folds: 5
+  patient_disjoint: true
+  outer_holdout_not_used_for_tuning: true
+fusion:
+  final_configuration: A8
+  meta_feature_order:
+  - p_xrv
+  - p_eva_x
+  - p_radiomics
+  logistic_regression:
+    class_weight: balanced
+    solver: lbfgs
+    C: 1.0
+    max_iter: 5000
+    seed: 42
+  intercept: -6.22883556957103
+  coefficients:
+    p_xrv: 7.964391214167865
+    p_eva_x: 4.559219751627475
+    p_radiomics: -0.03641402783417562
+  threshold: 0.47000000000000003
+  soft_voting_weights:
+    xrv: 0.3694867855722349
+    eva_x: 0.3571925056178238
+    radiomics: 0.2733207088099412
+  soft_voting_threshold: 0.435
+  individual_thresholds:
+    xrv: 0.495
+    eva_x: 0.47
+    radiomics: 0.225
+  a4_threshold: 0.49
+statistics:
+  bootstrap_resamples: 2000
+  bootstrap_seed: 42
+  bootstrap_stratified: true
+  paired_auc_test: DeLong
+  classifier_multiplicity: Holm
+calibration:
+  temperature_scaling_source: development_oof
+  deployment_use: false
+uncertainty:
+  mc_dropout_passes: 30
+  descriptor: two_sided_95_predictive_interval_width_equals_2_times_1.96_times_mc_probability_std
+xai:
+  scope: HYBRID_CNN_VIT_BRANCH_ONLY
+  xrv_layers:
+  - backbone.features.denseblock4.denselayer16.conv1
+  - backbone.features.denseblock4.denselayer15.conv1
+  eva_layers:
+  - blocks.11.mlp
+  - blocks.11
+  layer_weights:
+  - 0.75
+  - 0.25
+  inter_model_weights:
+    xrv: 0.25
+    eva_x: 0.75
+  activation_threshold: 0.25
+  patch_size: 16
+  grid_size:
+  - 14
+  - 14
+  class_token_detection: drop leading token iff N-1 is perfect square; otherwise use
+    N if perfect square; else invalid map
+faithfulness:
+  sample_n: 256
+  seed: 42
+  top_fraction: 0.1
+  baseline: image_mean
+  target_score: 0.25*XRV + 0.75*EVA-X-S branch probability
+external_validation:
+  dataset: Kermany official test
+  n: 624
+  normal: 234
+  pneumonia: 390
+  no_retraining: true
+  no_reselection: true
+  no_threshold_adaptation: true
+  no_recalibration: true
+deep_models:
+  efficientnetv2s:
+    framework: TensorFlow/Keras
+    constructor: tf.keras.applications.EfficientNetV2S
+    architecture: EfficientNetV2S
+    input:
+      model: EfficientNetV2S
+      framework: TensorFlow/Keras
+      input_range_before: '[0,1] float32 HWC after DICOM min-max + Pillow BILINEAR'
+      channel_handling: grayscale repeated to 3 channels
+      resize: 224x224 Pillow BILINEAR
+      scaling: multiply by 255; EfficientNetV2 preprocess_input is compatibility pass-through;
+        EfficientNetV2S default include_preprocessing=True performs internal rescaling
+      mean: N/A (application internal preprocessing, not external mean/std)
+      std: N/A
+      normalization_function: preprocess_for_efficientnet -> keras.applications.efficientnet_v2.preprocess_input;
+        model includes preprocessing
+      normalization_order: DICOM rescale/invert -> minmax -> resize -> RGB repeat
+        -> training augmentation -> batch -> x255/preprocess_input -> MixUp -> model
+      source_file: train_aura.py
+      source_function: load_dicom_grayscale/load_dicom_rgb; preprocess_for_efficientnet;
+        make_tf_dataset
+    pretraining:
+      identifier: weights="imagenet"
+      include_top: false
+      pooling: avg
+      upstream_hash: UNRESOLVED_FROM_AVAILABLE_PROVENANCE
+    head:
+      base_output: pooled feature vector
+      batchnorm_head: true
+      dense_units:
+      - 512
+      - 256
+      - 128
+      - 64
+      - 32
+      l2: 5.0e-05
+      dropout: 0.4
+      per_dense_sequence:
+      - Dense
+      - BatchNormalization
+      - ReLU
+      - Dropout
+      output: Dense(2,softmax,dtype=float32)
+      bias: Keras Dense default True
+      kernel_initializer: Keras Dense default GlorotUniform
+    loss:
+      type: CategoricalFocalCrossentropy
+      alpha: 0.25
+      alpha_source: Keras 3.13.2 effective default; code passes no alpha
+      gamma: 2.0
+      from_logits: false
+      label_smoothing: 0.05
+      reduction: sum_over_batch_size
+      class_weight: balanced per inner-train fold via total/(2*n_class)
+    augmentation:
+    - model: EfficientNetV2S
+      phase: all_training_phases
+      order_index: 1
+      augmentation: horizontal_flip
+      enabled: true
+      probability: 0.5
+      parameter: left-right flip
+      minimum: ''
+      maximum: ''
+      unit: boolean
+      interpolation: tf.image
+      fill_mode: N/A
+      source: train_aura.py:_tf_augment
+    - model: EfficientNetV2S
+      phase: all_training_phases
+      order_index: 2
+      augmentation: random_brightness
+      enabled: true
+      probability: '1.0'
+      parameter: additive delta
+      minimum: -0.15
+      maximum: 0.15
+      unit: normalized intensity
+      interpolation: tf.image
+      fill_mode: N/A
+      source: train_aura.py:_tf_augment
+    - model: EfficientNetV2S
+      phase: all_training_phases
+      order_index: 3
+      augmentation: random_contrast
+      enabled: true
+      probability: '1.0'
+      parameter: contrast factor
+      minimum: 0.85
+      maximum: 1.15
+      unit: multiplicative factor
+      interpolation: tf.image
+      fill_mode: N/A
+      source: train_aura.py:_tf_augment
+    - model: EfficientNetV2S
+      phase: all_training_phases
+      order_index: 4
+      augmentation: clip
+      enabled: true
+      probability: '1.0'
+      parameter: intensity
+      minimum: 0
+      maximum: 1
+      unit: normalized intensity
+      interpolation: tf.clip_by_value
+      fill_mode: N/A
+      source: train_aura.py:_tf_augment
+    - model: EfficientNetV2S
+      phase: all_training_phases
+      order_index: 5
+      augmentation: MixUp
+      enabled: true
+      probability: 1.0 per training batch
+      parameter: lambda ~ Beta(alpha,alpha)
+      minimum: 0.2
+      maximum: 0.2
+      unit: alpha; one scalar lambda per batch
+      interpolation: linear interpolation
+      fill_mode: paired by tf.random.shuffle
+      source: train_aura.py:mixup_batch; make_tf_dataset
+    training_phases:
+    - model: EfficientNetV2S
+      phase: phase1_initial
+      backbone_frozen: true
+      trainable_scope: custom head
+      optimizer: Adam(beta1=0.9,beta2=0.999,epsilon=1e-7,amsgrad=False)
+      lr: 0.0001
+      weight_decay: None
+      batch_size: 64
+      max_epochs: 40
+      scheduler: ReduceLROnPlateau(val_loss,factor=.5,patience=5,min_lr=1e-7)
+      early_stopping_patience: 12
+      monitor: val_auc
+      mixed_precision: mixed_float16 enabled by run script
+      gradient_clip: none
+      source: train_aura.py; run_aura_cxr.sh
+    - model: EfficientNetV2S
+      phase: phase2_finetune
+      backbone_frozen: false
+      trainable_scope: last 120 non-BN backbone layers; all BN frozen
+      optimizer: Adam(beta1=0.9,beta2=0.999,epsilon=1e-7,amsgrad=False)
+      lr: 1.0e-05
+      weight_decay: None
+      batch_size: 64
+      max_epochs: 20
+      scheduler: ReduceLROnPlateau(val_loss,factor=.5,patience=5,min_lr=1e-7)
+      early_stopping_patience: 12
+      monitor: val_auc
+      mixed_precision: mixed_float16 enabled by run script
+      gradient_clip: none
+      source: train_aura.py; run_aura_cxr.sh
+    early_stopping:
+      monitor: val_auc
+      mode: max
+      patience: 12
+      min_delta: 0.0
+      restore_best_weights: true
+      start_from_epoch: 0
+      scheduler_monitor: val_loss
+    inner_validation:
+      fraction: 0.1
+      stratify: binary label
+      seed: 42+outer_fold
+      outer_holdout_excluded: true
+    final_refit:
+      model: EfficientNetV2S
+      OOF_best_epochs: phase1=[40, 37, 30, 1, 39]; phase2=[15, 15, 20, 2, 20]
+      aggregation_rule: phase-wise Python round(median(best_epoch across 5 outer folds));
+        min 1
+      derived_epoch_phase1: 37
+      derived_epoch_phase2: 15
+      refit_dataset: full RSNA development=train+validation (21,346)
+      validation_used: false
+      initialization: fresh ImageNet EfficientNetV2S initialization
+      seed: 42
+      final_checkpoint: 'NOT_CREATED: candidate not selected for deployment'
+      hash: N.A.
+      execution_status: rule verified, refit skipped because not selected
+    parameter_count: 21170946
+    deployment: false
+    inference:
+      standard: model inference with dropout off / BN inference
+      OOF: MC Dropout mean of 30 passes; Dropout enabled, BatchNorm frozen
+      positive_class_index: 1
+  resnet50:
+    framework: TensorFlow/Keras
+    constructor: tf.keras.applications.ResNet50
+    architecture: ResNet50
+    input:
+      model: ResNet50
+      framework: TensorFlow/Keras
+      input_range_before: '[0,1] float32 HWC after DICOM min-max + Pillow BILINEAR'
+      channel_handling: grayscale repeated to 3 channels
+      resize: 224x224 Pillow BILINEAR
+      scaling: multiply by 255 then Keras ResNet50 Caffe preprocessing (RGB->BGR and
+        channel mean subtraction)
+      mean: BGR means [103.939,116.779,123.68] via Keras preprocess_input
+      std: none
+      normalization_function: keras.applications.resnet50.preprocess_input
+      normalization_order: DICOM rescale/invert -> minmax -> resize -> RGB repeat
+        -> training augmentation -> batch -> x255/ResNet preprocess -> MixUp -> model
+      source_file: train_aura.py
+      source_function: load_dicom_grayscale/load_dicom_rgb; preprocess_for_resnet;
+        make_tf_dataset
+    pretraining:
+      identifier: weights="imagenet"
+      include_top: false
+      pooling: avg
+      upstream_hash: UNRESOLVED_FROM_AVAILABLE_PROVENANCE
+    head:
+      base_output: pooled feature vector
+      batchnorm_head: true
+      dense_units:
+      - 512
+      - 256
+      - 128
+      - 64
+      - 32
+      l2: 5.0e-05
+      dropout: 0.4
+      per_dense_sequence:
+      - Dense
+      - BatchNormalization
+      - ReLU
+      - Dropout
+      output: Dense(2,softmax,dtype=float32)
+      bias: Keras Dense default True
+      kernel_initializer: Keras Dense default GlorotUniform
+    loss:
+      type: CategoricalFocalCrossentropy
+      alpha: 0.25
+      alpha_source: Keras 3.13.2 effective default; code passes no alpha
+      gamma: 2.0
+      from_logits: false
+      label_smoothing: 0.05
+      reduction: sum_over_batch_size
+      class_weight: balanced per inner-train fold via total/(2*n_class)
+    augmentation:
+    - model: ResNet50
+      phase: all_training_phases
+      order_index: 1
+      augmentation: horizontal_flip
+      enabled: true
+      probability: 0.5
+      parameter: left-right flip
+      minimum: ''
+      maximum: ''
+      unit: boolean
+      interpolation: tf.image
+      fill_mode: N/A
+      source: train_aura.py:_tf_augment
+    - model: ResNet50
+      phase: all_training_phases
+      order_index: 2
+      augmentation: random_brightness
+      enabled: true
+      probability: '1.0'
+      parameter: additive delta
+      minimum: -0.15
+      maximum: 0.15
+      unit: normalized intensity
+      interpolation: tf.image
+      fill_mode: N/A
+      source: train_aura.py:_tf_augment
+    - model: ResNet50
+      phase: all_training_phases
+      order_index: 3
+      augmentation: random_contrast
+      enabled: true
+      probability: '1.0'
+      parameter: contrast factor
+      minimum: 0.85
+      maximum: 1.15
+      unit: multiplicative factor
+      interpolation: tf.image
+      fill_mode: N/A
+      source: train_aura.py:_tf_augment
+    - model: ResNet50
+      phase: all_training_phases
+      order_index: 4
+      augmentation: clip
+      enabled: true
+      probability: '1.0'
+      parameter: intensity
+      minimum: 0
+      maximum: 1
+      unit: normalized intensity
+      interpolation: tf.clip_by_value
+      fill_mode: N/A
+      source: train_aura.py:_tf_augment
+    - model: ResNet50
+      phase: all_training_phases
+      order_index: 5
+      augmentation: MixUp
+      enabled: true
+      probability: 1.0 per training batch
+      parameter: lambda ~ Beta(alpha,alpha)
+      minimum: 0.2
+      maximum: 0.2
+      unit: alpha; one scalar lambda per batch
+      interpolation: linear interpolation
+      fill_mode: paired by tf.random.shuffle
+      source: train_aura.py:mixup_batch; make_tf_dataset
+    training_phases:
+    - model: ResNet50
+      phase: phase1_initial
+      backbone_frozen: true
+      trainable_scope: custom head
+      optimizer: Adam(beta1=0.9,beta2=0.999,epsilon=1e-7,amsgrad=False)
+      lr: 0.0001
+      weight_decay: None
+      batch_size: 64
+      max_epochs: 40
+      scheduler: ReduceLROnPlateau(val_loss,factor=.5,patience=5,min_lr=1e-7)
+      early_stopping_patience: 12
+      monitor: val_auc
+      mixed_precision: mixed_float16 enabled by run script
+      gradient_clip: none
+      source: train_aura.py; run_aura_cxr.sh
+    - model: ResNet50
+      phase: phase2_finetune
+      backbone_frozen: false
+      trainable_scope: last 120 non-BN backbone layers; all BN frozen
+      optimizer: Adam(beta1=0.9,beta2=0.999,epsilon=1e-7,amsgrad=False)
+      lr: 1.0e-05
+      weight_decay: None
+      batch_size: 64
+      max_epochs: 20
+      scheduler: ReduceLROnPlateau(val_loss,factor=.5,patience=5,min_lr=1e-7)
+      early_stopping_patience: 12
+      monitor: val_auc
+      mixed_precision: mixed_float16 enabled by run script
+      gradient_clip: none
+      source: train_aura.py; run_aura_cxr.sh
+    early_stopping:
+      monitor: val_auc
+      mode: max
+      patience: 12
+      min_delta: 0.0
+      restore_best_weights: true
+      start_from_epoch: 0
+      scheduler_monitor: val_loss
+    inner_validation:
+      fraction: 0.1
+      stratify: binary label
+      seed: 42+outer_fold
+      outer_holdout_excluded: true
+    final_refit:
+      model: ResNet50
+      OOF_best_epochs: phase1=[40, 40, 40, 38, 1]; phase2=[11, 12, 17, 7, 16]
+      aggregation_rule: phase-wise Python round(median(best_epoch across 5 outer folds));
+        min 1
+      derived_epoch_phase1: 40
+      derived_epoch_phase2: 12
+      refit_dataset: full RSNA development=train+validation (21,346)
+      validation_used: false
+      initialization: fresh ImageNet ResNet50 initialization
+      seed: 42
+      final_checkpoint: 'NOT_CREATED: candidate not selected for deployment'
+      hash: N.A.
+      execution_status: rule verified, refit skipped because not selected
+    parameter_count: 24823586
+    deployment: false
+    inference:
+      standard: model inference with dropout off / BN inference
+      OOF: MC Dropout mean of 30 passes; Dropout enabled, BatchNorm frozen
+      positive_class_index: 1
+  densenet121_xrv:
+    framework: PyTorch/TorchXRayVision
+    constructor: xrv.models.DenseNet(weights="densenet121-res224-all") wrapped by
+      XRVBinary
+    architecture: DenseNet121-XRV
+    input:
+      model: DenseNet121-XRV
+      framework: PyTorch/TorchXRayVision
+      input_range_before: '[0,1] float32 grayscale after DICOM rescale/invert/min-max'
+      channel_handling: single channel CHW [1,H,W]
+      resize: if needed, skimage.resize order=1 preserve_range=True anti_aliasing=True
+        after XRV normalize
+      scaling: xrv.datasets.normalize((img*255).float32,255); TorchXRayVision normalization
+        API
+      mean: not mean/std normalization
+      std: not mean/std normalization
+      normalization_function: xrv.datasets.normalize(...,255)
+      normalization_order: DICOM rescale/invert -> minmax -> x255 -> XRV normalize
+        -> resize if needed -> add channel
+      source_file: train_xrv_backbone.py
+      source_function: load_dicom_xrv
+    pretraining:
+      identifier: densenet121-res224-all
+      torchxrayvision_version: 1.5.2
+      upstream_hash: UNRESOLVED_FROM_AVAILABLE_PROVENANCE
+    head:
+      feature_source: backbone.features -> ReLU -> adaptive_avg_pool2d(1) -> flatten
+      dropout: 0.3
+      linear_outputs: 2
+      activation_during_forward: none/logits
+      probability: softmax(dim=1)
+      positive_class_index: 1
+    loss:
+      type: custom weighted focal cross-entropy
+      equation: mean((1-p_t)^gamma * NLLLoss(log_softmax(logits),target,weight=[N/(2N0),N/(2N1)]))
+      alpha: NO separate scalar alpha; class-specific balanced weights inside NLLLoss
+      gamma: 2.0
+      from_logits: true
+      label_smoothing: 0.0
+      class_weight: balanced from current training subset
+    augmentation: []
+    training_phases:
+    - model: DenseNet121-XRV
+      phase: single_phase
+      backbone_frozen: false
+      trainable_scope: full wrapped DenseNet + new head
+      optimizer: AdamW(betas=.9/.999,eps=1e-8,amsgrad=False)
+      lr: 0.0003
+      weight_decay: 0.0001
+      batch_size: 32
+      max_epochs: 60
+      scheduler: CosineAnnealingLR(T_max=60,eta_min=0), step after each epoch
+      early_stopping_patience: 12
+      monitor: inner_val_auc
+      mixed_precision: none
+      gradient_clip: global norm 5.0
+      source: train_xrv_backbone.py
+    optimizer:
+      name: AdamW
+      lr: 0.0003
+      weight_decay: 0.0001
+      betas:
+      - 0.9
+      - 0.999
+      eps: 1.0e-08
+      amsgrad: false
+      parameter_groups: all model parameters; no no-decay exclusions
+    scheduler:
+      name: CosineAnnealingLR
+      T_max: 60
+      eta_min: 0
+      step_timing: after each training epoch
+    early_stopping:
+      monitor: inner_val_auc
+      mode: max
+      patience: 12
+      min_delta: 1.0e-05
+      best_state: deep-cloned CPU state_dict
+      max_epochs: 60
+    inner_validation:
+      fraction: 0.1
+      stratify: binary label
+      seed: 42+outer_fold
+      outer_holdout_excluded: true
+    final_refit:
+      model: DenseNet121-XRV
+      OOF_best_epochs: '[1, 2, 2, 1, 2]'
+      aggregation_rule: max(1, int(round(median(best_epoch across 5 outer folds))))
+      derived_epoch_phase1: 2
+      derived_epoch_phase2: ''
+      refit_dataset: full RSNA development=train+validation (21,346)
+      validation_used: false
+      initialization: fresh TorchXRayVision densenet121-res224-all initialization
+        + AURA 2-class head
+      seed: 42
+      final_checkpoint: xrv_development_refit.pt
+      hash: ba0559aeba8afe500eeae3fc36825d3742e543d005a52d3cc35eeb732bab317a
+      execution_status: executed and deployment-locked
+    parameter_count: 6968084
+    deployment: true
+    inference:
+      deterministic_helper: model.eval()+torch.no_grad()+softmax
+      OOF_and_locked: MC Dropout mean of 30 passes; model.eval then only torch.nn.Dropout
+        modules train
+      batch_size: 32
+      positive_class_index: 1
+  eva_x_s:
+    framework: PyTorch/official EVA-X + timm
+    constructor: official eva_x.py::eva_x_small_patch16(pretrained=checkpoint_path)
+    architecture: EVA-X-S
+    input:
+      model: EVA-X-S
+      framework: PyTorch/official EVA-X + timm
+      input_range_before: '[0,1] float32 CHW after DICOM min-max + Pillow BILINEAR'
+      channel_handling: grayscale repeated to 3 channels CHW
+      resize: 224x224 Pillow BILINEAR
+      scaling: (x-mean)/std
+      mean: '[0.5,0.5,0.5]'
+      std: '[0.5,0.5,0.5]'
+      normalization_function: EvaDataset.__getitem__
+      normalization_order: DICOM rescale/invert -> minmax -> resize -> 3-channel repeat
+        -> (x-0.5)/0.5 -> tensor
+      source_file: train_eva_x_backbone.py
+      source_function: load_dicom_rgb; EvaDataset.__getitem__
+    pretraining:
+      identifier: eva_x_small_patch16_merged520k_mim.pt
+      lineage: official EVA-X merged520k MIM
+      upstream_hash: UNRESOLVED_FROM_AVAILABLE_PROVENANCE
+      observed_load_message: _IncompatibleKeys(missing_keys=['head.weight','head.bias'],
+        unexpected_keys=[])
+      patch_size: 16
+    head:
+      replacement: torch.nn.Sequential(Dropout(0.2), Linear(model.head.in_features,2))
+      activation_during_forward: none/logits
+      probability: softmax(dim=1)
+      positive_class_index: 1
+    loss:
+      type: custom weighted focal cross-entropy
+      equation: mean((1-p_t)^gamma * NLLLoss(log_softmax(logits),target,weight=[N/(2N0),N/(2N1)]))
+      alpha: NO separate scalar alpha; class-specific balanced weights inside NLLLoss
+      gamma: 2.0
+      from_logits: true
+      label_smoothing: 0.0
+      class_weight: balanced from current training subset
+    augmentation: []
+    training_phases:
+    - model: EVA-X-S
+      phase: single_phase
+      backbone_frozen: false
+      trainable_scope: full official EVA-X-S + replaced head
+      optimizer: AdamW(betas=.9/.999,eps=1e-8,amsgrad=False)
+      lr: 0.0001
+      weight_decay: 0.05
+      batch_size: 24
+      max_epochs: 60
+      scheduler: CosineAnnealingLR(T_max=60,eta_min=0), step after each epoch
+      early_stopping_patience: 12
+      monitor: inner_val_auc
+      mixed_precision: none
+      gradient_clip: global norm 5.0
+      source: train_eva_x_backbone.py
+    optimizer:
+      name: AdamW
+      lr: 0.0001
+      weight_decay: 0.05
+      betas:
+      - 0.9
+      - 0.999
+      eps: 1.0e-08
+      amsgrad: false
+      parameter_groups: all model parameters; no no-decay exclusions
+    scheduler:
+      name: CosineAnnealingLR
+      T_max: 60
+      eta_min: 0
+      step_timing: after each training epoch
+    early_stopping:
+      monitor: inner_val_auc
+      mode: max
+      patience: 12
+      min_delta: 1.0e-05
+      best_state: deep-cloned CPU state_dict
+      max_epochs: 60
+    inner_validation:
+      fraction: 0.1
+      stratify: binary label
+      seed: 42+outer_fold
+      outer_holdout_excluded: true
+    final_refit:
+      model: EVA-X-S
+      OOF_best_epochs: '[2, 1, 1, 2, 3]'
+      aggregation_rule: max(1, int(round(median(best_epoch across 5 outer folds))))
+      derived_epoch_phase1: 2
+      derived_epoch_phase2: ''
+      refit_dataset: full RSNA development=train+validation (21,346)
+      validation_used: false
+      initialization: fresh official EVA-X-S merged520k MIM checkpoint + replaced
+        2-class head
+      seed: 42
+      final_checkpoint: eva_x_development_refit.pt
+      hash: 83a46553743f12a8bbb64f900ece2efa312a6b75d5638e8fae519ec0d31418a6
+      execution_status: executed and deployment-locked
+    parameter_count: 21667970
+    deployment: true
+    inference:
+      OOF_and_locked: MC Dropout mean of 30 passes; model.eval then only torch.nn.Dropout
+        modules train
+      batch_size: 24
+      positive_class_index: 1
+    structure_for_stage7:
+      patch_size: 16
+      patch_grid_at_224:
+      - 14
+      - 14
+      patch_tokens: 196
+      verified_hooks:
+      - blocks.11.mlp
+      - blocks.11
+      full_block_count: UNRESOLVED_FROM_AVAILABLE_PROVENANCE
+      embedding_dimension: UNRESOLVED_FROM_AVAILABLE_PROVENANCE
+      class_token_presence: RUNTIME_DETECTED_BY_XAI; not statically established in
+        supplied training provenance
+deep_training_protocol:
+  outer_oof_folds: 5
+  inner_validation_fraction: 0.1
+  inner_split_seed_rule: 42 + outer_fold
+  inner_stratification: binary pneumonia label
+  outer_holdout_used_for_early_stopping: false
+  mc_dropout_passes_for_oof_and_locked: 30
+  selected_final_refit_epoch_rule: round(median(outer-fold best epochs)), minimum
+    1
+  selected_final_refit_dataset: all 21,346 development cases; no validation; no locked/external
+    data
+  determinism_level: procedural_reproducibility_only

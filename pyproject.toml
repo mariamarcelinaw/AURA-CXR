@@ -1,0 +1,13 @@
+[build-system]
+requires=["setuptools>=70"]
+build-backend="setuptools.build_meta"
+
+[project]
+name="aura-cxr"
+version="1.0.0"
+description="Public reproducibility implementation of the AURA-CXR pneumonia chest X-ray framework"
+requires-python=">=3.13"
+
+[project.urls]
+Homepage="https://github.com/mariamarcelinaw/AURA-CXR"
+Repository="https://github.com/mariamarcelinaw/AURA-CXR"

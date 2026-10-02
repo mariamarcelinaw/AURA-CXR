@@ -1,0 +1,10 @@
+datasets:
+  rsna_root: /path/to/rsna/stage_2_train_images
+  rsna_labels_csv: /path/to/rsna/stage_2_train_labels.csv
+  kermany_root: /path/to/kermany/test
+outputs:
+  root: ./outputs
+checkpoints:
+  root: ./checkpoints/local
+eva_x:
+  official_repo: /path/to/EVA-X

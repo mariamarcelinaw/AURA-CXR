@@ -1,0 +1,42 @@
+cff-version: 1.2.0
+message: "If you use AURA-CXR, please cite the associated paper. Add the official journal DOI only after it is assigned by the publisher."
+title: "AURA-CXR"
+type: software
+authors:
+  - family-names: "Widyastuti"
+    given-names: "Maria Marcelina"
+  - family-names: "Fatichah"
+    given-names: "Chastine"
+  - family-names: "Sunaryono"
+    given-names: "Dwi"
+version: "1.0.0"
+date-released: 2026-10-02
+repository-code: "https://github.com/mariamarcelinaw/AURA-CXR"
+abstract: >-
+  Public reproducibility implementation of AURA-CXR, a development-locked
+  pneumonia chest-X-ray framework combining a selected DenseNet121-XRV +
+  EVA-X-S Hybrid CNN–ViT branch, Adaptive Radiomics, and a frozen Logistic
+  Regression A8 stack. Spatial XAI is branch-scoped and does not explain the
+  complete A8 decision.
+keywords:
+  - chest x-ray
+  - pneumonia
+  - radiomics
+  - deep learning
+  - vision transformer
+  - explainable AI
+  - reproducibility
+  - medical imaging
+preferred-citation:
+  type: article
+  title: "AURA-CXR: Development-Locked Hybrid CNN–ViT and Adaptive Radiomics Stacking With Quantitative XAI for Pneumonia Detection"
+  authors:
+    - family-names: "Widyastuti"
+      given-names: "Maria Marcelina"
+    - family-names: "Fatichah"
+      given-names: "Chastine"
+    - family-names: "Sunaryono"
+      given-names: "Dwi"
+  journal: "International Journal of Intelligent Engineering and Systems"
+  year: 2026
+  notes: "Use the final published article metadata and official journal DOI when available. No software DOI is used for this repository."
