@@ -1,0 +1,13 @@
+model,phase,order_index,augmentation,enabled,probability,parameter,minimum,maximum,unit,interpolation,fill_mode,source
+EfficientNetV2S,all_training_phases,1,horizontal_flip,True,0.5,left-right flip,,,boolean,tf.image,N/A,train_aura.py:_tf_augment
+EfficientNetV2S,all_training_phases,2,random_brightness,True,1.0,additive delta,-0.15,0.15,normalized intensity,tf.image,N/A,train_aura.py:_tf_augment
+EfficientNetV2S,all_training_phases,3,random_contrast,True,1.0,contrast factor,0.85,1.15,multiplicative factor,tf.image,N/A,train_aura.py:_tf_augment
+EfficientNetV2S,all_training_phases,4,clip,True,1.0,intensity,0,1,normalized intensity,tf.clip_by_value,N/A,train_aura.py:_tf_augment
+EfficientNetV2S,all_training_phases,5,MixUp,True,1.0 per training batch,"lambda ~ Beta(alpha,alpha)",0.2,0.2,alpha; one scalar lambda per batch,linear interpolation,paired by tf.random.shuffle,train_aura.py:mixup_batch; make_tf_dataset
+ResNet50,all_training_phases,1,horizontal_flip,True,0.5,left-right flip,,,boolean,tf.image,N/A,train_aura.py:_tf_augment
+ResNet50,all_training_phases,2,random_brightness,True,1.0,additive delta,-0.15,0.15,normalized intensity,tf.image,N/A,train_aura.py:_tf_augment
+ResNet50,all_training_phases,3,random_contrast,True,1.0,contrast factor,0.85,1.15,multiplicative factor,tf.image,N/A,train_aura.py:_tf_augment
+ResNet50,all_training_phases,4,clip,True,1.0,intensity,0,1,normalized intensity,tf.clip_by_value,N/A,train_aura.py:_tf_augment
+ResNet50,all_training_phases,5,MixUp,True,1.0 per training batch,"lambda ~ Beta(alpha,alpha)",0.2,0.2,alpha; one scalar lambda per batch,linear interpolation,paired by tf.random.shuffle,train_aura.py:mixup_batch; make_tf_dataset
+DenseNet121-XRV,single_phase,1,none,False,0,No stochastic image augmentation implemented,,,,,,canonical model script
+EVA-X-S,single_phase,1,none,False,0,No stochastic image augmentation implemented,,,,,,canonical model script

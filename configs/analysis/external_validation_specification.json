@@ -1,0 +1,52 @@
+{
+  "project": "AURA-CXR",
+  "stage": 10,
+  "analysis_origin": "external_validation_audit",
+  "existing_external": {
+    "name": "Kermany",
+    "population": "pediatric",
+    "n": 624,
+    "normal": 234,
+    "pneumonia": 390,
+    "adaptation": false,
+    "auc": 0.9308568923953539,
+    "auc_ci": [
+      0.9103407845715538,
+      0.9498482358097744
+    ]
+  },
+  "path_decision": "PATH_B_SCOPE_LIMITATION",
+  "candidate_datasets": [
+    "VinDr-CXR",
+    "MIMIC-CXR",
+    "CheXpert",
+    "NIH ChestX-ray14",
+    "PadChest"
+  ],
+  "second_external": {
+    "name": null,
+    "population": null,
+    "institution": null,
+    "label_mapping": null,
+    "n": null,
+    "adaptation": false,
+    "status": "not_added"
+  },
+  "claim_lock": {
+    "broad_generalization": false,
+    "adult_generalization": false,
+    "multicenter_validation": false,
+    "prospective_validation": false,
+    "deployment_readiness": false,
+    "kermany_specific_transportability": true
+  },
+  "unresolved_shift_factors": [
+    "age",
+    "institution",
+    "acquisition",
+    "prevalence",
+    "case_mix",
+    "label_definition",
+    "image_format/processing"
+  ]
+}

@@ -1,0 +1,6 @@
+model,role,upstream_checkpoint,upstream_pretraining_data,supervision,relation_to_RSNA_cohort,relation_to_Kermany_cohort,source
+DenseNet121-XRV,selected Hybrid CNN-ViT branch (A1),TorchXRayVision densenet121-res224-all,"NIH ChestX-ray14, PadChest, CheXpert, MIMIC-CXR, Google, OpenI and RSNA Pneumonia (dataset tag nih-pc-chex-mimic_ch-google-openi-rsna)",supervised multi-label,"corpus includes RSNA Pneumonia and its NIH ChestX-ray14 source images; upstream split membership of individual AURA-CXR patients is not published",no known overlap,TorchXRayVision model card; Cohen et al. 2022
+EVA-X-S,selected Hybrid CNN-ViT branch (A2),eva_x_small_patch16_merged520k_mim.pt,"ChestX-ray14, CheXpert and MIMIC-CXR (merged ~520k images)",self-supervised masked image modeling (no labels),"corpus includes NIH ChestX-ray14, the source collection of the RSNA images; no RSNA labels used",no known overlap,Yao et al. 2025 (EVA-X)
+EfficientNetV2S,candidate only,Keras ImageNet weights,ImageNet-1K,supervised,no known overlap,no known overlap,Keras applications
+ResNet50,candidate only,Keras ImageNet weights,ImageNet-1K,supervised,no known overlap,no known overlap,Keras applications
+ConvNeXt V2 Tiny,same-split comparator,timm/convnextv2_tiny.fcmae_ft_in1k,ImageNet-1K (FCMAE pretraining and fine-tuning),self-supervised then supervised,no known overlap,no known overlap,Woo et al. 2023

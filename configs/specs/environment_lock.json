@@ -1,0 +1,21 @@
+{
+  "python": "3.13.12",
+  "tensorflow": "2.20.0",
+  "numpy": "2.4.2",
+  "pandas": "3.0.0",
+  "torch": "2.10.0+cu128",
+  "torchvision": "0.25.0+cu128",
+  "torchxrayvision": "1.5.2",
+  "timm": "1.0.28",
+  "lightgbm": "4.7.0",
+  "gpu": "NVIDIA A100-SXM4-40GB",
+  "cuda_driver_cudnn": "PARTIAL/NOT_FULLY_CAPTURED",
+  "scipy": "1.17.0",
+  "scikit_learn": "1.8.0",
+  "joblib": "1.5.3",
+  "pillow": "12.1.1",
+  "pydicom": "3.0.2",
+  "pywavelets": "1.8.0",
+  "scikit_image": "0.26.0",
+  "pywavelets_provenance_note": "Frozen preflight=1.8.0; alternate install log=1.9.0; Stage4 E1 OOF replay locks behavior."
+}

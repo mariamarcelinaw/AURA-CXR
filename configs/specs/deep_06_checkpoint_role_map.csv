@@ -1,0 +1,23 @@
+model,checkpoint,role,fold,phase,deployment,sha256,source_log
+EfficientNetV2S,models/oof/efficientnetv2/fold_0/efficientnetv2_final.keras,OOF outer-fold final model restored from phase best weights,0,phase1+phase2,False,NOT_CAPTURED_IN_SUPPLIED_ARCHIVE,04_tf_oof.log
+EfficientNetV2S,models/oof/efficientnetv2/fold_1/efficientnetv2_final.keras,OOF outer-fold final model restored from phase best weights,1,phase1+phase2,False,NOT_CAPTURED_IN_SUPPLIED_ARCHIVE,04_tf_oof.log
+EfficientNetV2S,models/oof/efficientnetv2/fold_2/efficientnetv2_final.keras,OOF outer-fold final model restored from phase best weights,2,phase1+phase2,False,NOT_CAPTURED_IN_SUPPLIED_ARCHIVE,04_tf_oof.log
+EfficientNetV2S,models/oof/efficientnetv2/fold_3/efficientnetv2_final.keras,OOF outer-fold final model restored from phase best weights,3,phase1+phase2,False,NOT_CAPTURED_IN_SUPPLIED_ARCHIVE,04_tf_oof.log
+EfficientNetV2S,models/oof/efficientnetv2/fold_4/efficientnetv2_final.keras,OOF outer-fold final model restored from phase best weights,4,phase1+phase2,False,NOT_CAPTURED_IN_SUPPLIED_ARCHIVE,04_tf_oof.log
+ResNet50,models/oof/resnet50/fold_0/resnet50_final.keras,OOF outer-fold final model restored from phase best weights,0,phase1+phase2,False,NOT_CAPTURED_IN_SUPPLIED_ARCHIVE,04_tf_oof.log
+ResNet50,models/oof/resnet50/fold_1/resnet50_final.keras,OOF outer-fold final model restored from phase best weights,1,phase1+phase2,False,NOT_CAPTURED_IN_SUPPLIED_ARCHIVE,04_tf_oof.log
+ResNet50,models/oof/resnet50/fold_2/resnet50_final.keras,OOF outer-fold final model restored from phase best weights,2,phase1+phase2,False,NOT_CAPTURED_IN_SUPPLIED_ARCHIVE,04_tf_oof.log
+ResNet50,models/oof/resnet50/fold_3/resnet50_final.keras,OOF outer-fold final model restored from phase best weights,3,phase1+phase2,False,NOT_CAPTURED_IN_SUPPLIED_ARCHIVE,04_tf_oof.log
+ResNet50,models/oof/resnet50/fold_4/resnet50_final.keras,OOF outer-fold final model restored from phase best weights,4,phase1+phase2,False,NOT_CAPTURED_IN_SUPPLIED_ARCHIVE,04_tf_oof.log
+DenseNet121-XRV,models/oof/xrv/fold_0.pt,OOF outer-fold best inner-validation checkpoint,0,single_phase,False,NOT_CAPTURED_IN_SUPPLIED_ARCHIVE,05_xrv_oof.log
+DenseNet121-XRV,models/oof/xrv/fold_1.pt,OOF outer-fold best inner-validation checkpoint,1,single_phase,False,NOT_CAPTURED_IN_SUPPLIED_ARCHIVE,05_xrv_oof.log
+DenseNet121-XRV,models/oof/xrv/fold_2.pt,OOF outer-fold best inner-validation checkpoint,2,single_phase,False,NOT_CAPTURED_IN_SUPPLIED_ARCHIVE,05_xrv_oof.log
+DenseNet121-XRV,models/oof/xrv/fold_3.pt,OOF outer-fold best inner-validation checkpoint,3,single_phase,False,NOT_CAPTURED_IN_SUPPLIED_ARCHIVE,05_xrv_oof.log
+DenseNet121-XRV,models/oof/xrv/fold_4.pt,OOF outer-fold best inner-validation checkpoint,4,single_phase,False,NOT_CAPTURED_IN_SUPPLIED_ARCHIVE,05_xrv_oof.log
+EVA-X-S,models/oof/eva_x/fold_0.pt,OOF outer-fold best inner-validation checkpoint,0,single_phase,False,NOT_CAPTURED_IN_SUPPLIED_ARCHIVE,06_eva_x_oof.log
+EVA-X-S,models/oof/eva_x/fold_1.pt,OOF outer-fold best inner-validation checkpoint,1,single_phase,False,NOT_CAPTURED_IN_SUPPLIED_ARCHIVE,06_eva_x_oof.log
+EVA-X-S,models/oof/eva_x/fold_2.pt,OOF outer-fold best inner-validation checkpoint,2,single_phase,False,NOT_CAPTURED_IN_SUPPLIED_ARCHIVE,06_eva_x_oof.log
+EVA-X-S,models/oof/eva_x/fold_3.pt,OOF outer-fold best inner-validation checkpoint,3,single_phase,False,NOT_CAPTURED_IN_SUPPLIED_ARCHIVE,06_eva_x_oof.log
+EVA-X-S,models/oof/eva_x/fold_4.pt,OOF outer-fold best inner-validation checkpoint,4,single_phase,False,NOT_CAPTURED_IN_SUPPLIED_ARCHIVE,06_eva_x_oof.log
+DenseNet121-XRV,xrv_development_refit.pt,full-development refit / locked deployment,,fixed_refit_2_epochs,True,ba0559aeba8afe500eeae3fc36825d3742e543d005a52d3cc35eeb732bab317a,09_refit_xrv_if_selected.log
+EVA-X-S,eva_x_development_refit.pt,full-development refit / locked deployment,,fixed_refit_2_epochs,True,83a46553743f12a8bbb64f900ece2efa312a6b75d5638e8fae519ec0d31418a6,10_refit_eva_if_selected.log

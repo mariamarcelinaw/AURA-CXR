@@ -1,0 +1,64 @@
+{
+  "lock_status": "FROZEN_BEFORE_LOCKED_TEST_COMPARATOR_EXECUTION",
+  "analysis_origin": "POST_HOC_XAI_SENSITIVITY",
+  "selected_method": "Integrated Gradients",
+  "reference": {
+    "authors": "Mukund Sundararajan, Ankur Taly, Qiqi Yan",
+    "title": "Axiomatic Attribution for Deep Networks",
+    "venue": "ICML / PMLR 70",
+    "year": 2017,
+    "pages": "3319-3328"
+  },
+  "selection_rationale": [
+    "Established gradient attribution method requiring no classifier retraining or architectural modification.",
+    "Class-specific and directly applicable to the frozen EVA-X-S image classifier.",
+    "Produces an input-space spatial attribution map without relying on undocumented attention-weight exposure.",
+    "Avoids adapting a model-specific Transformer relevance-propagation implementation to EVA-X-S after observing locked-test localization results."
+  ],
+  "alternatives_considered": [
+    {
+      "method": "Attention Rollout",
+      "reference": "Abnar and Zuidema, ACL 2020",
+      "reason_not_primary": "Established Transformer-specific attention-flow method but standard rollout is not inherently class-specific and depends on accessible attention matrices."
+    },
+    {
+      "method": "Transformer relevance propagation / Transformer Attribution",
+      "reference": "Chefer, Gur, and Wolf, CVPR 2021",
+      "reason_not_primary": "Strong Transformer-specific method but requires model-specific relevance propagation through attention/residual components; higher risk of changing/instrumenting the frozen EVA implementation beyond the minimum needed for a sensitivity comparator."
+    }
+  ],
+  "frozen_classifier": "EVA-X-S development-refit checkpoint",
+  "checkpoint_sha256": "83a46553743f12a8bbb64f900ece2efa312a6b75d5638e8fae519ec0d31418a6",
+  "target": "pre-softmax pneumonia logit, class index 1",
+  "population": "all 1,203 canonical RSNA GT-positive locked-test cases when computationally feasible",
+  "same_case_requirement": true,
+  "same_preprocessing_requirement": true,
+  "same_gt_boxes_requirement": true,
+  "integrated_gradients": {
+    "baseline": "zero tensor in normalized EVA input space",
+    "steps": 64,
+    "integration": "trapezoidal",
+    "internal_batch": 16,
+    "channel_to_spatial": "ReLU(sum signed IG across channels)",
+    "postprocessing": "min-max [0,1]",
+    "localization_threshold": 0.25
+  },
+  "primary_metrics": [
+    "Pointing Game",
+    "IoU@0.25",
+    "localization score",
+    "energy inside GT"
+  ],
+  "map_agreement": [
+    "Pearson spatial correlation",
+    "top-10%-pixel Jaccard overlap"
+  ],
+  "difference_orientation": "Comparator_minus_LayerCAM",
+  "paired_bootstrap_resamples": 2000,
+  "seed": 42,
+  "multiplicity": "Holm correction across four primary EVA method-sensitivity p-values",
+  "classifier_retraining": false,
+  "xai_reselection": false,
+  "locked_gt_parameter_tuning": false,
+  "a8_modification": false
+}

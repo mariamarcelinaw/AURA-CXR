@@ -1,0 +1,6 @@
+module_path,module_type,output_shape_if_known,block_index,candidate_XAI_hook,notes
+backbone.features,TorchXRayVision DenseNet feature trunk,feature map; exact runtime shape not captured in Stage6 artifacts,,False,feeds ReLU + adaptive average pooling for classifier
+backbone.features.denseblock4.denselayer16.conv1,DenseNet convolution,4D convolutional activation; exact shape not locked here,denseblock4/denselayer16,True,current primary XRV LayerCAM hook; 255/255 valid in validation
+backbone.features.denseblock4.denselayer15.conv1,DenseNet convolution,4D convolutional activation; exact shape not locked here,denseblock4/denselayer15,True,current secondary XRV LayerCAM hook; 255/255 valid in validation
+drop,Dropout(p=0.3),pooled feature vector,,False,enabled alone during MC Dropout inference
+head,"Linear(feat_dim,2)","[B,2] logits",,False,positive class index 1

@@ -1,0 +1,67 @@
+{
+  "project": "AURA-CXR",
+  "stage": 9,
+  "analysis_origin": "post_hoc_multiplicity_correction",
+  "alpha": 0.05,
+  "bootstrap_iterations_original": 2000,
+  "bootstrap_seed_original": 42,
+  "permutation_iterations_family_A": 20000,
+  "permutation_seed_base": 20261002,
+  "permutation_p_formula": "(extreme_count + 1)/(n_permutations + 1)",
+  "family_A_raw_test": "two-sided paired sign-flip randomization of mean difference",
+  "simultaneous_ci_sensitivity": {
+    "method": "Bonferroni-adjusted percentile paired bootstrap",
+    "family_size": 16,
+    "family_alpha": 0.05,
+    "nominal_level": 0.996875,
+    "iterations": 20000,
+    "seed_base": 20261003
+  },
+  "family_definitions": {
+    "A": [
+      "A_image_center_pointing_hit",
+      "A_image_center_iou_at_thr",
+      "A_image_center_localization_score",
+      "A_image_center_energy_inside_gt",
+      "A_lesion_prevalence_prior_pointing_hit",
+      "A_lesion_prevalence_prior_iou_at_thr",
+      "A_lesion_prevalence_prior_localization_score",
+      "A_lesion_prevalence_prior_energy_inside_gt",
+      "A_lung_prior_pointing_hit",
+      "A_lung_prior_iou_at_thr",
+      "A_lung_prior_localization_score",
+      "A_lung_prior_energy_inside_gt",
+      "A_random_noise_pointing_hit",
+      "A_random_noise_iou_at_thr",
+      "A_random_noise_localization_score",
+      "A_random_noise_energy_inside_gt"
+    ],
+    "B": [
+      "B_TP_vs_FN_pointing_hit",
+      "B_TP_vs_FN_iou_at_thr",
+      "B_TP_vs_FN_localization_score",
+      "B_TP_vs_FN_energy_inside_gt",
+      "B_TP_vs_FN_peak_distance_norm"
+    ],
+    "C": [
+      "C_EVA_LayerCAM_vs_IG_pointing_hit",
+      "C_EVA_LayerCAM_vs_IG_iou_at_thr",
+      "C_EVA_LayerCAM_vs_IG_localization_score",
+      "C_EVA_LayerCAM_vs_IG_energy_inside_gt"
+    ],
+    "C2": [
+      "C2_IG_TP_vs_FN_pointing_hit",
+      "C2_IG_TP_vs_FN_iou_at_thr",
+      "C2_IG_TP_vs_FN_localization_score",
+      "C2_IG_TP_vs_FN_energy_inside_gt"
+    ]
+  },
+  "primary_multiplicity": "Holm FWER",
+  "bh_fdr_role": "sensitivity only",
+  "two_sided": true,
+  "xai_method_selection_eligible": false,
+  "classifier_selection_eligible": false,
+  "a8_reselection_allowed": false,
+  "xai_threshold_retuning_allowed": false,
+  "gt_modification_allowed": false
+}

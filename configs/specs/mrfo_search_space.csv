@@ -1,0 +1,16 @@
+estimator,parameter,lower_bound,upper_bound,scale,integer_or_continuous,transformation,rounding_rule,clip_rule,default_if_missing,source_function
+knn,k_index,0,49,linear index,continuous_position_to_discrete,"K_RANGE[index], odd 3..101",Python round -> int,clip 0..49,N/A,MRFOptimizer._decode
+knn,weights_index,0,1,linear index,continuous_position_to_categorical,"['uniform','distance'][index]",Python round -> int,clip 0..1,N/A,MRFOptimizer._decode
+knn,metric_index,0,3,linear index,continuous_position_to_categorical,"['euclidean','manhattan','minkowski','chebyshev'][index]",Python round -> int,clip 0..3,N/A,MRFOptimizer._decode
+svm,log10_C,-2,3,log10,continuous,10**x,"round(C,5)",clip position to bounds,N/A,MRFOptimizer._decode
+svm,log10_gamma,-4,0,log10,continuous,10**x,"round(gamma,6)",clip position to bounds,N/A,MRFOptimizer._decode
+histgb,log10_learning_rate,-2.3,-0.4,log10,continuous,10**x,"round(lr,5)",clip position to bounds,N/A,MRFOptimizer._decode
+histgb,max_leaf_nodes/num_leaves,15,255,linear,integer,x,Python round -> int,clip 15..255,N/A,MRFOptimizer._decode
+histgb,search_depth,2,12,linear,integer,x; LGBM depth=12 maps to max_depth=-1,Python round -> int,clip 2..12,N/A,MRFOptimizer._decode/_build_estimator
+histgb,log10_l2,-4,1,log10,continuous,10**x,"round(l2,5)",clip position to bounds,N/A,MRFOptimizer._decode
+histgb,min_leaf_fraction,0.001,0.05,linear,continuous,"HistGB max(20,int(frac*n)); LGBM max(5,int(frac*n))","round(frac,4)",clip 0.001..0.05,N/A,MRFOptimizer._decode/_build_estimator
+lgbm,log10_learning_rate,-2.3,-0.4,log10,continuous,10**x,"round(lr,5)",clip position to bounds,N/A,MRFOptimizer._decode
+lgbm,max_leaf_nodes/num_leaves,15,255,linear,integer,x,Python round -> int,clip 15..255,N/A,MRFOptimizer._decode
+lgbm,search_depth,2,12,linear,integer,x; LGBM depth=12 maps to max_depth=-1,Python round -> int,clip 2..12,N/A,MRFOptimizer._decode/_build_estimator
+lgbm,log10_l2,-4,1,log10,continuous,10**x,"round(l2,5)",clip position to bounds,N/A,MRFOptimizer._decode
+lgbm,min_leaf_fraction,0.001,0.05,linear,continuous,"HistGB max(20,int(frac*n)); LGBM max(5,int(frac*n))","round(frac,4)",clip 0.001..0.05,N/A,MRFOptimizer._decode/_build_estimator

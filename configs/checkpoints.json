@@ -1,0 +1,92 @@
+{
+  "xrv": {
+    "model_id": "xrv_development_refit",
+    "architecture": "DenseNet121-XRV",
+    "role": "frozen development refit",
+    "upstream_source": "TorchXRayVision",
+    "upstream_checkpoint_identifier": "densenet121-res224-all",
+    "local_filename": "xrv_development_refit.pt",
+    "sha256": "ba0559aeba8afe500eeae3fc36825d3742e543d005a52d3cc35eeb732bab317a",
+    "expected_input_size": 224,
+    "normalization": "TorchXRayVision datasets.normalize(...,255)",
+    "redistribution_status": "RELEASED",
+    "download_instructions": "GitHub release v1.0 asset: https://github.com/mariamarcelinaw/AURA-CXR/releases/download/v1.0/xrv_development_refit.pt; check the SHA-256 before use (python aura_cxr.py verify checks files placed in checkpoints/).",
+    "license_note": "Derived from the TorchXRayVision densenet121-res224-all weights (Apache-2.0; LICENSES/Apache-2.0.txt) and RSNA data; use is subject to the upstream license and the RSNA terms of use and attribution (THIRD_PARTY_NOTICES.md).",
+    "framework": "PyTorch/TorchXRayVision",
+    "upstream_checkpoint_sha256": "UNRESOLVED_FROM_AVAILABLE_PROVENANCE",
+    "head_replacement": "Dropout(0.3)+Linear(feat_dim,2)",
+    "load_method": "xrv.models.DenseNet(weights=densenet121-res224-all); derived state_dict strict=True"
+  },
+  "eva_x": {
+    "model_id": "eva_x_development_refit",
+    "architecture": "EVA-X-S",
+    "role": "frozen development refit",
+    "upstream_source": "official EVA-X repository",
+    "upstream_checkpoint_identifier": "eva_x_small_patch16_merged520k_mim.pt",
+    "local_filename": "eva_x_development_refit.pt",
+    "sha256": "83a46553743f12a8bbb64f900ece2efa312a6b75d5638e8fae519ec0d31418a6",
+    "expected_input_size": 224,
+    "normalization": {
+      "mean": [
+        0.5,
+        0.5,
+        0.5
+      ],
+      "std": [
+        0.5,
+        0.5,
+        0.5
+      ]
+    },
+    "redistribution_status": "RELEASED",
+    "download_instructions": "GitHub release v1.0 asset: https://github.com/mariamarcelinaw/AURA-CXR/releases/download/v1.0/eva_x_development_refit.pt; check the SHA-256 before use (python aura_cxr.py verify checks files placed in checkpoints/).",
+    "license_note": "Derived from the official EVA-X-S weights (MIT License per the model card at huggingface.co/MapleF/eva_x) and RSNA data; use is subject to the upstream license and the RSNA terms of use and attribution (THIRD_PARTY_NOTICES.md). The metadata field \"checkpoint\" records the original server path of the upstream file; the file is released unmodified so that it matches the recorded SHA-256.",
+    "framework": "PyTorch/official EVA-X+timm",
+    "upstream_checkpoint_sha256": "UNRESOLVED_FROM_AVAILABLE_PROVENANCE",
+    "head_replacement": "Dropout(0.2)+Linear(in_features,2)",
+    "load_method": "official eva_x_small_patch16(pretrained=path); derived state_dict strict=True",
+    "observed_upstream_load_message": "missing head.weight/head.bias; unexpected_keys=[]"
+  },
+  "radiomics": {
+    "model_id": "radiomics_mrfo_development_refit",
+    "architecture": "LightGBM",
+    "role": "frozen development refit",
+    "upstream_source": "AURA-CXR training",
+    "upstream_checkpoint_identifier": null,
+    "local_filename": "radiomics_mrfo_development_refit.pkl",
+    "sha256": "15d862c5c9ddfd088aebdbfd146b4cb133c089f577cd09ed73bf71058ab1c1b7",
+    "expected_input_size": 746,
+    "normalization": "none before LightGBM",
+    "redistribution_status": "RELEASED",
+    "download_instructions": "GitHub release v1.0 asset: https://github.com/mariamarcelinaw/AURA-CXR/releases/download/v1.0/radiomics_mrfo_development_refit.pkl; check the SHA-256 before use (python aura_cxr.py verify checks files placed in checkpoints/).",
+    "license_note": "scikit-learn Pipeline with a LightGBM classifier trained on RSNA development data; use is subject to the RSNA terms of use and attribution. Load only this verified file (pickle format)."
+  },
+  "efficientnetv2s": {
+    "model_id": "efficientnetv2s_candidate",
+    "architecture": "EfficientNetV2S",
+    "role": "development candidate; non-deployed",
+    "framework": "TensorFlow/Keras",
+    "upstream_source": "Keras applications",
+    "upstream_checkpoint_identifier": "weights=imagenet",
+    "local_filename": null,
+    "sha256": null,
+    "expected_input_size": 224,
+    "normalization": "EfficientNetV2 native application preprocessing",
+    "redistribution_status": "DOWNLOAD_FROM_FRAMEWORK",
+    "license_note": "framework/upstream terms apply"
+  },
+  "resnet50": {
+    "model_id": "resnet50_candidate",
+    "architecture": "ResNet50",
+    "role": "development candidate; non-deployed",
+    "framework": "TensorFlow/Keras",
+    "upstream_source": "Keras applications",
+    "upstream_checkpoint_identifier": "weights=imagenet",
+    "local_filename": null,
+    "sha256": null,
+    "expected_input_size": 224,
+    "normalization": "Keras ResNet50 Caffe preprocessing",
+    "redistribution_status": "DOWNLOAD_FROM_FRAMEWORK",
+    "license_note": "framework/upstream terms apply"
+  }
+}
