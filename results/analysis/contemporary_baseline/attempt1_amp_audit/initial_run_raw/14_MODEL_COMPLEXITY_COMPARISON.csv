@@ -1,0 +1,2 @@
+model,parameters,trainable_parameters,input_size,FLOPs_if_verified,checkpoint_size_bytes,peak_VRAM_bytes,inference_locked_seconds_total,training_GPU_hours_if_measured
+C1_CONVNEXTV2_TINY,27868034,27868034,224x224,,111552029,4006556672,46.62594294548035,1.2082465757926304

@@ -1,0 +1,27 @@
+{
+  "attempt_id": "STAGE8_ATTEMPT1_AMP",
+  "status": "RETAINED_FOR_AUDIT_NOT_FINAL",
+  "training_issue": "Fold 4 numerical/optimization collapse under AMP",
+  "fold4_best_inner_val_auc": 0.7168124392614188,
+  "fold4_best_epoch": 1,
+  "locked_test": {
+    "n": 5338,
+    "positive": 1203,
+    "negative": 4135,
+    "auc": 0.896045858750946,
+    "auprc": 0.7282120633518695,
+    "sensitivity": 0.8187863674147964,
+    "specificity": 0.8089480048367593,
+    "accuracy": 0.8111652304233795,
+    "f1": 0.661517797179315,
+    "balanced_accuracy": 0.8138671861257778,
+    "mcc": 0.5567232903861778
+  },
+  "paired_A8_vs_baseline": {
+    "delta_auc_A8_minus_baseline": 0.0027293716534941836,
+    "ci_low": -0.0025081642137237898,
+    "ci_high": 0.007966907520712156,
+    "p_value": 0.3070784377803517,
+    "method": "paired_DeLong"
+  }
+}

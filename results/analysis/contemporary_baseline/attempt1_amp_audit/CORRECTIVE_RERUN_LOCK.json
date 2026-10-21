@@ -1,0 +1,44 @@
+{
+  "project": "AURA-CXR",
+  "stage": 8,
+  "attempt_id": "STAGE8_CORRECTED_FP32_V2",
+  "baseline_identity": "C1_CONVNEXTV2_TINY",
+  "correction_type": "TECHNICAL_NUMERICAL_STABILITY_CORRECTION",
+  "diagnostic_scope": "development-only Fold 4; locked test inaccessible by design",
+  "diagnostic_evidence": {
+    "amp_repeat": {
+      "epoch1_nonfinite_grad_batches": 3,
+      "epoch1_amp_scale_drops": 3,
+      "epoch1_max_grad_norm": "Infinity",
+      "best_val_auc": 0.7168124392614188,
+      "epoch6_val_auc": 0.554064454064454,
+      "epoch6_prob_std": 2.2782470765404703e-05
+    },
+    "fp32": {
+      "nonfinite_grad_batches_all_epochs": 0,
+      "best_val_auc_through_epoch6": 0.8309175329583494,
+      "epoch6_val_auc": 0.8309175329583494,
+      "epoch6_prob_std": 0.12466081999002722
+    }
+  },
+  "locked_change": {
+    "precision_before": "AMP float16 autocast + GradScaler",
+    "precision_after": "FP32; autocast disabled; no GradScaler",
+    "other_hyperparameters_changed": false,
+    "model_changed": false,
+    "split_changed": false,
+    "preprocessing_changed": false,
+    "optimizer_changed": false,
+    "learning_rate_changed": false,
+    "augmentation_changed": false,
+    "threshold_rule_changed": false,
+    "final_refit_rule_changed": false
+  },
+  "test_integrity": {
+    "attempt1_locked_test_was_already_observed": true,
+    "correction_was_not_selected_to_improve_test_result": true,
+    "correction_basis_is_development_only_diagnostic": true,
+    "attempt1_result_must_be_retained_in_audit_trail": true,
+    "attempt2_may_open_locked_test_only_after_corrected_oof_threshold_and_deployment_lock": true
+  }
+}

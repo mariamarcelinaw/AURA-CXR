@@ -1,0 +1,111 @@
+device= cuda torch= 2.10.0+cu128 timm= 1.0.28
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+STAGE8_PREFLIGHT = PASS
+[FOLD 0] epoch=1 loss=0.13426 val_auc=0.86507 best=0.86507@1 stale=0
+[FOLD 0] epoch=2 loss=0.11709 val_auc=0.87083 best=0.87083@2 stale=0
+[FOLD 0] epoch=3 loss=0.10986 val_auc=0.87889 best=0.87889@3 stale=0
+[FOLD 0] epoch=4 loss=0.10296 val_auc=0.87960 best=0.87960@4 stale=0
+[FOLD 0] epoch=5 loss=0.09646 val_auc=0.88340 best=0.88340@5 stale=0
+[FOLD 0] epoch=6 loss=0.08369 val_auc=0.86185 best=0.88340@5 stale=1
+[FOLD 0] epoch=7 loss=0.07302 val_auc=0.87223 best=0.88340@5 stale=2
+[FOLD 0] epoch=8 loss=0.06307 val_auc=0.87048 best=0.88340@5 stale=3
+[FOLD 0] epoch=9 loss=0.04923 val_auc=0.87868 best=0.88340@5 stale=4
+[FOLD 0] epoch=10 loss=0.03818 val_auc=0.87071 best=0.88340@5 stale=5
+[FOLD 0] epoch=11 loss=0.03162 val_auc=0.86862 best=0.88340@5 stale=6
+[FOLD 0] epoch=12 loss=0.02484 val_auc=0.86900 best=0.88340@5 stale=7
+[FOLD 0] epoch=13 loss=0.02136 val_auc=0.86709 best=0.88340@5 stale=8
+[FOLD 0] epoch=14 loss=0.01836 val_auc=0.86550 best=0.88340@5 stale=9
+[FOLD 0] epoch=15 loss=0.01600 val_auc=0.86356 best=0.88340@5 stale=10
+[FOLD 0] epoch=16 loss=0.01655 val_auc=0.84724 best=0.88340@5 stale=11
+[FOLD 0] epoch=17 loss=0.01225 val_auc=0.86306 best=0.88340@5 stale=12
+[FOLD 1] epoch=1 loss=0.13649 val_auc=0.86251 best=0.86251@1 stale=0
+[FOLD 1] epoch=2 loss=0.11863 val_auc=0.87734 best=0.87734@2 stale=0
+[FOLD 1] epoch=3 loss=0.11260 val_auc=0.87740 best=0.87740@3 stale=0
+[FOLD 1] epoch=4 loss=0.10589 val_auc=0.87360 best=0.87740@3 stale=1
+[FOLD 1] epoch=5 loss=0.09840 val_auc=0.88173 best=0.88173@5 stale=0
+[FOLD 1] epoch=6 loss=0.08963 val_auc=0.87105 best=0.88173@5 stale=1
+[FOLD 1] epoch=7 loss=0.08237 val_auc=0.86980 best=0.88173@5 stale=2
+[FOLD 1] epoch=8 loss=0.07029 val_auc=0.87634 best=0.88173@5 stale=3
+[FOLD 1] epoch=9 loss=0.06037 val_auc=0.87867 best=0.88173@5 stale=4
+[FOLD 1] epoch=10 loss=0.05087 val_auc=0.86962 best=0.88173@5 stale=5
+[FOLD 1] epoch=11 loss=0.03979 val_auc=0.87583 best=0.88173@5 stale=6
+[FOLD 1] epoch=12 loss=0.03456 val_auc=0.86604 best=0.88173@5 stale=7
+[FOLD 1] epoch=13 loss=0.02696 val_auc=0.87094 best=0.88173@5 stale=8
+[FOLD 1] epoch=14 loss=0.02193 val_auc=0.87351 best=0.88173@5 stale=9
+[FOLD 1] epoch=15 loss=0.01898 val_auc=0.87155 best=0.88173@5 stale=10
+[FOLD 1] epoch=16 loss=0.01672 val_auc=0.86552 best=0.88173@5 stale=11
+[FOLD 1] epoch=17 loss=0.01478 val_auc=0.86455 best=0.88173@5 stale=12
+[FOLD 2] epoch=1 loss=0.13808 val_auc=0.87876 best=0.87876@1 stale=0
+[FOLD 2] epoch=2 loss=0.11859 val_auc=0.88929 best=0.88929@2 stale=0
+[FOLD 2] epoch=3 loss=0.11276 val_auc=0.89150 best=0.89150@3 stale=0
+[FOLD 2] epoch=4 loss=0.10578 val_auc=0.89036 best=0.89150@3 stale=1
+[FOLD 2] epoch=5 loss=0.09841 val_auc=0.89477 best=0.89477@5 stale=0
+[FOLD 2] epoch=6 loss=0.08928 val_auc=0.89306 best=0.89477@5 stale=1
+[FOLD 2] epoch=7 loss=0.08059 val_auc=0.89065 best=0.89477@5 stale=2
+[FOLD 2] epoch=8 loss=0.06789 val_auc=0.88772 best=0.89477@5 stale=3
+[FOLD 2] epoch=9 loss=0.05759 val_auc=0.88500 best=0.89477@5 stale=4
+[FOLD 2] epoch=10 loss=0.04750 val_auc=0.87869 best=0.89477@5 stale=5
+[FOLD 2] epoch=11 loss=0.03863 val_auc=0.87272 best=0.89477@5 stale=6
+[FOLD 2] epoch=12 loss=0.03304 val_auc=0.88174 best=0.89477@5 stale=7
+[FOLD 2] epoch=13 loss=0.02856 val_auc=0.87606 best=0.89477@5 stale=8
+[FOLD 2] epoch=14 loss=0.02256 val_auc=0.87630 best=0.89477@5 stale=9
+[FOLD 2] epoch=15 loss=0.01785 val_auc=0.86577 best=0.89477@5 stale=10
+[FOLD 2] epoch=16 loss=0.01721 val_auc=0.87110 best=0.89477@5 stale=11
+[FOLD 2] epoch=17 loss=0.01596 val_auc=0.87886 best=0.89477@5 stale=12
+[FOLD 3] epoch=1 loss=0.14019 val_auc=0.86652 best=0.86652@1 stale=0
+[FOLD 3] epoch=2 loss=0.11942 val_auc=0.86573 best=0.86652@1 stale=1
+[FOLD 3] epoch=3 loss=0.11329 val_auc=0.87357 best=0.87357@3 stale=0
+[FOLD 3] epoch=4 loss=0.10633 val_auc=0.88050 best=0.88050@4 stale=0
+[FOLD 3] epoch=5 loss=0.09882 val_auc=0.87735 best=0.88050@4 stale=1
+[FOLD 3] epoch=6 loss=0.08765 val_auc=0.88393 best=0.88393@6 stale=0
+[FOLD 3] epoch=7 loss=0.07805 val_auc=0.87786 best=0.88393@6 stale=1
+[FOLD 3] epoch=8 loss=0.06607 val_auc=0.86656 best=0.88393@6 stale=2
+[FOLD 3] epoch=9 loss=0.05565 val_auc=0.86844 best=0.88393@6 stale=3
+[FOLD 3] epoch=10 loss=0.04488 val_auc=0.86740 best=0.88393@6 stale=4
+[FOLD 3] epoch=11 loss=0.03534 val_auc=0.87239 best=0.88393@6 stale=5
+[FOLD 3] epoch=12 loss=0.02832 val_auc=0.86926 best=0.88393@6 stale=6
+[FOLD 3] epoch=13 loss=0.02214 val_auc=0.86247 best=0.88393@6 stale=7
+[FOLD 3] epoch=14 loss=0.02105 val_auc=0.85871 best=0.88393@6 stale=8
+[FOLD 3] epoch=15 loss=0.01734 val_auc=0.84709 best=0.88393@6 stale=9
+[FOLD 3] epoch=16 loss=0.01552 val_auc=0.86457 best=0.88393@6 stale=10
+[FOLD 3] epoch=17 loss=0.01450 val_auc=0.85918 best=0.88393@6 stale=11
+[FOLD 3] epoch=18 loss=0.01191 val_auc=0.86948 best=0.88393@6 stale=12
+[FOLD 4] epoch=1 loss=0.17727 val_auc=0.71681 best=0.71681@1 stale=0
+[FOLD 4] epoch=2 loss=0.17479 val_auc=0.46241 best=0.71681@1 stale=1
+[FOLD 4] epoch=3 loss=0.17461 val_auc=0.53438 best=0.71681@1 stale=2
+[FOLD 4] epoch=4 loss=0.17429 val_auc=0.53895 best=0.71681@1 stale=3
+[FOLD 4] epoch=5 loss=0.17430 val_auc=0.54627 best=0.71681@1 stale=4
+[FOLD 4] epoch=6 loss=0.17413 val_auc=0.55406 best=0.71681@1 stale=5
+[FOLD 4] epoch=7 loss=0.17385 val_auc=0.50469 best=0.71681@1 stale=6
+[FOLD 4] epoch=8 loss=0.17373 val_auc=0.48601 best=0.71681@1 stale=7
+[FOLD 4] epoch=9 loss=0.17379 val_auc=0.55115 best=0.71681@1 stale=8
+[FOLD 4] epoch=10 loss=0.17375 val_auc=0.57501 best=0.71681@1 stale=9
+[FOLD 4] epoch=11 loss=0.17393 val_auc=0.48086 best=0.71681@1 stale=10
+[FOLD 4] epoch=12 loss=0.17376 val_auc=0.47471 best=0.71681@1 stale=11
+[FOLD 4] epoch=13 loss=0.17361 val_auc=0.51348 best=0.71681@1 stale=12
+[REFIT] 1/5 loss=0.13338
+[REFIT] 2/5 loss=0.11625
+[REFIT] 3/5 loss=0.10622
+[REFIT] 4/5 loss=0.09532
+[REFIT] 5/5 loss=0.08039
+STAGE8_DYNAMIC_RUN = COMPLETE
+{
+  "n": 5338,
+  "positive": 1203,
+  "negative": 4135,
+  "auc": 0.896045858750946,
+  "auprc": 0.7282120633518695,
+  "sensitivity": 0.8187863674147964,
+  "specificity": 0.8089480048367593,
+  "accuracy": 0.8111652304233795,
+  "f1": 0.661517797179315,
+  "balanced_accuracy": 0.8138671861257778,
+  "mcc": 0.5567232903861778
+}
+{
+  "delta": 0.0027293716534941836,
+  "ci_low": -0.0025081642137237898,
+  "ci_high": 0.007966907520712156,
+  "p_value": 0.3070784377803517,
+  "method": "paired_DeLong"
+}

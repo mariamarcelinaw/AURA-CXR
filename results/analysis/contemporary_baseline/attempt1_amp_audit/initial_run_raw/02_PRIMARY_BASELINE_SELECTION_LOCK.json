@@ -1,0 +1,78 @@
+{
+  "project": "AURA-CXR",
+  "stage": 8,
+  "analysis_origin": "REVIEWER_REQUESTED_CONTEMPORARY_BASELINE",
+  "lock_status": "PRETEST_SELECTION_LOCK",
+  "created_before_baseline_locked_test": true,
+  "selected_baseline_id": "C1",
+  "model_name": "ConvNeXt V2 Tiny",
+  "timm_model_id": "convnextv2_tiny.fcmae_ft_in1k",
+  "architecture": "ConvNeXt V2 Tiny",
+  "literature_reference": {
+    "title": "ConvNeXt V2: Co-Designing and Scaling ConvNets With Masked Autoencoders",
+    "venue": "CVPR",
+    "year": 2023,
+    "doi": "10.1109/CVPR52729.2023.01548"
+  },
+  "implementation_source": "timm port with official Meta ConvNeXt-V2 lineage",
+  "pretrained_checkpoint_identifier": "timm/convnextv2_tiny.fcmae_ft_in1k",
+  "pretrained_checkpoint_state_hash": "f932cb959aebe4e018f3a60b2902a4d81a9edd2350d1ae441e291443d7f6101c",
+  "parameter_count_reference": "~28.6M; exact instantiated count captured by server",
+  "input_size": [
+    224,
+    224
+  ],
+  "base_preprocessing": "RSNA DICOM slope/intercept -> MONOCHROME1 inversion -> per-image minmax -> PIL bilinear 224x224 -> repeat grayscale to 3 channels",
+  "model_normalization": {
+    "mean": [
+      0.485,
+      0.456,
+      0.406
+    ],
+    "std": [
+      0.229,
+      0.224,
+      0.225
+    ]
+  },
+  "loss": "class-weighted focal cross-entropy, gamma=2.0",
+  "optimizer": "AdamW",
+  "learning_rate": 0.0001,
+  "weight_decay": 0.05,
+  "augmentation": "development-only horizontal flip p=0.5, brightness delta \u00b10.15, contrast factor 0.85-1.15",
+  "scheduler": "CosineAnnealingLR",
+  "batch_size": 32,
+  "inner_validation": "10% stratified from each outer-train set; seed=42+fold",
+  "early_stopping": "inner-validation ROC-AUC, patience=12, min_delta=1e-5",
+  "oof_folds": 5,
+  "threshold_selection": "canonical tune_threshold grid 0.01..0.99 / 197 points; maximize Youden subject to sensitivity >=0.85; deterministic tie-break",
+  "final_refit_rule": "round(median(best_epoch_across_5_outer_folds)); train full development for exactly that many epochs",
+  "random_seed": 42,
+  "evaluation_metrics": [
+    "ROC-AUC",
+    "AUPRC",
+    "Sensitivity",
+    "Specificity",
+    "Accuracy",
+    "F1",
+    "Balanced Accuracy",
+    "MCC",
+    "Brier"
+  ],
+  "statistical_comparisons": {
+    "primary": "paired DeLong A8 minus baseline ROC-AUC",
+    "secondary": "2000 paired class-stratified bootstrap, seed 42"
+  },
+  "locked_test_case_list_sha256": "c69d76990714350302766587bf06f4bc49308c3bdfafc3d92138fa559e63b8ea",
+  "development_oof_fold_sha256": "0b195b012b4719fb0a457e60d6cc48d8c4cb17128b92a1e8908a4f0dc736353a",
+  "pretraining_overlap_status": "NO_KNOWN_RSNA_OVERLAP",
+  "fallback_baseline_id": "C2",
+  "fallback_trigger": "TECHNICAL_FAILURE_ONLY",
+  "external_baseline_extension": "DO_NOT_RUN_INITIAL_STAGE8",
+  "a8_reselection_allowed": false,
+  "a8_refit_allowed": false,
+  "locked_test_tuning_allowed": false,
+  "external_tuning_allowed": false,
+  "instantiated_parameter_count": 27868034,
+  "server_preflight_timestamp_unix": 1790773127.2160296
+}

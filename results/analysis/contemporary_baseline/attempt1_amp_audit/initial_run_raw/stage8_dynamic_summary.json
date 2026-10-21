@@ -1,0 +1,71 @@
+{
+  "project": "AURA-CXR",
+  "stage": 8,
+  "analysis_origin": "reviewer_requested_contemporary_baseline",
+  "baseline": {
+    "name": "ConvNeXt V2 Tiny",
+    "architecture_family": "ConvNeXt V2",
+    "publication": "CVPR 2023",
+    "year": 2023,
+    "implementation": "convnextv2_tiny.fcmae_ft_in1k",
+    "pretrained_checkpoint": "timm/convnextv2_tiny.fcmae_ft_in1k",
+    "pretrained_state_hash": "f932cb959aebe4e018f3a60b2902a4d81a9edd2350d1ae441e291443d7f6101c",
+    "checkpoint_hash": "0b5885bc16baf21119d36a95d015537d47148284760c906d579ee054c5a44ef4",
+    "parameter_count": 27868034,
+    "input_size": [
+      224,
+      224
+    ],
+    "pretraining_overlap_status": "NO_KNOWN_RSNA_OVERLAP"
+  },
+  "development": {
+    "n": 21346,
+    "oof_auc": 0.8465642675058744,
+    "oof_auprc": 0.6442330580396048,
+    "threshold": 0.47000000000000003,
+    "fold_auc_mean": 0.848075227483338,
+    "fold_auc_sd": 0.0770943987104982
+  },
+  "locked_test": {
+    "n": 5338,
+    "positive": 1203,
+    "negative": 4135,
+    "auc": 0.896045858750946,
+    "auprc": 0.7282120633518695,
+    "sensitivity": 0.8187863674147964,
+    "specificity": 0.8089480048367593,
+    "accuracy": 0.8111652304233795,
+    "f1": 0.661517797179315,
+    "balanced_accuracy": 0.8138671861257778,
+    "mcc": 0.5567232903861778
+  },
+  "paired_A8_vs_baseline": {
+    "difference_orientation": "A8_minus_baseline",
+    "auc": {
+      "delta": 0.0027293716534941836,
+      "ci_low": -0.0025081642137237898,
+      "ci_high": 0.007966907520712156,
+      "p_value": 0.3070784377803517,
+      "method": "paired_DeLong"
+    }
+  },
+  "complexity": {
+    "model": "C1_CONVNEXTV2_TINY",
+    "parameters": 27868034,
+    "trainable_parameters": 27868034,
+    "input_size": "224x224",
+    "FLOPs_if_verified": null,
+    "checkpoint_size_bytes": 111552029,
+    "peak_VRAM_bytes": 4006556672,
+    "inference_locked_seconds_total": 46.62594294548035,
+    "training_GPU_hours_if_measured": 1.2082465757926304
+  },
+  "protocol_integrity": {
+    "a8_retrained": false,
+    "a8_reselected": false,
+    "baseline_selected_on_test": false,
+    "threshold_tuned_on_test": false,
+    "external_tuning": false
+  },
+  "stage_8_dynamic_run": "COMPLETE"
+}
