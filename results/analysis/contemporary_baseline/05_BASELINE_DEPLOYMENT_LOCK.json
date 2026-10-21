@@ -1,0 +1,20 @@
+{
+  "baseline_id": "C1_CONVNEXTV2_TINY",
+  "oof_sha256": "d193df7ee27dd2f581a12ddbbfb7ffaf70839e89af5ece249145450628168ab9",
+  "threshold": 0.455,
+  "threshold_source": "development_oof",
+  "final_refit_epochs": 5,
+  "final_training_population": 21346,
+  "final_checkpoint": "${AURA_PROJECT_DIR}/STAGE8_RESULTS_CORRECTED/contemporary_baseline_fp32_v2/checkpoints/final_convnextv2_tiny.pt",
+  "final_checkpoint_sha256": "457ef9a05f5ff23272d9534779b842f6ac699ecf626be3d50945d4b41108c709",
+  "training_config_sha256": "b846063163a954ea56da32227c9a989e7c9e38ea7119e5215cc8e104d3d76d48",
+  "locked_test_patient_list_sha256": "c69d76990714350302766587bf06f4bc49308c3bdfafc3d92138fa559e63b8ea",
+  "created_before_locked_test": true,
+  "locked_test_tuning": false,
+  "attempt_id": "STAGE8_CORRECTED_FP32_V2",
+  "precision": "FP32",
+  "corrective_rerun": true,
+  "attempt1_locked_test_already_seen": true,
+  "correction_basis": "development-only Fold-4 AMP-vs-FP32 diagnostic",
+  "correction_locked_before_attempt2_locked_test": true
+}

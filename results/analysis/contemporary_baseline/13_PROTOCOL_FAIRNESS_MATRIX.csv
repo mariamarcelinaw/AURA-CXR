@@ -1,0 +1,14 @@
+item,AURA_CXR,Baseline,Identical,Justification
+Patient split,canonical Stage 0-7 RSNA,canonical Stage 0-7 RSNA,YES,same split manifests
+Labels,binary pneumonia,binary pneumonia,YES,same split labels
+Base preprocessing,slope/intercept; MONOCHROME1; minmax; 224 bilinear,same,YES,model normalization applied after base preprocessing
+Input size,224x224,224x224,YES,native ConvNeXt V2 Tiny 224 support
+GT boxes as input,NO,NO,YES,not used
+Development cohort,"n=21,346","n=21,346",YES,same patients
+OOF folds,5 canonical,same 5,YES,hash audited
+Locked test,"n=5,338","n=5,338",YES,same patients
+Metric implementation,canonical AURA definitions,same definitions,YES,audit-compatible
+Bootstrap,2000 seed42 class-stratified,same,YES,paired same-patient resampling
+Threshold source,development OOF,development OOF,YES,canonical rule
+External adaptation,NO,NO,YES,no external tuning
+Upstream pretraining data,CXR corpora including RSNA-derived images (XRV supervised; EVA-X-S self-supervised),ImageNet-1K,NO,architecture-specific public checkpoints; component-level sensitivity in 15_COMPONENT_VS_BASELINE.csv

@@ -1,0 +1,7 @@
+{
+  "epochs": 5,
+  "runtime_seconds": 640.6814322471619,
+  "checkpoint_sha256": "457ef9a05f5ff23272d9534779b842f6ac699ecf626be3d50945d4b41108c709",
+  "precision": "FP32",
+  "attempt_id": "STAGE8_CORRECTED_FP32_V2"
+}

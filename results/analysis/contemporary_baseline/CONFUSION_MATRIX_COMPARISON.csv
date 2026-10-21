@@ -1,0 +1,4 @@
+model,threshold,TN,FP,FN,TP
+ConvNeXt V2 Tiny baseline,0.455,3273,862,210,993
+A8 frozen stack,0.47,3190,945,179,1024
+A4 Hybrid CNN-ViT mean,0.49,3212,923,178,1025
