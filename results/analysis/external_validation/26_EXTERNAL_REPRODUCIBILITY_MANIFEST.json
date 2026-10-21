@@ -1,0 +1,231 @@
+{
+  "schema": "aura_cxr_stage10_manifest_v1",
+  "created_at": "2026-10-02",
+  "stage_10_gate": "PASS",
+  "selected_path": "PATH_B_SCOPE_LIMITATION",
+  "files": [
+    {
+      "path": "01_KERMANY_PROTOCOL_AUDIT.md",
+      "sha256": "f4ec6f3cfc55431415da451e4d0439882fc5f330ef338ad46bf5eb45acbfc46d",
+      "size_bytes": 1415
+    },
+    {
+      "path": "02_KERMANY_REPRODUCTION.csv",
+      "sha256": "14998c21bc9108a78cb10ddbbaba24810149ea8bff5c5ef403579ae722b77220",
+      "size_bytes": 1645
+    },
+    {
+      "path": "03_EXTERNAL_CLAIM_INVENTORY.csv",
+      "sha256": "27b20896ae6f438596806c1f16dd6cc46875f70f1b5f246ee2f416e7366072fd",
+      "size_bytes": 2349
+    },
+    {
+      "path": "04_EXTERNAL_DATASET_CANDIDATE_MATRIX.csv",
+      "sha256": "1ca8587e85984df5e476796a79dd4a16c6ff0d044f4dab617be8a552f2bbfaa1",
+      "size_bytes": 4195
+    },
+    {
+      "path": "05_SECOND_EXTERNAL_COHORT_PROTOCOL_LOCK.json",
+      "sha256": "d41f899723569c078a7ee4fbd3a10ab4e36e6e512e18b40019960d82d0c852a9",
+      "size_bytes": 892
+    },
+    {
+      "path": "06_EXTERNAL_VALIDATION_PATH_DECISION.md",
+      "sha256": "53c96a0728e25b6fb8fd49ecaccd802594cde476b6c13d7d262fd169c8891f8e",
+      "size_bytes": 2266
+    },
+    {
+      "path": "07_SECOND_EXTERNAL_COHORT_FLOW.csv",
+      "sha256": "dbb03e1869b0eb3715f889629f67747f01bcc19ba08c3e53adf7e5ef057fc6cd",
+      "size_bytes": 257
+    },
+    {
+      "path": "08_SECOND_EXTERNAL_PREDICTIONS.csv",
+      "sha256": "b4de6ca3246fb8db594ad7d5436e05cf7fe0eebf5392b00ab88bb11ebb333483",
+      "size_bytes": 107
+    },
+    {
+      "path": "09_EXTERNAL_SCORE_DISTRIBUTION.csv",
+      "sha256": "5b513532630afc59fdc68d1ba1baad263479f8786569f0d2e296e2a1c2429059",
+      "size_bytes": 729
+    },
+    {
+      "path": "10_EXTERNAL_CLAIM_LOCK.json",
+      "sha256": "461c543e90faa21eb37f0de1f2f3bde7738c9285bd45ae635263c5cdddcd38f3",
+      "size_bytes": 1249
+    },
+    {
+      "path": "11_SECOND_EXTERNAL_RESULTS.csv",
+      "sha256": "f528903b1a366f479ffd774acf4e69222c04b8fa2a8e3b9beff6a4cf0415a606",
+      "size_bytes": 162
+    },
+    {
+      "path": "12_MULTI_COHORT_EXTERNAL_SUMMARY.csv",
+      "sha256": "d5c3ef9eb0486f1c111b929d4c79262be3574346736ae1c81c434991ef25f839",
+      "size_bytes": 734
+    },
+    {
+      "path": "13_RESPONSE_EVIDENCE_R2_C6.md",
+      "sha256": "54b0748f94ecbb16792456226e770153280c6af1285a89af7440db4b83b03eb3",
+      "size_bytes": 2173
+    },
+    {
+      "path": "14_MANUSCRIPT_EXTERNAL_METHODS_INSERT.md",
+      "sha256": "4ddb5209e9c87806ff7fe3ba0c5e21203af21d78fc984fbacc5abfefcda16e34",
+      "size_bytes": 1583
+    },
+    {
+      "path": "15_MANUSCRIPT_EXTERNAL_RESULTS_INSERT.md",
+      "sha256": "b4ec36ffbab6e571af3679849d3da973f8851313810021b5a7de570f1de7effb",
+      "size_bytes": 1062
+    },
+    {
+      "path": "16_MANUSCRIPT_EXTERNAL_DISCUSSION_INSERT.md",
+      "sha256": "48e694745e370674ffba527d66b860ed1933d7088ceac6aad516a18f27e67c86",
+      "size_bytes": 1213
+    },
+    {
+      "path": "17_MANUSCRIPT_EXTERNAL_LIMITATIONS_INSERT.md",
+      "sha256": "d1946b6e978f5e7b91c34449093c1f66536226ba7983655a0d955fc2e39101cb",
+      "size_bytes": 1120
+    },
+    {
+      "path": "18_MANUSCRIPT_EXTERNAL_CONCLUSION_INSERT.md",
+      "sha256": "f949ec429909cfba1a5134787f7678e56b0926e0c67d72aa5ab6edba88f9b317",
+      "size_bytes": 399
+    },
+    {
+      "path": "19_MANUSCRIPT_EXTERNAL_ABSTRACT_INSERT.md",
+      "sha256": "8258323b29e2ebd3348807066c0388cd851566f4d0d40dd71a21b2638d166487",
+      "size_bytes": 414
+    },
+    {
+      "path": "20_EXTERNAL_MANUSCRIPT_IMPACT_MAP.csv",
+      "sha256": "7f5cbd33516d22a2ab95812c13ff580f4e3eb2f5b2e762fc8d0d903e2be9fbeb",
+      "size_bytes": 1485
+    },
+    {
+      "path": "21_EXTERNAL_VALIDATION_SPECIFICATION.json",
+      "sha256": "4fb2209a1d77ea40ace3c955c1293f64e4bcb88614c22d0aab3c6ccd1fb61f04",
+      "size_bytes": 1155
+    },
+    {
+      "path": "22_STAGE_11_HANDOFF.md",
+      "sha256": "bd2a514923a9d3258c22d1cfedfa9cb08f40f0755d855d998aa81816a426f23b",
+      "size_bytes": 995
+    },
+    {
+      "path": "23_EXTERNAL_SHIFT_CHARACTERIZATION.md",
+      "sha256": "4c8e56f9eeb0fd7f63c9f9c0d2ca2854d8ccbb43d1016347406ad75d286ba1b9",
+      "size_bytes": 1566
+    },
+    {
+      "path": "24_DATASET_OVERLAP_AUDIT.md",
+      "sha256": "4636c4e522308bcbe213a8eae022ff52c30ed76628fdcb6bcd1b4fe02b94d2a5",
+      "size_bytes": 1144
+    },
+    {
+      "path": "25_EXTERNAL_STATISTICAL_QC.md",
+      "sha256": "e0476140f4174aad949624faf929175f755162dad2433d051ddf5a4aa762229f",
+      "size_bytes": 805
+    },
+    {
+      "path": "27_STAGE_10_FINAL_REPORT.md",
+      "sha256": "56c9807054653c059199d5d890ce07f8e53188fc232f11d24cf07567322ef5bf",
+      "size_bytes": 6107
+    },
+    {
+      "path": "28_STAGE_10_MACHINE_SUMMARY.json",
+      "sha256": "fcc6e9b9ac2cf253dc505526760400fe72b3e505711fe34f08f93b7d5ff378f8",
+      "size_bytes": 2209
+    },
+    {
+      "path": "README.md",
+      "sha256": "f05b64b3599610f324c97c9a3aeebb33ca2a0b4280342ef6a11108934ff3026e",
+      "size_bytes": 1079
+    },
+    {
+      "path": "TERMINAL_SUMMARY.txt",
+      "sha256": "061c35d17c4570660f68c2c8042890bee394794d56b3680d2bd190aace10b1ae",
+      "size_bytes": 2278
+    },
+    {
+      "path": "WEB_SOURCE_RECORD.md",
+      "sha256": "24f9d145447526fe491c9878f421897746de00e6288d8336b21e2e4b1f64471a",
+      "size_bytes": 1766
+    },
+    {
+      "path": "scripts/external_validation_audit.py",
+      "sha256": "1333a442c25646889da1b9a4fb5e014168008b3c247449feaa26904c9c31233e",
+      "size_bytes": 1832
+    },
+    {
+      "path": "stage10_external_config.json",
+      "sha256": "6eb850d427b3de1e6f26c455d3b7b2bfba66c547a2c42ab74850a923f91ece82",
+      "size_bytes": 711
+    },
+    {
+      "path": "support/14_STAGE_10_HANDOFF.md",
+      "sha256": "bc3815ab4bf064eadb49aafdc2488519d81a8f7c033e464bcfac36db917c035a",
+      "size_bytes": 852
+    },
+    {
+      "path": "support/kermany/external_validation_kermany_calibration.csv",
+      "sha256": "43ddd59e4813f1336482e44cf33a0102fea2b17d2c9591e7562699737673b3e2",
+      "size_bytes": 617
+    },
+    {
+      "path": "support/kermany/external_validation_kermany_confusion_matrices.csv",
+      "sha256": "69042109763b54ca36b7c5c8a2b80dea13b5d4ef1c020d9fe7413787833329f5",
+      "size_bytes": 360
+    },
+    {
+      "path": "support/kermany/external_validation_kermany_dataset_manifest.csv",
+      "sha256": "c55257744445c79da01a77e67d094562bca08b75d0931fb5b699be56b863e20b",
+      "size_bytes": 86059
+    },
+    {
+      "path": "support/kermany/external_validation_kermany_locked_selected_pair.csv",
+      "sha256": "0b55586924677c525ef2fc25ace2f31b3b8cbc649c5caa870065722253b51581",
+      "size_bytes": 5107
+    },
+    {
+      "path": "support/kermany/external_validation_kermany_predictions.csv",
+      "sha256": "2979eb6a9fc907e037e84e30a44ae7b7ae1176e5adbcd5e7ffe30ca95cafab29",
+      "size_bytes": 75258
+    },
+    {
+      "path": "support/kermany/external_validation_kermany_preflight.json",
+      "sha256": "e694aaba08bed86014b34e0baf8f8c8ae39fdcbc87f9e936bd1ca1a9eef59964",
+      "size_bytes": 9014
+    },
+    {
+      "path": "support/kermany/external_validation_kermany_protocol.json",
+      "sha256": "57a32b61a1b1de9e8c42a812ce4dae669a9c9237ca8888ae56d5ba3d0e602e2c",
+      "size_bytes": 8060
+    },
+    {
+      "path": "support/kermany/external_validation_kermany_runtime.json",
+      "sha256": "fbb919a481d36189470fd5bef82db7858d0bb249f6ad9cff74cd0cee934f51f5",
+      "size_bytes": 511
+    },
+    {
+      "path": "support/stage3/13_EXTERNAL_SECONDARY_ANALYSIS.csv",
+      "sha256": "53a1d2d6ac2b46501f4c9939e1f3d64419c42f166118813778eb6a29dbb460f5",
+      "size_bytes": 1833
+    },
+    {
+      "path": "tests/test_external_protocol.py",
+      "sha256": "77e118383014f1446e789d0e3a10bc394eef9da4d7b3a3e900bce1d05754aa26",
+      "size_bytes": 1926
+    }
+  ],
+  "source_hashes": {
+    "kermany_predictions": "2979eb6a9fc907e037e84e30a44ae7b7ae1176e5adbcd5e7ffe30ca95cafab29",
+    "kermany_protocol": "57a32b61a1b1de9e8c42a812ce4dae669a9c9237ca8888ae56d5ba3d0e602e2c",
+    "kermany_metrics": "0b55586924677c525ef2fc25ace2f31b3b8cbc649c5caa870065722253b51581",
+    "rsna_test_split": "ab88fb7871fe24870f1c8b1aea40496908b9ab519da741c13d2ff7aec341c00f",
+    "rsna_stacked_probs": "646f9f4334bb0ac9310e523961edd86c58adb460357d07d00f9409e07417e538",
+    "stage3_external_secondary": "53a1d2d6ac2b46501f4c9939e1f3d64419c42f166118813778eb6a29dbb460f5"
+  }
+}

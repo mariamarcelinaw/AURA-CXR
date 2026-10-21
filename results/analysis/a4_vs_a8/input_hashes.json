@@ -1,0 +1,38 @@
+{
+  "locked_standardized_predictions": {
+    "path": "release_tree/predictions/standardized/locked_rsna.csv",
+    "sha256": "fabe28d7443b6aeb41ab4cdf605979029ba63e1a7464b2da3dc48163c13930a9"
+  },
+  "locked_test_split": {
+    "path": "release_tree/splits/test.csv",
+    "sha256": "c69d76990714350302766587bf06f4bc49308c3bdfafc3d92138fa559e63b8ea"
+  },
+  "deployment_manifest": {
+    "path": "release_tree/reproducibility/deployment_manifest.json",
+    "sha256": "5d449701aae4194d3639e1bea31b00bbcd2c7b6c56a4b1c68042afd7000c19f4"
+  },
+  "frozen_config": {
+    "path": "release_tree/configs/frozen_config.yaml",
+    "sha256": "3f5d815482cc13b7bf7d33437a3170de22ab4ed723a9b06fc2c6b210f94812bb"
+  },
+  "evaluation_module": {
+    "path": "release_tree/src/aura_cxr/evaluation.py",
+    "sha256": "af8161ddfdf778711cd6a0f422ec7f5ebbac76339220eb7bab5b5920df1df57b"
+  },
+  "fusion_module": {
+    "path": "release_tree/src/aura_cxr/fusion.py",
+    "sha256": "57dbd1128590aa5a5760565008993685857f97e3f944fb78916604ecb5a64443"
+  },
+  "canonical_delong_source": {
+    "path": "release_tree/reproducibility/canonical_source_snapshot/q1_stats_report.py",
+    "sha256": "c4d9b8a73c34b473a8d5b59ff0d278a6d8c555df636ce105915a2a8a30c626db"
+  },
+  "kermany_standardized_predictions": {
+    "path": "release_tree/predictions/standardized/kermany.csv",
+    "sha256": "77d9508ee85b3e0580e9a8ba2a8d043d2ae712e1c5e23eba1b2d6e0799b9a215"
+  },
+  "development_supporting_audit": {
+    "path": "radiomics_contribution_oof_audit.json",
+    "sha256": "d58e738f9662c98336364c1da6e743d6d3ead1d15b0e440930de3bb1a0591443"
+  }
+}

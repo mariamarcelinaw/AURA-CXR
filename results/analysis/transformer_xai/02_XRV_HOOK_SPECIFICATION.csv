@@ -1,0 +1,3 @@
+branch,hook_index,activation_shape,gradient_shape,target,channel_axis,spatial_grid,module_path,module_type,layer_weight,historical_prefix_tokens_dropped,embedding_dim,retained_patch_tokens
+xrv,1,"[1, 128, 7, 7]","[1, 128, 7, 7]",pre_softmax_logit_class_1,1.0,"[7, 7]",backbone.features.denseblock4.denselayer16.conv1,Conv2d,0.75,,,
+xrv,2,"[1, 128, 7, 7]","[1, 128, 7, 7]",pre_softmax_logit_class_1,1.0,"[7, 7]",backbone.features.denseblock4.denselayer15.conv1,Conv2d,0.25,,,

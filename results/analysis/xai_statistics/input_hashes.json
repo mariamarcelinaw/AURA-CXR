@@ -1,0 +1,57 @@
+{
+  "xai_localization_per_sample.csv": {
+    "path": "${WORK_DIR}/_stage9_work/reports/xai_localization_per_sample.csv",
+    "sha256": "42b9a10a02f0b425cc7f287b3848025bb953aa42cd54efcfd92a4531cdfc6316",
+    "bytes": 1341078
+  },
+  "completed_baselines_per_sample.csv": {
+    "path": "${WORK_DIR}/_stage9_work/reports/lung_prior_completion/xai_localization_baselines_per_sample.csv",
+    "sha256": "a48b2be2262c86479f62f0b7cbea1a990c8894f80d3b712b1e913f88a6f1ed1f",
+    "bytes": 567716
+  },
+  "completed_baseline_comparison.csv": {
+    "path": "${WORK_DIR}/_stage9_work/reports/lung_prior_completion/xai_localization_baseline_comparison.csv",
+    "sha256": "d83cb1560ad2331d86bce27f82e121985f118ea6cf4204b93a9d694d171a4d65",
+    "bytes": 1754
+  },
+  "xai_tp_vs_fn_statistics.csv": {
+    "path": "${WORK_DIR}/_stage9_work/reports/xai_tp_vs_fn_statistics.csv",
+    "sha256": "279c34557111ea3101c324ecdb8b7a60bf7e3cfb9955227bde95e459f5ef9955",
+    "bytes": 1013
+  },
+  "stage7_comparator_results.csv": {
+    "path": "${WORK_DIR}/_stage9_work/stage7/STAGE_7_TRANSFORMER_XAI_VALIDATION/12_TRANSFORMER_COMPARATOR_RESULTS.csv",
+    "sha256": "a178d8fe9a6f10617c5eca678138fc6056219f1be9f3c9394098a8264caf7895",
+    "bytes": 1730
+  },
+  "stage7_comparator_tp_vs_fn.csv": {
+    "path": "${WORK_DIR}/_stage9_work/stage7/STAGE_7_TRANSFORMER_XAI_VALIDATION/COMPARATOR_TP_VS_FN.csv",
+    "sha256": "dcefade69c009de67e326a0238d321a5860c178d65b3b14284a8976f152768bf",
+    "bytes": 522
+  },
+  "stage7_multiplicity_handoff.md": {
+    "path": "${WORK_DIR}/_stage9_work/stage7/STAGE_7_TRANSFORMER_XAI_VALIDATION/25_XAI_MULTIPLICITY_HANDOFF.md",
+    "sha256": "8ac88f69f96a7075a08ea4350fc65607478d0eac8069768abbaf111a424aa8ef",
+    "bytes": 1675
+  },
+  "lesion_prevalence_prior.json": {
+    "path": "${WORK_DIR}/_stage9_work/reports/xai_training_lesion_prevalence_prior.json",
+    "sha256": "578601ee07c43000cd357e3599f7a70edb69f9a2932617d3f008abba743a89f9",
+    "bytes": 109
+  },
+  "lung_prior_completion_audit.json": {
+    "path": "${WORK_DIR}/_stage9_work/reports/lung_prior_completion/lung_prior_completion_audit.json",
+    "sha256": "f279a1e2df2730d1fb54e59621c42abccbda48aeee63976ce7471b4ed78b344e",
+    "bytes": 3277
+  },
+  "faithfulness_summary.json": {
+    "path": "${WORK_DIR}/_stage9_work/reports/xai_faithfulness_summary.json",
+    "sha256": "99cacd4cc6d29d3612351339c02831f864467130eafd328b368f7bbf672d8f99",
+    "bytes": 314
+  },
+  "outside_lung_per_sample.csv": {
+    "path": "${WORK_DIR}/_stage9_work/reports/outside_lung_regenerated_sensitivity/outside_lung_per_sample.csv",
+    "sha256": "7b869c6b61b11fdad77a1be064bf9741761c89688c93ee24f50e48e33e009279",
+    "bytes": 367749
+  }
+}

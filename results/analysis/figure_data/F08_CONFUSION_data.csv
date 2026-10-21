@@ -1,0 +1,3 @@
+,Pred normal,Pred pneumonia
+True normal,217,17
+True pneumonia,80,310

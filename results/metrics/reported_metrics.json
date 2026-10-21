@@ -1,0 +1,45 @@
+{
+  "internal_A8": {
+    "AUC": 0.8987752304044404,
+    "AUPRC": 0.7337712172642205,
+    "sensitivity": 0.8512053200332502,
+    "specificity": 0.7714631197097944,
+    "accuracy": 0.7894342450355939,
+    "balanced_acc": 0.8113342198715223,
+    "MCC": 0.5392051864630275
+  },
+  "internal_A4": {
+    "AUC": 0.8995679885333019,
+    "AUPRC": 0.7365069518711118,
+    "sensitivity": 0.8520365752285952,
+    "specificity": 0.7767835550181379,
+    "accuracy": 0.7937429748969651,
+    "balanced_acc": 0.8144100651233666,
+    "MCC": 0.5457612307508461
+  },
+  "xai": {
+    "n": 1203,
+    "pointing_game": 0.839568,
+    "iou": 0.392374,
+    "localization_score": 0.486518,
+    "energy_inside_gt": 0.436053
+  },
+  "faithfulness": {
+    "n": 256,
+    "deletion_drop": 0.21572695560462307,
+    "retention_ratio": 0.8088985944617479
+  },
+  "external_A8": {
+    "n": 624,
+    "roc_auc": 0.9309,
+    "auprc": 0.9546,
+    "sensitivity": 0.7949,
+    "specificity": 0.9274,
+    "balanced_accuracy": 0.8611,
+    "mcc": 0.7001,
+    "tn": 217,
+    "fp": 17,
+    "fn": 80,
+    "tp": 310
+  }
+}

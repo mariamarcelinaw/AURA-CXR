@@ -1,0 +1,14 @@
+{
+  "n": 21346,
+  "exact_max_entropy_ties": 0,
+  "near_tie_tolerance": "NOT_PRESPECIFIED_NO_POST_HOC_THRESHOLD_APPLIED",
+  "margin_mean": 0.07746627861765655,
+  "margin_sd": 0.075259788455391,
+  "margin_min": 1.9073486328125e-06,
+  "margin_q1": 0.0320544242858886,
+  "margin_median": 0.0638604164123535,
+  "margin_q3": 0.0972557067871093,
+  "margin_max": 1.0328187942504885,
+  "winner_entropy_mean": 14.054497735118124,
+  "second_best_entropy_mean": 13.977031456500468
+}
