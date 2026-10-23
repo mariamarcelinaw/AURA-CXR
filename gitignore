@@ -1,0 +1,32 @@
+# Raw data, local outputs and model weights are never tracked (see README).
+data/raw/
+runs/
+checkpoints/
+configs/paths.yaml
+
+# Python and test caches
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Weight, array and image files
+*.pt
+*.pth
+*.ckpt
+*.h5
+*.keras
+*.onnx
+*.safetensors
+*.npy
+*.npz
+*.pkl
+*.joblib
+*.dcm
+*.dicom
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
