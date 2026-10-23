@@ -1,0 +1,140 @@
+{
+  "project": "AURA-CXR",
+  "stage": 7,
+  "analysis_origin": "POST_HOC_XAI_SENSITIVITY",
+  "scope": {
+    "explains": "Hybrid CNN-ViT branch",
+    "xai_scope_constant": "HYBRID_CNN_VIT_BRANCH_ONLY",
+    "explains_radiomics": false,
+    "explains_meta_learner": false,
+    "explains_final_A8": false
+  },
+  "checkpoints": {
+    "xrv_sha256": "ba0559aeba8afe500eeae3fc36825d3742e543d005a52d3cc35eeb732bab317a",
+    "eva_sha256": "83a46553743f12a8bbb64f900ece2efa312a6b75d5638e8fae519ec0d31418a6",
+    "unchanged_after_run": true
+  },
+  "target": {
+    "class_index": 1,
+    "class_semantics": "pneumonia",
+    "scalar": "pre-softmax class-1 logit"
+  },
+  "xrv": {
+    "hooks": [
+      "backbone.features.denseblock4.denselayer16.conv1",
+      "backbone.features.denseblock4.denselayer15.conv1"
+    ],
+    "module_types": [
+      "Conv2d",
+      "Conv2d"
+    ],
+    "activation_shapes": [
+      "[1, 128, 7, 7]",
+      "[1, 128, 7, 7]"
+    ],
+    "gradient_shapes": [
+      "[1, 128, 7, 7]",
+      "[1, 128, 7, 7]"
+    ],
+    "layer_weights": [
+      0.75,
+      0.25
+    ]
+  },
+  "eva": {
+    "hooks": [
+      "blocks.11.mlp",
+      "blocks.11"
+    ],
+    "module_types": [
+      "GluMlp",
+      "EvaBlock"
+    ],
+    "activation_shapes": [
+      "[1, 197, 384]",
+      "[1, 197, 384]"
+    ],
+    "gradient_shapes": [
+      "[1, 197, 384]",
+      "[1, 197, 384]"
+    ],
+    "layer_weights": [
+      0.75,
+      0.25
+    ],
+    "token_structure": {
+      "num_prefix_tokens": 1,
+      "class_token": true,
+      "other_prefix_tokens": 0,
+      "num_patch_tokens": 196,
+      "embedding_dim": 384,
+      "patch_size": [
+        16,
+        16
+      ],
+      "grid": [
+        14,
+        14
+      ],
+      "ordering": "row-major raster",
+      "historical_heuristic_equivalent": true
+    }
+  },
+  "fusion": {
+    "xrv_weight": 0.25,
+    "eva_weight": 0.75,
+    "layer_weights": [
+      0.75,
+      0.25
+    ],
+    "gaussian_sigma_pixels": 1.12,
+    "normalization": "per-layer min-max after resize; post-layer-fusion min-max; post-model-fusion min-max"
+  },
+  "postprocessing": {
+    "map_policy": "raw",
+    "threshold": 0.25,
+    "threshold_meaning": "absolute 0.25 on normalized [0,1] map",
+    "upsampling": "scipy.ndimage.zoom order=1 to 224x224"
+  },
+  "faithfulness": {
+    "sample_n": 256,
+    "seed": 42,
+    "top_fraction": 0.1,
+    "baseline": "image mean",
+    "target": "0.25*p_XRV + 0.75*p_EVA deep-branch score",
+    "deletion_drop_mean": 0.21572695560462307,
+    "retention_ratio_mean": 0.8088985944617479,
+    "explains_final_A8": false
+  },
+  "comparator": {
+    "method": "Integrated Gradients",
+    "reference": "Sundararajan, Taly, Yan, ICML 2017",
+    "target": "same EVA class-1 pre-softmax logit",
+    "baseline": "zero tensor in normalized EVA input space",
+    "steps": 64,
+    "integration": "trapezoidal",
+    "internal_batch": 16,
+    "channel_aggregation": "ReLU(sum signed IG over RGB channels)",
+    "normalization": "min-max [0,1]",
+    "localization_threshold": 0.25,
+    "n_attempted": 1203,
+    "n_valid": 1203
+  },
+  "statistics": {
+    "difference_orientation": "COMPARATOR_MINUS_LAYERCAM",
+    "bootstrap_resamples": 2000,
+    "seed": 42,
+    "primary_family": [
+      "Pointing Game",
+      "IoU@0.25",
+      "localization score",
+      "energy inside GT"
+    ],
+    "multiplicity": "Holm across four EVA method-sensitivity tests"
+  },
+  "protocol_integrity": {
+    "classifier_retrained": false,
+    "xai_retuned_on_locked_test": false,
+    "a8_modified": false
+  }
+}

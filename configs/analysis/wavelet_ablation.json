@@ -1,0 +1,92 @@
+{
+  "analysis_name": "wavelet_ablation",
+  "analysis_origin": "post_hoc",
+  "selection_eligible": false,
+  "difference_orientation": "adaptive_minus_fixed",
+  "policies": [
+    "adaptive",
+    "fixed_haar",
+    "fixed_db4",
+    "fixed_sym4",
+    "fixed_coif3"
+  ],
+  "candidate_wavelets": [
+    "haar",
+    "db4",
+    "sym4",
+    "coif3"
+  ],
+  "primary_metric": "ROC_AUC",
+  "secondary_metrics": [
+    "AUPRC",
+    "Brier",
+    "macro_F1",
+    "fold_auc_mean",
+    "fold_auc_sd"
+  ],
+  "bootstrap_resamples": 2000,
+  "bootstrap_seed": 42,
+  "ci_level": 0.95,
+  "multiplicity_method": "Holm",
+  "outer_folds": 5,
+  "feature_dimension": 746,
+  "mrfo_retuned_per_policy": false,
+  "locked_test_extension": false,
+  "fold_lightgbm_policy": "reuse exact original adaptive-OOF outer-fold LightGBM hyperparameters for every wavelet policy; do not rerun MRFO",
+  "fold_lightgbm_params": {
+    "0": {
+      "learning_rate": 0.01502,
+      "max_leaf_nodes": 255,
+      "max_depth": 12,
+      "l2_regularization": 0.00038,
+      "min_samples_leaf_frac": 0.0041
+    },
+    "1": {
+      "learning_rate": 0.03721,
+      "max_leaf_nodes": 216,
+      "max_depth": 10,
+      "l2_regularization": 1.92579,
+      "min_samples_leaf_frac": 0.0116
+    },
+    "2": {
+      "learning_rate": 0.03873,
+      "max_leaf_nodes": 90,
+      "max_depth": 9,
+      "l2_regularization": 0.01433,
+      "min_samples_leaf_frac": 0.012
+    },
+    "3": {
+      "learning_rate": 0.00837,
+      "max_leaf_nodes": 255,
+      "max_depth": 11,
+      "l2_regularization": 10.0,
+      "min_samples_leaf_frac": 0.001
+    },
+    "4": {
+      "learning_rate": 0.06527,
+      "max_leaf_nodes": 255,
+      "max_depth": 7,
+      "l2_regularization": 10.0,
+      "min_samples_leaf_frac": 0.0147
+    }
+  },
+  "deployment_refit_params_not_used_for_primary_oof": {
+    "learning_rate": 0.03401,
+    "max_leaf_nodes": 39,
+    "max_depth": 12,
+    "l2_regularization": 10.0,
+    "min_samples_leaf_frac": 0.001
+  },
+  "input_hashes": {
+    "${AURA_PACKAGE_DIR}/splits/development_oof_folds.csv": "0b195b012b4719fb0a457e60d6cc48d8c4cb17128b92a1e8908a4f0dc736353a",
+    "${AURA_PACKAGE_DIR}/splits/development.csv": "bb02dabcbb8831edaafd4bf7d1842ffa3fcd0eb726bfd05f8d307475fc7d68bc",
+    "${AURA_PACKAGE_DIR}/configs/frozen_config.yaml": "3f5d815482cc13b7bf7d33437a3170de22ab4ed723a9b06fc2c6b210f94812bb",
+    "${AURA_PACKAGE_DIR}/src/aura_cxr/radiomics.py": "e14e79cd6eed2078ee4ed0ca1bd0e87fd438fa5c7c8ce5096efe937c59997d9b",
+    "${STAGE1_WORKSPACE}/raw_readonly/raw_probs/probs/oof_radiomics_lgbm.npz": "f180acec675977caa304d2b88e66c3392bdfa6d8b359b7843a488c2a75a0b1bb",
+    "${STAGE1_WORKSPACE}/raw_readonly/raw_reports/reports/radiomics_learner_selection_manifest.json": "d46bdb06007b1ccbc59a1f440c1c95ca41ed71f88bd4fa8f3370668ea887091b",
+    "${STAGE1_WORKSPACE}/raw_readonly/raw_reports/reports/radiomics_development_refit_mrfo.json": "df8c30255bbd3d9f83264fc4962aa9fdb345105cd13f1f4485ea1eef83d7ce8d",
+    "${STAGE1_WORKSPACE}/raw_readonly/raw_reports/reports/development_radiomics_feature_manifest.json": "cfa3e240919138e08cbbe83a6826f12a5c19b73a513e6d90fb3b520c4b348243",
+    "${STAGE1_WORKSPACE}/raw_readonly/raw_reports/reports/radiomics_fixed_candidate_outer_folds.json": "068982d2e3ca44223dd118f8715ce221108e8293a53eb110c9d3648846d3963d",
+    "${STAGE1_WORKSPACE}/raw_readonly/raw_program/PROGRAM AURA CXR/train_aura.py": "ef83a312230304b1ca2d6632ef0f853abe2702b82658b124f69d87cf6ac1c77f"
+  }
+}

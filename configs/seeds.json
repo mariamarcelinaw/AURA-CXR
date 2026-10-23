@@ -1,0 +1,26 @@
+{
+  "global": 42,
+  "mrfo": 42,
+  "radiomics_screening": [
+    42,
+    123
+  ],
+  "bootstrap": 42,
+  "faithfulness": 42,
+  "oof_split": 42,
+  "inner_validation": 42,
+  "deep_training": {
+    "global": 42,
+    "inner_validation_by_outer_fold": [
+      42,
+      43,
+      44,
+      45,
+      46
+    ],
+    "tensorflow_shuffle": 42,
+    "pytorch": 42,
+    "cuda": 42,
+    "deterministic_algorithms": false
+  }
+}

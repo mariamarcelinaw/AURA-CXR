@@ -1,0 +1,53 @@
+{
+  "project": "AURA-CXR",
+  "stage": 7,
+  "analysis_origin": "POST_HOC_XAI_SENSITIVITY",
+  "scope": "HYBRID_CNN_VIT_BRANCH_ONLY",
+  "image_size": 224,
+  "class_index": 1,
+  "seed": 42,
+  "xrv_checkpoint_sha256": "ba0559aeba8afe500eeae3fc36825d3742e543d005a52d3cc35eeb732bab317a",
+  "eva_checkpoint_sha256": "83a46553743f12a8bbb64f900ece2efa312a6b75d5638e8fae519ec0d31418a6",
+  "xrv_hooks": [
+    "backbone.features.denseblock4.denselayer16.conv1",
+    "backbone.features.denseblock4.denselayer15.conv1"
+  ],
+  "eva_hooks": [
+    "blocks.11.mlp",
+    "blocks.11"
+  ],
+  "layer_weights": [
+    0.75,
+    0.25
+  ],
+  "inter_model_weights": {
+    "xrv": 0.25,
+    "eva_x": 0.75
+  },
+  "map_policy": "raw",
+  "activation_threshold": 0.25,
+  "smooth_sigma_frac": 0.005,
+  "comparator": {
+    "method": "Integrated Gradients",
+    "target": "EVA-X-S pre-softmax pneumonia logit (class index 1)",
+    "baseline": "zero tensor in normalized EVA input space",
+    "integration_rule": "64-step trapezoidal path integral",
+    "steps": 64,
+    "internal_batch": 16,
+    "spatial_aggregation": "ReLU(sum over RGB channels of signed integrated-gradient attribution)",
+    "normalization": "min-max to [0,1] after nonnegative projection",
+    "test_gt_tuning": false
+  },
+  "statistics": {
+    "difference_orientation": "COMPARATOR_MINUS_LAYERCAM",
+    "bootstrap_resamples": 2000,
+    "bootstrap_seed": 42,
+    "primary_metrics": [
+      "pointing_hit",
+      "iou_at_thr",
+      "localization_score",
+      "energy_inside_gt"
+    ],
+    "multiplicity": "Holm across the four primary EVA method-sensitivity comparisons"
+  }
+}

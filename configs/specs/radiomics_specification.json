@@ -1,0 +1,660 @@
+{
+  "schema": "aura_cxr_radiomics_reproducibility_stage5_v1",
+  "analysis_origin": "original_study_implementation_documentation",
+  "source_authority": {
+    "original_source": {
+      "path": "PROGRAM AURA CXR/train_aura.py",
+      "sha256": "ef83a312230304b1ca2d6632ef0f853abe2702b82658b124f69d87cf6ac1c77f"
+    },
+    "canonical_radiomics": {
+      "path": "src/aura_cxr/radiomics.py",
+      "sha256": "e14e79cd6eed2078ee4ed0ca1bd0e87fd438fa5c7c8ce5096efe937c59997d9b"
+    },
+    "canonical_data": {
+      "path": "src/aura_cxr/data.py",
+      "sha256": "fe4873477772fc0cac0796ae45d92922cd1ea18fa65af4284d651eb4f92648a6"
+    },
+    "stage4_equivalence": {
+      "status": "PASS",
+      "evidence": "adaptive OOF exact after float32 round-trip",
+      "max_abs_csv_vs_original": 2.98e-08
+    }
+  },
+  "preprocessing": {
+    "internal_rsna": {
+      "source_format": "DICOM",
+      "pixel_dtype_before_processing": "float32",
+      "rescale_slope": "apply; default 1.0",
+      "rescale_intercept": "apply; default 0.0",
+      "monochrome1": "img=max(img)-img",
+      "windowing": null,
+      "clipping": "none before min-max",
+      "normalization": "per-image min-max; constant -> zeros",
+      "resize_input_conversion": "[0,1] *255 -> uint8 L",
+      "resize": [
+        224,
+        224
+      ],
+      "resize_library": "Pillow",
+      "resize_interpolation": "BILINEAR explicit",
+      "output_dtype": "float32",
+      "output_range": [
+        0,
+        1
+      ],
+      "channels": 1,
+      "nan_inf_sanitization": "none explicit"
+    },
+    "external_kermany": {
+      "source_format": "JPEG/PNG",
+      "mode": "Pillow L",
+      "normalization": "finite-aware per-image min-max; constant/nonfinite -> zeros",
+      "resize": [
+        224,
+        224
+      ],
+      "resize_interpolation": "Pillow default BICUBIC for mode L",
+      "difference_from_rsna": "BICUBIC vs internal BILINEAR; downstream extractor/model identical"
+    }
+  },
+  "wavelets": {
+    "library": "PyWavelets",
+    "version_evidence": {
+      "verified_frozen_external_runtime": "1.8.0",
+      "alternate_install_log": "1.9.0",
+      "note": "PyWavelets 1.8.0 is explicitly captured by the frozen Kermany preflight. A separate installation log records an alternate/later PyWavelets 1.9.0 installation; the original development source did not pin PyWavelets. Stage 4 nevertheless reproduced the canonical adaptive OOF vector exactly after float32 round-trip, numerically locking the released behavior."
+    },
+    "candidates": [
+      "haar",
+      "db4",
+      "sym4",
+      "coif3"
+    ],
+    "candidate_order": [
+      "haar",
+      "db4",
+      "sym4",
+      "coif3"
+    ],
+    "selection_level": 1,
+    "dwt_function": "pywt.dwt2",
+    "extension_mode": {
+      "effective": "symmetric",
+      "source": "implicit PyWavelets dwt2 default; mode not passed by original code"
+    },
+    "coefficient_mapping": {
+      "pywt_return": "(cA,(cH,cV,cD))",
+      "code_variables": [
+        "ll",
+        "lh",
+        "hl",
+        "hh"
+      ],
+      "paper_terms": {
+        "LH": "cH / code lh",
+        "HL": "cV / code hl",
+        "HH": "cD / code hh"
+      }
+    }
+  },
+  "entropy": {
+    "coefficient_source": "flatten and concatenate level-1 lh/hl/hh",
+    "absolute_value": true,
+    "zero_handling": "discard exact zero magnitudes",
+    "empty_case": "0.0",
+    "normalization": "p_i=|c_i|/sum_j|c_j| over combined nonzero details",
+    "epsilon": 1e-12,
+    "log_base": 2,
+    "formula": "-sum_i p_i*log2(p_i+1e-12)",
+    "aggregation": "one entropy over concatenated 3-band vector",
+    "selection_rule": "argmax",
+    "tie_break": "strict >; first candidate wins exact tie",
+    "floating_tie_tolerance": null
+  },
+  "decomposition": {
+    "levels": 3,
+    "method": "sequential dwt2 on current LL",
+    "extension_mode": "symmetric effective default",
+    "subband_count": 10,
+    "subband_order": [
+      "LH1",
+      "HL1",
+      "HH1",
+      "LH2",
+      "HL2",
+      "HH2",
+      "LH3",
+      "HL3",
+      "HH3",
+      "LL3"
+    ],
+    "post_dwt_crop": false,
+    "post_dwt_resize": false,
+    "shape_rules_224": {
+      "haar": {
+        "dec_len": 2,
+        "L1": [
+          112,
+          112
+        ],
+        "L2": [
+          56,
+          56
+        ],
+        "L3": [
+          28,
+          28
+        ]
+      },
+      "db4": {
+        "dec_len": 8,
+        "L1": [
+          115,
+          115
+        ],
+        "L2": [
+          61,
+          61
+        ],
+        "L3": [
+          34,
+          34
+        ]
+      },
+      "sym4": {
+        "dec_len": 8,
+        "L1": [
+          115,
+          115
+        ],
+        "L2": [
+          61,
+          61
+        ],
+        "L3": [
+          34,
+          34
+        ]
+      },
+      "coif3": {
+        "dec_len": 18,
+        "L1": [
+          120,
+          120
+        ],
+        "L2": [
+          68,
+          68
+        ],
+        "L3": [
+          42,
+          42
+        ]
+      }
+    }
+  },
+  "glcm": {
+    "input": "each raw signed DWT subband independently",
+    "quantization": {
+      "function": "to_uint8",
+      "normalization": "float32 per-subband min-max; math.isclose(min,max)->zeros",
+      "scale": 255,
+      "clip": [
+        0,
+        255
+      ],
+      "cast": "uint8 truncation"
+    },
+    "library": "skimage.feature.graycomatrix / graycoprops",
+    "scikit_image_version": "0.26.0",
+    "levels": 256,
+    "distances": [
+      1,
+      2,
+      3
+    ],
+    "angles_deg": [
+      0,
+      45,
+      90,
+      135
+    ],
+    "angles_rad": [
+      "0",
+      "pi/4",
+      "pi/2",
+      "3*pi/4"
+    ],
+    "symmetric": true,
+    "normed": true,
+    "border_behavior": "no custom padding/crop; valid offset pairs only",
+    "properties": [
+      "contrast",
+      "energy",
+      "homogeneity",
+      "dissimilarity",
+      "correlation",
+      "ASM"
+    ],
+    "property_order": [
+      "contrast",
+      "energy",
+      "homogeneity",
+      "dissimilarity",
+      "correlation",
+      "ASM"
+    ],
+    "graycoprops_shape": [
+      3,
+      4
+    ],
+    "flatten_order": "C/row-major distance-major angle-minor",
+    "feature_order": "subband -> property -> distance -> angle",
+    "feature_count": 720,
+    "correlation_constant_edge_case": "handled by scikit-image 0.26 graycoprops; no AURA post-sanitization"
+  },
+  "lbp": {
+    "input": "preprocessed 224x224 original grayscale -> to_uint8",
+    "library": "skimage.feature.local_binary_pattern",
+    "points": 24,
+    "radius": 3,
+    "method": "uniform",
+    "bins": 26,
+    "histogram": "np.histogram(... bins=26, range=(0,26), density=True)",
+    "normalization": "density=True; unit-width bins => effective L1",
+    "epsilon": null,
+    "feature_count": 26
+  },
+  "feature_schema": {
+    "concatenation_order": "720 GLCM then 26 LBP",
+    "dimension": 746,
+    "dtype": "float32",
+    "schema_file": "04_FEATURE_SCHEMA_746.csv",
+    "schema_sha256": "aef48a478b89b93dc92160959ba18d901775c26a08cfd50dbe33af8a9642f876",
+    "names": "documentation-generated; historical vector was positional",
+    "missing_value_handling": "no explicit imputation after construction; revision validation requires finite",
+    "feature_scaling": "none for LightGBM",
+    "feature_selection": "none"
+  },
+  "cache": {
+    "original_format": "joblib dict image_path->float32 vector + sibling wavelet_info JSON",
+    "development_cache_sha256": "18442202a80092bf8ac57547b425b5985dba4843d22a3baefe7930ee3a9d744b",
+    "development_feature_manifest_sha256": "cfa3e240919138e08cbbe83a6826f12a5c19b73a513e6d90fb3b520c4b348243",
+    "historical_cache_tag": "radiomic_v3_development_adaptive_L3_glcm_lbp"
+  },
+  "lightgbm": {
+    "library_version": "4.7.0",
+    "selected_family": "LGBMClassifier",
+    "full_development_search_params": {
+      "learning_rate": 0.03401,
+      "max_leaf_nodes": 39,
+      "max_depth": 12,
+      "l2_regularization": 10.0,
+      "min_samples_leaf_frac": 0.001
+    },
+    "full_development_effective_params": {
+      "boosting_type": "gbdt",
+      "objective": "binary",
+      "learning_rate": 0.03401,
+      "num_leaves": 39,
+      "search_depth": 12,
+      "max_depth": -1,
+      "reg_lambda": 10.0,
+      "reg_alpha": 0.0,
+      "min_child_samples": 21,
+      "min_child_weight": 0.001,
+      "min_split_gain": 0.0,
+      "n_estimators": 400,
+      "subsample": 0.9,
+      "subsample_freq": 1,
+      "colsample_bytree": 0.9,
+      "subsample_for_bin": 200000,
+      "max_bin": 255,
+      "class_weight": "balanced",
+      "random_state": 42,
+      "n_jobs": -1,
+      "verbosity": -1,
+      "deterministic": false,
+      "force_col_wise": false,
+      "force_row_wise": false,
+      "device_type": "cpu",
+      "importance_type": "split",
+      "fit_sample_weight": null,
+      "fit_eval_set": null,
+      "fit_eval_metric": null,
+      "fit_callbacks": null,
+      "early_stopping": false,
+      "feature_scaler": null
+    },
+    "parameter_sources": {
+      "boosting_type": {
+        "value": "gbdt",
+        "source": "LightGBM 4.7.0 default"
+      },
+      "objective": {
+        "value": "binary",
+        "source": "wrapper objective=None inferred from binary target"
+      },
+      "learning_rate": {
+        "value": 0.03401,
+        "source": "MRFO full-development"
+      },
+      "num_leaves": {
+        "value": 39,
+        "source": "MRFO max_leaf_nodes -> num_leaves"
+      },
+      "search_depth": {
+        "value": 12,
+        "source": "MRFO decoded search variable"
+      },
+      "max_depth": {
+        "value": -1,
+        "source": "code maps decoded depth 12 to -1"
+      },
+      "reg_lambda": {
+        "value": 10.0,
+        "source": "MRFO"
+      },
+      "reg_alpha": {
+        "value": 0.0,
+        "source": "LightGBM 4.7.0 default"
+      },
+      "min_child_samples": {
+        "value": 21,
+        "source": "max(5,int(0.001*21346))"
+      },
+      "min_child_weight": {
+        "value": 0.001,
+        "source": "LightGBM 4.7.0 default"
+      },
+      "min_split_gain": {
+        "value": 0.0,
+        "source": "LightGBM 4.7.0 default"
+      },
+      "n_estimators": {
+        "value": 400,
+        "source": "explicit"
+      },
+      "subsample": {
+        "value": 0.9,
+        "source": "explicit"
+      },
+      "subsample_freq": {
+        "value": 1,
+        "source": "explicit"
+      },
+      "colsample_bytree": {
+        "value": 0.9,
+        "source": "explicit"
+      },
+      "subsample_for_bin": {
+        "value": 200000,
+        "source": "LightGBM 4.7.0 default"
+      },
+      "max_bin": {
+        "value": 255,
+        "source": "LightGBM core default"
+      },
+      "class_weight": {
+        "value": "balanced",
+        "source": "explicit"
+      },
+      "random_state": {
+        "value": 42,
+        "source": "explicit"
+      },
+      "n_jobs": {
+        "value": -1,
+        "source": "explicit"
+      },
+      "verbosity": {
+        "value": -1,
+        "source": "verbose=-1 explicit"
+      },
+      "deterministic": {
+        "value": false,
+        "source": "LightGBM core default"
+      },
+      "force_col_wise": {
+        "value": false,
+        "source": "LightGBM core default"
+      },
+      "force_row_wise": {
+        "value": false,
+        "source": "LightGBM core default"
+      },
+      "device_type": {
+        "value": "cpu",
+        "source": "default / radiomics execution"
+      },
+      "importance_type": {
+        "value": "split",
+        "source": "LGBMClassifier default"
+      },
+      "fit_sample_weight": {
+        "value": null,
+        "source": "not passed"
+      },
+      "fit_eval_set": {
+        "value": null,
+        "source": "not passed"
+      },
+      "fit_eval_metric": {
+        "value": null,
+        "source": "not passed"
+      },
+      "fit_callbacks": {
+        "value": null,
+        "source": "not passed"
+      },
+      "early_stopping": {
+        "value": false,
+        "source": "not configured"
+      },
+      "feature_scaler": {
+        "value": null,
+        "source": "Pipeline contains only clf"
+      }
+    },
+    "outer_oof_effective_params": [
+      {
+        "fold": 0,
+        "n_train": 17076,
+        "learning_rate": 0.01502,
+        "num_leaves": 255,
+        "search_depth": 12,
+        "max_depth_effective": -1,
+        "reg_lambda": 0.00038,
+        "min_leaf_fraction": 0.0041,
+        "min_child_samples": 70
+      },
+      {
+        "fold": 1,
+        "n_train": 17077,
+        "learning_rate": 0.03721,
+        "num_leaves": 216,
+        "search_depth": 10,
+        "max_depth_effective": 10,
+        "reg_lambda": 1.92579,
+        "min_leaf_fraction": 0.0116,
+        "min_child_samples": 198
+      },
+      {
+        "fold": 2,
+        "n_train": 17077,
+        "learning_rate": 0.03873,
+        "num_leaves": 90,
+        "search_depth": 9,
+        "max_depth_effective": 9,
+        "reg_lambda": 0.01433,
+        "min_leaf_fraction": 0.012,
+        "min_child_samples": 204
+      },
+      {
+        "fold": 3,
+        "n_train": 17077,
+        "learning_rate": 0.00837,
+        "num_leaves": 255,
+        "search_depth": 11,
+        "max_depth_effective": 11,
+        "reg_lambda": 10.0,
+        "min_leaf_fraction": 0.001,
+        "min_child_samples": 17
+      },
+      {
+        "fold": 4,
+        "n_train": 17077,
+        "learning_rate": 0.06527,
+        "num_leaves": 255,
+        "search_depth": 7,
+        "max_depth_effective": 7,
+        "reg_lambda": 10.0,
+        "min_leaf_fraction": 0.0147,
+        "min_child_samples": 251
+      }
+    ],
+    "model_sha256": "15d862c5c9ddfd088aebdbfd146b4cb133c089f577cd09ed73bf71058ab1c1b7",
+    "best_inner_cv_macro_f1": 0.6908849817456861
+  },
+  "mrfo": {
+    "implementation": "custom MRFOptimizer in train_aura.py",
+    "source_sha256": "ef83a312230304b1ca2d6632ef0f853abe2702b82658b124f69d87cf6ac1c77f",
+    "reference": "Zhao, Zhang & Wang 2020",
+    "objective": "mean macro-F1 from pipe.predict within inner CV",
+    "fitness_returned": "negative mean score",
+    "optimizer_direction": "MINIMIZE negative mean macro-F1 = MAXIMIZE macro-F1",
+    "classification_threshold": "default classifier label prediction; no separately optimized inner threshold",
+    "inner_cv": {
+      "type": "StratifiedKFold",
+      "shuffle": true,
+      "random_state": 42,
+      "final_folds": 3
+    },
+    "final": {
+      "population": 15,
+      "iterations": 15,
+      "inner_cv": 3,
+      "seed": 42,
+      "subsample": 0,
+      "restart_patience": 6,
+      "restart_fraction": 0.35,
+      "epsilon": 1e-05
+    },
+    "screening": {
+      "rows": 4000,
+      "outer_screen_folds": 3,
+      "inner_folds": 2,
+      "population": 8,
+      "iterations": 8,
+      "base_seeds": [
+        42,
+        123
+      ],
+      "top_k": 2,
+      "sampling": "train_test_split train_size=4000 stratify=y random_state=seed+100003*outer_fold",
+      "screen_fold_split": "StratifiedKFold(3,shuffle=True,random_state=sample_seed)",
+      "mrfo_seed": "sample_seed+1009*screen_fold",
+      "restart_patience": 5
+    },
+    "refinement": {
+      "outer_folds": 5,
+      "inner_folds": 3,
+      "population": 15,
+      "iterations": 15,
+      "subsample": 0,
+      "optimizer_seed_formula": "42 + 10007*outer_fold + 101*complexity_rank; LGBM rank=2",
+      "inner_cv_random_state": 42
+    },
+    "search_space_file": "05_MRFO_SEARCH_SPACE.csv",
+    "update_rules": {
+      "initialization": "uniform(lb,ub)",
+      "chain": "r2<0.5",
+      "cyclone": "r2>=0.5; beta=2*exp(rand*(T-t)/T)*sin(2*pi*rand)",
+      "somersault": "S=2",
+      "mutation": "Gaussian scale=(0.10*(1-t/T)+0.02)*(ub-lb+1e-8)",
+      "clip": "[lb,ub]",
+      "replacement": "strict lower fitness",
+      "best_update": "improvement > epsilon",
+      "restart": "after patience; replace worst round(pop*fraction), half random half jitter",
+      "stopping": "fixed max_iter",
+      "tie_handling": "equal/near equal retains existing"
+    }
+  },
+  "screening_refinement": {
+    "screening_candidates": [
+      "knn",
+      "histgb",
+      "lgbm",
+      "svm"
+    ],
+    "global_promoted": [
+      "lgbm",
+      "histgb"
+    ],
+    "selection_tolerance": 0.002,
+    "final_primary": "crossfitted macro-F1",
+    "tie_break": [
+      "ROC-AUC desc",
+      "AUPRC desc",
+      "Brier asc",
+      "fold AUC SD asc",
+      "complexity rank asc",
+      "estimator lexicographic"
+    ],
+    "selected": "lgbm",
+    "selected_metrics": {
+      "auc": 0.7855949606088833,
+      "auprc": 0.5081822285442029,
+      "brier": 0.1579838766555708,
+      "crossfitted_f1_macro": 0.590816231366389,
+      "fold_auc_mean": 0.7880876895717209,
+      "fold_auc_sd": 0.007217325808150685,
+      "crossfitted_thresholds": [
+        {
+          "outer_fold": 0,
+          "threshold_from_other_outer_folds": 0.23500000000000001
+        },
+        {
+          "outer_fold": 1,
+          "threshold_from_other_outer_folds": 0.225
+        },
+        {
+          "outer_fold": 2,
+          "threshold_from_other_outer_folds": 0.225
+        },
+        {
+          "outer_fold": 3,
+          "threshold_from_other_outer_folds": 0.21000000000000002
+        },
+        {
+          "outer_fold": 4,
+          "threshold_from_other_outer_folds": 0.23
+        }
+      ]
+    }
+  },
+  "randomness": {
+    "global_seed": 42,
+    "mrfo_rng": "np.random.default_rng(seed)",
+    "lightgbm_random_state": 42,
+    "inner_cv_random_state": 42,
+    "screening_base_seeds": [
+      42,
+      123
+    ]
+  },
+  "software_versions": {
+    "python": "3.13.12",
+    "numpy": "2.4.2",
+    "pandas": "3.0.0",
+    "scipy": "1.17.0",
+    "scikit_learn": "1.8.0",
+    "joblib": "1.5.3",
+    "pillow": "12.1.1",
+    "pydicom": "3.0.2",
+    "pywavelets": "1.8.0",
+    "scikit_image": "0.26.0",
+    "lightgbm": "4.7.0"
+  },
+  "software_version_provenance_note": "PyWavelets 1.8.0 is explicitly captured by the frozen Kermany preflight. A separate installation log records an alternate/later PyWavelets 1.9.0 installation; the original development source did not pin PyWavelets. Stage 4 nevertheless reproduced the canonical adaptive OOF vector exactly after float32 round-trip, numerically locking the released behavior."
+}

@@ -1,0 +1,6 @@
+module_path,module_type,output_shape_if_known,block_index,candidate_XAI_hook,notes
+eva_x_small_patch16,official model constructor,2 logits after AURA head replacement,,False,patch size 16 verified by constructor; exact upstream file eva_x_small_patch16_merged520k_mim.pt
+blocks.11.mlp,Transformer block MLP,token sequence tensor; exact embedding dimension not captured,11,True,current LayerCAM primary EVA hook; validated eligible in XAI audit
+blocks.11,Transformer block,token sequence tensor; exact embedding dimension not captured,11,True,current secondary EVA hook; proves block index 11 exists; full block count unresolved
+head,"Sequential(Dropout(0.2), Linear(in_features,2))","[B,2]",,False,upstream classifier replaced after pretrained load
+patch_grid,derived geometry,14x14 = 196 patch tokens at 224x224 / 16,,False,class-token presence is not statically locked; XAI code detects leading class token by square-token logic
