@@ -1,0 +1,12 @@
+{
+  "schema": "aura_cxr_dl_pair_selection_q1_v17",
+  "model": "eva_x",
+  "display_name": "EVA-X-S",
+  "n": 21346,
+  "n_folds": 5,
+  "source": "official EVA-X-S; outer OOF with inner early stopping",
+  "patient_disjoint": true,
+  "test_set_used": false,
+  "external_set_used": false,
+  "created_at": "2026-07-30T14:05:46"
+}

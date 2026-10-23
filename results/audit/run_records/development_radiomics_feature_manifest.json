@@ -1,0 +1,11 @@
+{
+  "schema": "aura_cxr_dl_pair_selection_q1_v17",
+  "scope": "development_train_plus_validation_only",
+  "n_samples": 21346,
+  "image_size": 224,
+  "test_images_accessed": false,
+  "test_features_generated": false,
+  "cache_path": "${AURA_PROJECT_DIR}/results_aura_cxr/cache/radiomic_v3_development_adaptive_L3_glcm_lbp.joblib",
+  "cache_sha256": "18442202a80092bf8ac57547b425b5985dba4843d22a3baefe7930ee3a9d744b",
+  "created_at": "2026-07-31T10:24:14"
+}

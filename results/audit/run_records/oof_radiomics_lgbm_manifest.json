@@ -1,0 +1,19 @@
+{
+  "schema": "aura_cxr_dl_pair_selection_q1_v17",
+  "model": "radiomics_lgbm",
+  "display_name": "radiomics_lgbm",
+  "n": 21346,
+  "n_folds": 5,
+  "source": "fixed global radiomics candidate lgbm; nested MRFO in every outer fold",
+  "patient_disjoint": true,
+  "test_set_used": false,
+  "external_set_used": false,
+  "created_at": "2026-07-30T08:16:10",
+  "fixed_single_learner_family": "lgbm",
+  "selection_scope": "development_outer_oof_fixed_best_radiomics",
+  "outer_holdout_used_for_inner_tuning": false,
+  "global_screen_top2": [
+    "lgbm",
+    "histgb"
+  ]
+}

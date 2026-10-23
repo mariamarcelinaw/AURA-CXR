@@ -1,0 +1,54 @@
+{
+  "schema": "aura_cxr_dl_pair_selection_q1_v17",
+  "selection_lock_id": "2bb402e76854bcf6b892cc8ec896088e575cdd0da6dc832a725bcedd18ddb7b3",
+  "deployment_lock_id": "bdd68083c49a27bf29eda552eb5e8c40b75e8a124046dce3440c6488abde803b",
+  "selected_dl_models": [
+    "xrv",
+    "eva_x"
+  ],
+  "members": [
+    "xrv",
+    "eva_x",
+    "radiomics"
+  ],
+  "probability_sources": {
+    "xrv": "${AURA_PROJECT_DIR}/results_aura_cxr/probs/xrv_development_refit_test_mean.npy",
+    "eva_x": "${AURA_PROJECT_DIR}/results_aura_cxr/probs/eva_x_development_refit_test_mean.npy",
+    "radiomics": "${AURA_PROJECT_DIR}/results_aura_cxr/probs/radiomics_development_refit_test.npy"
+  },
+  "meta_feature_order": [
+    "p_xrv",
+    "p_eva_x",
+    "p_radiomics"
+  ],
+  "threshold": 0.47000000000000003,
+  "threshold_source": "development_oof",
+  "test_labels_read": false,
+  "test_set_used_for_selection": false,
+  "external_set_used_for_selection": false,
+  "development_refit_artifacts_required": true,
+  "n_test": 5338,
+  "stacked_probability_sha256": "646f9f4334bb0ac9310e523961edd86c58adb460357d07d00f9409e07417e538",
+  "soft_probability_sha256": "c3e8eea159b7cd9de6be420bb4d618274f6dca036ea1332dc238558acc245ab5",
+  "predictive_uncertainty_definition": "two_sided_95_predictive_interval_width_equals_2_times_1.96_times_mc_probability_std",
+  "ensemble_uncertainty_method": "soft_linear_independence; stacked_logistic_delta_method_independence",
+  "uncertainty_artifacts": {
+    "soft_std": {
+      "path": "${AURA_PROJECT_DIR}/results_aura_cxr/probs/soft_std_locked_test.npy",
+      "sha256": "64edfa7e2910c5023e50a3d6e3c8815e90a48fd5ff76d1e4904ba829856ae451"
+    },
+    "soft_predictive_interval_width_95": {
+      "path": "${AURA_PROJECT_DIR}/results_aura_cxr/probs/soft_predictive_interval_width_95_locked_test.npy",
+      "sha256": "aabdede72bf4e7f6f6695291c2a541eee06651e548b4d27ef479d35add369cdc"
+    },
+    "stacked_std": {
+      "path": "${AURA_PROJECT_DIR}/results_aura_cxr/probs/stacked_std_locked_test.npy",
+      "sha256": "f3db7cb4bb9f63195c5b783d2b3cff2f3045234c679293a04e63605b912892d4"
+    },
+    "stacked_predictive_interval_width_95": {
+      "path": "${AURA_PROJECT_DIR}/results_aura_cxr/probs/stacked_predictive_interval_width_95_locked_test.npy",
+      "sha256": "25100a085dd7b042f6fe1200becb3bb49fb98017e979f66436d924c456969560"
+    }
+  },
+  "created_at": "2026-07-30T21:27:31"
+}

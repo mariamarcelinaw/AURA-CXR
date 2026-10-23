@@ -1,0 +1,17 @@
+{
+  "schema": "aura_cxr_dl_pair_selection_q1_v17",
+  "role": "exploratory_nonselected_models",
+  "method": "five_outer_fold_checkpoint_ensemble",
+  "generated_after_pair_lock": true,
+  "test_labels_used": false,
+  "test_set_used_for_selection": false,
+  "fold_model_paths": [
+    "${AURA_PROJECT_DIR}/results_aura_cxr/models/oof/eva_x/fold_0.pt",
+    "${AURA_PROJECT_DIR}/results_aura_cxr/models/oof/eva_x/fold_1.pt",
+    "${AURA_PROJECT_DIR}/results_aura_cxr/models/oof/eva_x/fold_2.pt",
+    "${AURA_PROJECT_DIR}/results_aura_cxr/models/oof/eva_x/fold_3.pt",
+    "${AURA_PROJECT_DIR}/results_aura_cxr/models/oof/eva_x/fold_4.pt"
+  ],
+  "probability_path": "${AURA_PROJECT_DIR}/results_aura_cxr/probs/eva_x_exploratory_cvensemble_test.npy",
+  "created_at": "2026-07-30T21:17:30"
+}

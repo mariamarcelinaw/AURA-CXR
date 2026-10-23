@@ -1,0 +1,12 @@
+{
+  "schema": "aura_cxr_dl_pair_selection_q1_v17",
+  "source_model": "${AURA_PROJECT_DIR}/results_aura_cxr/models/xrv_development_refit.pt",
+  "source_sha256": "ba0559aeba8afe500eeae3fc36825d3742e543d005a52d3cc35eeb732bab317a",
+  "development_refit_only": true,
+  "test_inference_started_after_pair_lock": true,
+  "test_labels_used": false,
+  "test_set_used_for_selection": false,
+  "predictive_uncertainty_definition": "two_sided_95_predictive_interval_width_equals_2_times_1.96_times_mc_probability_std",
+  "predictive_interval_width_path": "${AURA_PROJECT_DIR}/results_aura_cxr/probs/xrv_development_refit_test_predictive_interval_width_95.npy",
+  "created_at": "2026-07-30T20:42:45"
+}

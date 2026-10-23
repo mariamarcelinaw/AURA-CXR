@@ -1,0 +1,120 @@
+{
+ "schema": "aura_cxr_stage1_golden_reference_v1",
+ "created_at_utc": "2026-09-29T03:28:22.075211+00:00",
+ "stage0_gate": "CONDITIONAL_PASS",
+ "canonical_split_hashes": {
+  "development.csv": "1282ea659e78c639251f8991339f18c34a7af2274a969e520c6f6cecd3b8d624",
+  "development_oof_folds.csv": "0b195b012b4719fb0a457e60d6cc48d8c4cb17128b92a1e8908a4f0dc736353a",
+  "split_manifest.json": "b63085f9c3d3bcabf8d9b490bd50f9aaa2665443c22237a5573b53a754b151aa",
+  "test.csv": "ab88fb7871fe24870f1c8b1aea40496908b9ab519da741c13d2ff7aec341c00f",
+  "train.csv": "8975cafc7a1eedae3128fb1a8c83ea90c8d742660808cc9a7e5b6dc87e3e5592",
+  "val.csv": "faaeee0125182df7d31bbf2683a138894226bcdf4c97570b7a5d11d90c4e1140"
+ },
+ "critical_artifact_hashes": {
+  "raw_splits/splits/split_manifest.json": "b63085f9c3d3bcabf8d9b490bd50f9aaa2665443c22237a5573b53a754b151aa",
+  "raw_splits/splits/train.csv": "8975cafc7a1eedae3128fb1a8c83ea90c8d742660808cc9a7e5b6dc87e3e5592",
+  "raw_splits/splits/val.csv": "faaeee0125182df7d31bbf2683a138894226bcdf4c97570b7a5d11d90c4e1140",
+  "raw_splits/splits/test.csv": "ab88fb7871fe24870f1c8b1aea40496908b9ab519da741c13d2ff7aec341c00f",
+  "raw_splits/splits/development_oof_folds.csv": "0b195b012b4719fb0a457e60d6cc48d8c4cb17128b92a1e8908a4f0dc736353a",
+  "raw_reports/reports/q1_locked_deployment_manifest.json": "1cd6c42677a7f6fcf1eac9985c3a027ee97ac986f6a7292c0157fbf2ea03d5e5",
+  "raw_reports/reports/q1_final_experiment_lock.json": "6b9abadcc29d9528b168d2257fc7ed238b59c2932243ceb4225d2ab1c35fe0a9",
+  "raw_reports/reports/dl_pair_selection_manifest.json": "46a8c567be3b53598786d4d4a832d5a4e0a66f0d3373a93887497db701a8b321",
+  "raw_reports/reports/radiomics_learner_selection_manifest.json": "d46bdb06007b1ccbc59a1f440c1c95ca41ed71f88bd4fa8f3370668ea887091b",
+  "raw_reports/reports/q1_test_metrics.csv": "cf62d3cd2187d3b58dc7b9835c5a3a532c3621991aa459092e8ff88719684eca",
+  "raw_reports/reports/ablation_selected_dl_pair.csv": "53a1c31eb38dd343bc2d304eb16787e4791353924c98818beb31a2a1a6f4476c",
+  "raw_reports/reports/test_predictions_full.csv": "7705bedae7bb69c0d0a002d5bae4324c73c85e0afe303ed87b7ff7b60a27e08a",
+  "raw_probs/probs/stacked_locked_test.npy": "646f9f4334bb0ac9310e523961edd86c58adb460357d07d00f9409e07417e538",
+  "raw_probs/probs/selected_pair_locked_test_member_probs.npz": "ab1c8bac119c9c34627b9a995808a6d481f1916b9110c30099a587e44d569245",
+  "raw_reports/reports/xai_cam_layer_selection_validation.json": "68eca0b9d47e38deaf9263c0b7953c5898a66fe219adceda72f7cf3715d60dea",
+  "raw_reports/reports/xai_localization_per_sample.csv": "42b9a10a02f0b425cc7f287b3848025bb953aa42cd54efcfd92a4531cdfc6316",
+  "raw_reports/reports/xai_faithfulness_v18_dual_cnn_full256_summary.json": "99cacd4cc6d29d3612351339c02831f864467130eafd328b368f7bbf672d8f99",
+  "raw_reports/reports/external_validation_kermany_predictions.csv": "2979eb6a9fc907e037e84e30a44ae7b7ae1176e5adbcd5e7ffe30ca95cafab29"
+ },
+ "canonical_code_hashes": {
+  "train_aura.py": "ef83a312230304b1ca2d6632ef0f853abe2702b82658b124f69d87cf6ac1c77f",
+  "aura_dl_pair_selection.py": "60c422d342d9652a3751d38436a0d138878e51c0f02e366f8053f8c0855c38ad",
+  "train_xrv_backbone.py": "ccf59eb33d9d7d72c788f64f766ac2f3bd70fa66c420370a07e4e63618836f80",
+  "train_eva_x_backbone.py": "60cb3e730e37f75084d1861288d62b9b166c7c2c1a8a82c0ed3cae0eb82ebb5c",
+  "q1_stats_report.py": "c4d9b8a73c34b473a8d5b59ff0d278a6d8c555df636ce105915a2a8a30c626db",
+  "eval_only_xai.py": "c16eb7a455a036a8810108f2ce9c0181d66ee25b1965a5651e31a2ad737bcbd2",
+  "external_validation_kermany.py": "fe650089f602a2317344605ecc44f07200006a3416c743b68620f907e561df66",
+  "external_validation_kermany_stage19.py": "873ff96ba745067cd618166529f64a3d710fddd94daa5e0a3361428c5eef937e"
+ },
+ "expected_counts": {
+  "rsna_total": 26684,
+  "train": 18678,
+  "validation": 2668,
+  "development": 21346,
+  "locked_test": 5338,
+  "locked_test_positive": 1203,
+  "locked_test_negative": 4135,
+  "kermany_total": 624,
+  "kermany_normal": 234,
+  "kermany_pneumonia": 390
+ },
+ "frozen_a8": {
+  "selected_dl_models": [
+   "xrv",
+   "eva_x"
+  ],
+  "radiomics": "LightGBM",
+  "meta_feature_order": [
+   "p_xrv",
+   "p_eva_x",
+   "p_radiomics"
+  ],
+  "coefficients": {
+   "intercept": -6.22883556957103,
+   "beta_xrv": 7.964391214167865,
+   "beta_eva_x": 4.559219751627475,
+   "beta_radiomics": -0.03641402783417562
+  },
+  "threshold": 0.47000000000000003,
+  "selection_lock_id": "2bb402e76854bcf6b892cc8ec896088e575cdd0da6dc832a725bcedd18ddb7b3",
+  "deployment_lock_id": "bdd68083c49a27bf29eda552eb5e8c40b75e8a124046dce3440c6488abde803b",
+  "checkpoint_hashes": {
+   "xrv": "ba0559aeba8afe500eeae3fc36825d3742e543d005a52d3cc35eeb732bab317a",
+   "eva_x": "83a46553743f12a8bbb64f900ece2efa312a6b75d5638e8fae519ec0d31418a6",
+   "radiomics": "15d862c5c9ddfd088aebdbfd146b4cb133c089f577cd09ed73bf71058ab1c1b7"
+  }
+ },
+ "key_metric_fingerprints": {
+  "A4": {
+   "AUC": 0.8995679885333019,
+   "AUPRC": 0.7365069518711118,
+   "sensitivity": 0.8520365752285952,
+   "specificity": 0.7767835550181379,
+   "accuracy": 0.7937429748969651,
+   "balanced_acc": 0.8144100651233666,
+   "MCC": 0.5457612307508461
+  },
+  "A8": {
+   "AUC": 0.8987752304044404,
+   "AUPRC": 0.7337712172642205,
+   "sensitivity": 0.8512053200332502,
+   "specificity": 0.7714631197097944,
+   "accuracy": 0.7894342450355939,
+   "balanced_acc": 0.8113342198715223,
+   "MCC": 0.5392051864630275
+  }
+ },
+ "known_artifact_caveats": [
+  "reports/test_predictions_full.csv:cnn_mean_prob equals xrv_prob; do not use as A4",
+  "model binaries are not included in the supplied revision package"
+ ],
+ "repository_note": "Golden reference for the frozen AURA-CXR configuration. Raw source hashes refer to the canonical source snapshot of the original development tree.",
+ "radiomics_reproducibility": {
+  "feature_count": 746,
+  "feature_schema_sha256": "aef48a478b89b93dc92160959ba18d901775c26a08cfd50dbe33af8a9642f876",
+  "radiomics_config_semantic_sha256": "10c672dd38030999ccbb7dab76c5f53f25a97c4585f5ef59eabf5cb96ffde66e",
+  "frozen_config_file_sha256": "8783438eb6b347681c365441604ba54153ea083f8d03ea61d132338e25109d89",
+  "radiomics_specification_sha256": "30312f5d7fb1d85a1fd4d1f33d0489b6c1054bccdf55a8f14f438941c1a59d1a",
+  "original_train_aura_sha256": "ef83a312230304b1ca2d6632ef0f853abe2702b82658b124f69d87cf6ac1c77f",
+  "canonical_radiomics_module_pre_stage5_sha256": "e14e79cd6eed2078ee4ed0ca1bd0e87fd438fa5c7c8ce5096efe937c59997d9b",
+  "development_feature_cache_sha256": "18442202a80092bf8ac57547b425b5985dba4843d22a3baefe7930ee3a9d744b",
+  "radiomics_oof_sha256": "f180acec675977caa304d2b88e66c3392bdfa6d8b359b7843a488c2a75a0b1bb",
+  "selected_lightgbm_checkpoint_sha256": "15d862c5c9ddfd088aebdbfd146b4cb133c089f577cd09ed73bf71058ab1c1b7",
+  "stage4_adaptive_oof_equivalence": "E1 float32-exact after round-trip; CSV max abs diff <= 2.98e-08"
+ },
+ "canonical_code_hashes_note": "These are the SHA-256 values of the original-language development sources, recorded before the snapshot comments were translated into English. The hashes of the corresponding files in scripts/ are in SHA256SUMS.txt and in the source_equivalence section of results/audit/provenance.json, which also records the verification showing the executable code is unchanged."
+}

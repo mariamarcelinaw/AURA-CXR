@@ -1,0 +1,444 @@
+{
+ "description": "Quality-control and audit notes for the post-hoc analyses in results/analysis/, converted from the original Markdown reports without changing any value.",
+ "analyses": {
+  "contemporary_baseline": [
+   {
+    "source_file": "22_BASELINE_COMPUTE_REPORT.md",
+    "title": "Baseline compute report",
+    "content": [
+     "Hardware: NVIDIA A100-SXM4-40GB.",
+     "Software: PyTorch 2.10.0+cu128, CUDA build 12.8, timm 1.0.28.",
+     "Final training precision: FP32.",
+     "Fold 0: 26.14 min; best epoch 4; stopped epoch 16.",
+     "Fold 1: 27.42 min; best epoch 5; stopped epoch 17.",
+     "Fold 2: 27.39 min; best epoch 5; stopped epoch 17.",
+     "Fold 3: 25.82 min; best epoch 4; stopped epoch 16.",
+     "Fold 4: 46.46 min; best epoch 17; stopped epoch 29.",
+     "Five-fold training runtime: 2.554 GPU-hours.",
+     "Final five-epoch refit runtime: 10.68 min.",
+     "Total measured training GPU time (folds + refit): 2.732 h.",
+     "Locked-test inference time: 46.70 s total (8.75 ms/image averaged over the measured run).",
+     "Peak VRAM: 5.49 GiB.",
+     "Final checkpoint size: 106.38 MiB.",
+     "Parameter count: 27,868,034.",
+     "Peak system RAM: not measured; not reported."
+    ]
+   },
+   {
+    "source_file": "23_BASELINE_TRAINING_QC.md",
+    "title": "Baseline training quality control",
+    "content": [
+     "The corrected FP32 run completed all five folds without NaN/non-finite failure in the retained training logs. Fold 4, which had collapsed in the original AMP attempt, showed progressive learning and a final holdout ROC-AUC consistent with the other folds.",
+     {
+      "table": [
+       {
+        "Fold": "0",
+        "Best epoch": "4",
+        "Stop epoch": "16",
+        "Best inner-val AUC": "0.8870",
+        "OOF holdout AUC": "0.8835",
+        "QC": "PASS"
+       },
+       {
+        "Fold": "1",
+        "Best epoch": "5",
+        "Stop epoch": "17",
+        "Best inner-val AUC": "0.8811",
+        "OOF holdout AUC": "0.8690",
+        "QC": "PASS"
+       },
+       {
+        "Fold": "2",
+        "Best epoch": "5",
+        "Stop epoch": "17",
+        "Best inner-val AUC": "0.8923",
+        "OOF holdout AUC": "0.8755",
+        "QC": "PASS"
+       },
+       {
+        "Fold": "3",
+        "Best epoch": "4",
+        "Stop epoch": "16",
+        "Best inner-val AUC": "0.8776",
+        "OOF holdout AUC": "0.8898",
+        "QC": "PASS"
+       },
+       {
+        "Fold": "4",
+        "Best epoch": "17",
+        "Stop epoch": "29",
+        "Best inner-val AUC": "0.8710",
+        "OOF holdout AUC": "0.8705",
+        "QC": "PASS"
+       }
+      ]
+     },
+     "Fold ROC-AUC mean ± SD: 0.8777 ± 0.0079.",
+     "OOF pooled ROC-AUC: 0.8761.",
+     "OOF probability range: [0.023666, 0.896862].",
+     "OOF completeness: 21,346 rows, 21,346 unique patient IDs, no duplicates, no missing probabilities.",
+     "Training QC decision: PASS for the corrected FP32 run.",
+     "The original AMP attempt remains explicitly archived as a failed-QC attempt because Fold 4 produced non-finite-gradient evidence and near-constant probabilities."
+    ]
+   },
+   {
+    "source_file": "24_PRETRAINING_DATA_OVERLAP_AUDIT.md",
+    "title": "Pretraining data overlap audit",
+    "gates": {
+     "Classification": "NO_KNOWN_RSNA_OVERLAP"
+    },
+    "content": [
+     "Primary baseline: ConvNeXt V2 Tiny convnextv2_tiny.fcmae_ft_in1k. Public model documentation identifies ImageNet-1K as the upstream pretraining/fine-tuning dataset. No RSNA Pneumonia Challenge data are identified in that provenance.",
+     "Classification: NO_KNOWN_RSNA_OVERLAP.",
+     "This is a provenance classification, not proof that no visually related image exists anywhere in ImageNet. Stage-8 fine-tuning itself uses only canonical AURA development patients."
+    ]
+   },
+   {
+    "source_file": "25_BASELINE_PROTOCOL_DEVIATIONS.md",
+    "title": "Baseline protocol deviations and architecture-specific adaptations",
+    "content": [
+     {
+      "table": [
+       {
+        "Item": "ImageNet normalization after canonical base preprocessing",
+        "Classification": "MODEL_SPECIFIC",
+        "Rationale": "Required by the upstream ConvNeXt V2 pretrained input convention."
+       },
+       {
+        "Item": "Independent ConvNeXt V2 architecture",
+        "Classification": "NECESSARY",
+        "Rationale": "Independent comparator; not AURA model reselection."
+       },
+       {
+        "Item": "AdamW + cosine schedule",
+        "Classification": "MODEL_SPECIFIC",
+        "Rationale": "Appropriate ConvNeXt-family fine-tuning choice, frozen before the original locked-test inference."
+       },
+       {
+        "Item": "Batch size 32",
+        "Classification": "COMPUTE_DRIVEN",
+        "Rationale": "Compatible with A100-40GB and the prespecified training recipe."
+       },
+       {
+        "Item": "Corrected training precision: FP32 instead of initial AMP",
+        "Classification": "NECESSARY / CORRECTIVE",
+        "Rationale": "A development-only diagnostic reproduced non-finite AMP gradients and probability collapse in Fold 4. All five folds were rerun uniformly; no other training or evaluation rule changed."
+       },
+       {
+        "Item": "Corrected run occurred after attempt-1 locked test had been viewed",
+        "Classification": "UNPLANNED, FULLY DISCLOSED",
+        "Rationale": "Correction basis was development-only and locked before attempt-2 test inference; attempt-1 outputs are retained. This is a limitation and audit disclosure, not a hidden rerun."
+       },
+       {
+        "Item": "No Kermany Stage-8 extension",
+        "Classification": "NECESSARY",
+        "Rationale": "The primary comparison endpoint is the identical-split RSNA evaluation; no external extension was used for comparator selection."
+       },
+       {
+        "Item": "No second contemporary baseline",
+        "Classification": "NECESSARY",
+        "Rationale": "This study reports one prespecified same-split contemporary comparator; an optional second baseline was not run."
+       }
+      ]
+     },
+     "No deviation changes the patient identities, labels, five OOF folds, locked-test membership, threshold source, A8 model, or metric definitions."
+    ]
+   },
+   {
+    "source_file": "RUNTIME_SOFTWARE.md",
+    "title": "Runtime / software",
+    "content": [
+     "Verified from the Stage-8 server run and preflight:",
+     "GPU: NVIDIA A100-SXM4-40GB.",
+     "PyTorch: 2.10.0+cu128.",
+     "PyTorch CUDA build: 12.8.",
+     "timm: 1.0.28.",
+     "Training precision for the final corrected run: FP32; autocast and GradScaler disabled.",
+     "Model ID: convnextv2_tiny.fcmae_ft_in1k.",
+     "Pretrained state hash: f932cb959aebe4e018f3a60b2902a4d81a9edd2350d1ae441e291443d7f6101c.",
+     "Final refit checkpoint hash: 457ef9a05f5ff23272d9534779b842f6ac699ecf626be3d50945d4b41108c709.",
+     "The original AMP attempt is retained only as an audit artifact because a development-only diagnostic reproduced non-finite gradients and probability collapse in Fold 4."
+    ]
+   }
+  ],
+  "external_validation": [
+   {
+    "source_file": "01_KERMANY_PROTOCOL_AUDIT.md",
+    "title": "01 — Kermany protocol audit",
+    "gates": {
+     "KERMANY_PROTOCOL": "VERIFIED"
+    },
+    "sections": [
+     {
+      "heading": "Gate result",
+      "items": [
+       "KERMANY_PROTOCOL = VERIFIED",
+       "Canonical artifact review confirms the official Kermany test partition only: n=624, NORMAL=234, PNEUMONIA=390, prevalence=0.6250. The external run reused the frozen AURA-CXR selected branches, radiomics model, ordered A8 meta-features, Logistic Regression stack, and development-derived threshold τ=0.470.",
+       "XRV checkpoint SHA256: ba0559aeba8afe500eeae3fc36825d3742e543d005a52d3cc35eeb732bab317a",
+       "EVA-X-S checkpoint SHA256: 83a46553743f12a8bbb64f900ece2efa312a6b75d5638e8fae519ec0d31418a6",
+       "Radiomics checkpoint SHA256: 15d862c5c9ddfd088aebdbfd146b4cb133c089f577cd09ed73bf71058ab1c1b7",
+       "Meta learner SHA256: f8b1781ef805c0c27dbe12ec4dd5bda7dec8452e62a3c7db728b3b8c68ef345e",
+       "Meta-feature order: ['p_xrv', 'p_eva_x', 'p_radiomics']",
+       "Selected A8 threshold: 0.47000000000000003 from development OOF",
+       "External threshold tuned: False",
+       "External recalibration performed: False",
+       "External set used for selection/tuning: False/False",
+       "Exact internal deployment reused: True",
+       "Preflight: 0 failed of 51 checks; overall pass=True.",
+       "Kermany image-level records expose a stable deidentified sample ID and path; age/sex/site metadata are not present in the canonical Stage-19 prediction table. The original cohort is pediatric; the revision must not infer individual demographic values not present in the artifacts."
+      ]
+     }
+    ]
+   },
+   {
+    "source_file": "23_EXTERNAL_SHIFT_CHARACTERIZATION.md",
+    "title": "External domain-shift characterization",
+    "sections": [
+     {
+      "heading": "Quantified shift",
+      "items": [
+       "RSNA locked test: 5338 cases, 1203 pneumonia-positive, prevalence 22.5365%.",
+       "Kermany test: 624 cases, 390 pneumonia, prevalence 62.5000%.",
+       "Prevalence difference: 39.96 percentage points (Kermany higher).",
+       "At the unchanged threshold τ=0.47, A8 sensitivity changed from 0.8512 on RSNA to 0.7949 on Kermany, while specificity changed from 0.7715 to 0.9274. These are descriptive cross-cohort differences; the cohorts contain different individuals and no paired internal-vs-external test is used.",
+       "Class-conditional A8 score summaries are stored in 09_EXTERNAL_SCORE_DISTRIBUTION.csv. The score distributions differ across cohorts, but this does not identify a causal mechanism."
+      ]
+     },
+     {
+      "heading": "Known/observable domain differences",
+      "items": [
+       "Population: Kermany is pediatric; the magnitude of the RSNA age-distribution shift cannot be quantified from the current analysis metadata.",
+       "Institution: Kermany originates from a different clinical source; RSNA site metadata are not used to claim a specific institutional effect.",
+       "File/image path: Kermany uses JPEG in the canonical external pipeline; RSNA uses DICOM. Canonical non-DICOM preprocessing was used without learned domain adaptation.",
+       "Prevalence: directly quantified above.",
+       "Label/case mix: Kermany is NORMAL-versus-PNEUMONIA pediatric classification; RSNA negatives are not equivalent to a strict healthy-normal control set.",
+       "No causal statement attributes performance changes specifically to age, acquisition, prevalence, institution, or case mix."
+      ]
+     }
+    ]
+   },
+   {
+    "source_file": "24_DATASET_OVERLAP_AUDIT.md",
+    "title": "Dataset / upstream-pretraining overlap audit",
+    "sections": [
+     {
+      "heading": "Selected branch upstream provenance",
+      "items": [
+       "DenseNet121-XRV initialization: densenet121-res224-all. Current model-card provenance states training on nih-pc-chex-mimic_ch-google-openi-rsna.",
+       "EVA-X-S initialization: eva_x_small_patch16_merged520k_mim.pt. The EVA-X publication defines Merged520k as frontal images from ChestX-ray14, CheXpert and MIMIC-CXR."
+      ]
+     },
+     {
+      "heading": "Candidate implications",
+      "items": [
+       "NIH ChestX-ray14: CONFIRMED upstream overlap in XRV and EVA-X.",
+       "CheXpert: CONFIRMED upstream overlap in XRV and EVA-X.",
+       "MIMIC-CXR: CONFIRMED upstream overlap in XRV and EVA-X.",
+       "PadChest: CONFIRMED upstream overlap in XRV; not listed in EVA-X Merged520k.",
+       "VinDr-CXR: NO KNOWN upstream overlap from the documented XRV-all and EVA-X provenance, but the public release removes PatientID, preventing strict patient-cluster verification.",
+       "Upstream exposure does not make these datasets invalid for every scientific use, but it weakens their status as clean independent external validation of this exact frozen system, especially when the exposure is supervised on related pathology labels."
+      ]
+     }
+    ]
+   },
+   {
+    "source_file": "25_EXTERNAL_STATISTICAL_QC.md",
+    "title": "External statistical QC",
+    "gates": {
+     "KERMANY_REPRODUCTION": "PASS"
+    },
+    "content": [
+     "Kermany prediction rows: 624 / 624 PASS.",
+     "Unique sample IDs: 624 / 624 PASS.",
+     "Class counts: NORMAL=234, PNEUMONIA=390 PASS.",
+     "Frozen A8 threshold: 0.470 PASS.",
+     "AUC recomputation difference vs canonical: 1.110e-16.",
+     "AUPRC recomputation difference vs canonical: 0.000e+00.",
+     "Stratified bootstrap: 2,000 repetitions, canonical A8 seed 45 (base seed 42 + model-order index 3). AUC CI reproduced exactly.",
+     "Confusion matrix: TN=217, FP=17, FN=80, TP=310; exact canonical match.",
+     "ECE method: 10 uniform bins; assessment only; no external recalibration.",
+     "Cross-cohort RSNA-vs-Kermany comparisons are descriptive; no paired test is used because cohorts are independent.",
+     "No second-cohort inferential results exist under PATH B.",
+     "KERMANY_REPRODUCTION = PASS"
+    ]
+   }
+  ],
+  "transformer_xai": [
+   {
+    "source_file": "10_HOOK_NONINTERFERENCE_TEST.md",
+    "title": "Hook non-interference and state-safety test",
+    "gates": {
+     "status": "PASS"
+    },
+    "content": [
+     "Status: PASS.",
+     "On the deterministic preflight case, probability before/after LayerCAM instrumentation was:",
+     "XRV: 0.845382750034 → 0.845382750034; absolute difference 0.0.",
+     "EVA-X-S: 0.795722007751 → 0.795722007751; absolute difference 0.0.",
+     "Required tolerance: 1e-07.",
+     "Repeated EVA LayerCAM generation passed the script's deterministic np.allclose check (rtol 1e-6, atol 1e-7). The complete run re-hashed the deployment checkpoints after attribution: both hashes were unchanged, and checkpoint_unchanged=true. The attribution script clears gradients after use and does not retrain or update parameters."
+    ]
+   },
+   {
+    "source_file": "04_TOKEN_ORDER_VERIFICATION.md",
+    "title": "EVA-X-S token-order verification",
+    "gates": {
+     "status": "VERIFIED_ROW_MAJOR"
+    },
+    "sections": [
+     {
+      "heading": null,
+      "items": [
+       "Status: VERIFIED_ROW_MAJOR.",
+       "Dynamic instrumentation of the exact frozen EVA-X-S deployment model captured the input to blocks.0 as [1, 197, 384]. The sequence contains 197 tokens with embedding dimension 384: one verified class/prefix token followed by 196 patch tokens. The model exposes num_prefix_tokens=1, cls_token shape [1, 1, 384], patch size 16×16, and grid 14×14. No additional prefix/register/distillation tokens were observed (other_prefix_tokens=0)."
+      ]
+     },
+     {
+      "heading": "Structural patch perturbation test",
+      "items": [
+       "patch (0,0) -> token 1 (expected 1): PASS",
+       "patch (0,1) -> token 2 (expected 2): PASS",
+       "patch (1,0) -> token 15 (expected 15): PASS",
+       "patch (13,13) -> token 196 (expected 196): PASS",
+       "The patch sequence is therefore row-major raster ordered after the leading class token. The historical rule that removes one leading token when N-1 is a perfect square yields the same retained 196 patch tokens for this exact checkpoint (historical_heuristic_equivalent=true). This establishes equivalence for the historical implementation; the revised specification should state the verified one-prefix-token structure directly rather than infer it from sequence length alone."
+      ]
+     }
+    ]
+   }
+  ],
+  "xai_statistics": [
+   {
+    "source_file": "04_XAI_FAMILY_REGISTER.md",
+    "title": "XAI statistical family register",
+    "sections": [
+     {
+      "heading": null,
+      "items": [
+       "Analysis origin: POST_HOC_MULTIPLICITY_CORRECTION."
+      ]
+     },
+     {
+      "heading": "Family A — model vs localization baselines",
+      "items": [
+       "Scientific question: Do the frozen Hybrid CNN–ViT LayerCAM maps exceed simple non-model localization priors across the four prespecified localization measures?",
+       "Included: 4 metrics × 4 baselines = 16 paired contrasts.",
+       "Population: 1,203 GT-positive locked RSNA cases.",
+       "Raw test: two-sided paired sign-flip randomization of the case-level mean difference, 20,000 Monte Carlo permutations with +1 correction.",
+       "Primary correction: Holm FWER, alpha=0.05.",
+       "Sensitivity: BH-FDR; Bonferroni familywise bootstrap interval sensitivity (99.6875% nominal per contrast).",
+       "Effect uncertainty: original unadjusted 95% paired-bootstrap CI, 2,000 resamples, seed 42 plus canonical metric offsets."
+      ]
+     },
+     {
+      "heading": "Family B — TP vs FN localization",
+      "items": [
+       "Scientific question: Is localization systematically stronger for true-positive than false-negative locked-test cases?",
+       "Canonical inferential report contains five related metrics: Pointing Game, IoU, localization score, energy inside GT, and peak distance.",
+       "Family size: 5. Four are displayed in Fig. 6a; peak distance is retained because it appears in the canonical inferential output and is named among the Methods localization metrics. Excluding it would leave an orphan p-value.",
+       "Population: TP=1,024, FN=179; independent groups.",
+       "Raw test: two-sided Mann–Whitney U; effect size: Cliff's delta.",
+       "Primary correction: Holm FWER across all five canonical tests; BH-FDR sensitivity."
+      ]
+     },
+     {
+      "heading": "Family C — EVA attribution-method sensitivity",
+      "items": [
+       "Scientific question: Are EVA localization findings sensitive to the attribution method?",
+       "Included: four prespecified EVA LayerCAM-vs-Integrated-Gradients localization metrics.",
+       "Family size: 4.",
+       "Primary correction: Holm FWER already applied in Stage 7. Stage 9 verifies, and does not double-adjust, those p-values."
+      ]
+     },
+     {
+      "heading": "Family C2 — IG TP-vs-FN supporting sensitivity",
+      "items": [
+       "Scientific question: Does the TP-vs-FN pattern persist under EVA Integrated Gradients?",
+       "Included: four Stage-7 supporting Mann–Whitney tests.",
+       "Family size: 4.",
+       "Primary correction: Holm FWER in Stage 9; BH-FDR sensitivity."
+      ]
+     },
+     {
+      "heading": "Family D — perturbation faithfulness",
+      "items": [
+       "Deletion drop and retention ratio are descriptive quantities with marginal bootstrap CIs. No formal null-hypothesis p-values were used; no multiplicity correction is required."
+      ]
+     },
+     {
+      "heading": "Family E — outside-lung analysis",
+      "items": [
+       "Current manuscript/reports use descriptive means/sensitivity quantities rather than a family of formal hypothesis tests. No multiplicity correction is required. No causal inference is permitted.",
+       "Family definitions follow distinct scientific claims and were frozen for this revision-era audit before adjusted results were interpreted."
+      ]
+     }
+    ]
+   },
+   {
+    "source_file": "17_FAITHFULNESS_MULTIPLICITY_AUDIT.md",
+    "title": "Faithfulness multiplicity audit",
+    "content": [
+     "The canonical faithfulness output contains two descriptive quantities on the same deterministic n=256 cohort:",
+     "deletion confidence drop: mean 0.215727, marginal 95% CI [0.202129, 0.228843];",
+     "retention probability ratio: mean 0.808899, marginal 95% CI [0.779430, 0.841685].",
+     "No formal null-hypothesis p-values are present in the canonical faithfulness artifact, and Stage 7 did not add a comparator-faithfulness test family. Therefore FAITHFULNESS_MULTIPLICITY = NOT_REQUIRED for the current manuscript. These CIs remain descriptive marginal intervals; they do not establish causal reasoning or complete A8 faithfulness."
+    ]
+   },
+   {
+    "source_file": "18_OUTSIDE_LUNG_MULTIPLICITY_AUDIT.md",
+    "title": "Outside-lung multiplicity audit",
+    "content": [
+     "The provenance-verified regenerated-mask sensitivity file contains n=1203 cases. Mean outside-lung ratio is 0.215528 overall, 0.182310 for TP cases, and 0.405557 for FN cases.",
+     "The manuscript uses these values descriptively and explicitly avoids a causal statement. No canonical p-value family is attached to this regenerated-mask sensitivity analysis. Therefore OUTSIDE_LUNG_MULTIPLICITY = NOT_REQUIRED for the current claims. Any later formal TP-vs-FN outside-lung test would constitute a new inferential family and must be prespecified separately."
+    ]
+   },
+   {
+    "source_file": "20_STATISTICAL_QC_REPORT.md",
+    "title": "Statistical QC report",
+    "gates": {
+     "family_A_expected_16": "PASS",
+     "family_A_unique_ids": "PASS",
+     "family_A_all_original_reproduced": "PASS",
+     "family_A_case_n_1203": "PASS",
+     "family_A_two_sided": "PASS",
+     "family_A_holm_all16_applied": "PASS",
+     "family_A_holm_ge_raw": "PASS",
+     "family_A_bh_generated": "PASS",
+     "family_B_no_orphan_peak_distance": "PASS",
+     "family_B_holm_applied": "PASS",
+     "family_C_holm_verified": "PASS",
+     "family_C_no_double_adjustment": "PASS",
+     "family_C2_supporting_pvalues_corrected": "PASS",
+     "faithfulness_no_formal_p_family": "PASS",
+     "outside_lung_no_formal_p_family": "PASS",
+     "branch_scope_locked": "PASS",
+     "full_A8_spatial_claim_forbidden": "PASS",
+     "segmentation_claim_forbidden": "PASS",
+     "causal_claim_forbidden": "PASS",
+     "OVERALL_QC": "PASS"
+    },
+    "content": [
+     "family_A_expected_16: PASS",
+     "family_A_unique_ids: PASS",
+     "family_A_all_original_reproduced: PASS",
+     "family_A_case_n_1203: PASS",
+     "family_A_two_sided: PASS",
+     "family_A_holm_all16_applied: PASS",
+     "family_A_holm_ge_raw: PASS",
+     "family_A_bh_generated: PASS",
+     "family_B_no_orphan_peak_distance: PASS",
+     "family_B_holm_applied: PASS",
+     "family_C_holm_verified: PASS",
+     "family_C_no_double_adjustment: PASS",
+     "family_C2_supporting_pvalues_corrected: PASS",
+     "faithfulness_no_formal_p_family: PASS",
+     "outside_lung_no_formal_p_family: PASS",
+     "branch_scope_locked: PASS",
+     "full_A8_spatial_claim_forbidden: PASS",
+     "segmentation_claim_forbidden: PASS",
+     "causal_claim_forbidden: PASS",
+     "OVERALL_QC = PASS"
+    ]
+   }
+  ]
+ }
+}

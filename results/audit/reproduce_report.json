@@ -1,0 +1,63 @@
+{
+  "inputs": [
+    "results/predictions/locked_rsna.csv",
+    "results/predictions/kermany.csv",
+    "results/metrics/xai_faithfulness_summary.json"
+  ],
+  "absolute_differences": {
+    "internal_A4_vs_golden_reference": {
+      "AUC": 0.0,
+      "AUPRC": 0.0,
+      "sensitivity": 0.0,
+      "specificity": 0.0,
+      "accuracy": 0.0,
+      "balanced_acc": 0.0,
+      "MCC": 0.0
+    },
+    "internal_A4_vs_reported_metrics": {
+      "AUC": 0.0,
+      "AUPRC": 0.0,
+      "sensitivity": 0.0,
+      "specificity": 0.0,
+      "accuracy": 0.0,
+      "balanced_acc": 0.0,
+      "MCC": 0.0
+    },
+    "internal_A8_vs_golden_reference": {
+      "AUC": 0.0,
+      "AUPRC": 0.0,
+      "sensitivity": 0.0,
+      "specificity": 0.0,
+      "accuracy": 0.0,
+      "balanced_acc": 0.0,
+      "MCC": 0.0
+    },
+    "internal_A8_vs_reported_metrics": {
+      "AUC": 0.0,
+      "AUPRC": 0.0,
+      "sensitivity": 0.0,
+      "specificity": 0.0,
+      "accuracy": 0.0,
+      "balanced_acc": 0.0,
+      "MCC": 0.0
+    },
+    "external_A8_vs_reported_metrics": {
+      "roc_auc": 0.0,
+      "auprc": 0.0,
+      "sensitivity": 0.0,
+      "specificity": 0.0,
+      "balanced_accuracy": 0.0,
+      "mcc": 0.0,
+      "tn": 0,
+      "fp": 0,
+      "fn": 0,
+      "tp": 0
+    },
+    "faithfulness_vs_reported_metrics": {
+      "deletion_drop": 0.0,
+      "retention_ratio": 0.0
+    }
+  },
+  "max_absolute_difference": 0.0,
+  "status": "PASS"
+}

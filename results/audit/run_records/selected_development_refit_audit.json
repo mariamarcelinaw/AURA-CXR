@@ -1,0 +1,18 @@
+{
+  "schema": "aura_cxr_dl_pair_selection_q1_v17",
+  "selected_dl_models": [
+    "xrv",
+    "eva_x"
+  ],
+  "selected_radiomics_estimator": "lgbm",
+  "generated_here": [
+    "radiomics"
+  ],
+  "pending_pytorch_refits": [
+    "xrv",
+    "eva_x"
+  ],
+  "test_images_accessed": false,
+  "deployment_status": "WAITING_FOR_SELECTED_REFITS",
+  "created_at": "2026-07-30T14:57:59"
+}

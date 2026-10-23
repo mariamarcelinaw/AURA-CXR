@@ -1,0 +1,74 @@
+{
+  "schema": "aura_cxr_candidate_budget_q1_v17",
+  "image_size": 224,
+  "patient_level_oof_folds": 5,
+  "inner_validation_fraction": 0.1,
+  "common_max_epochs": 60,
+  "early_stopping_patience": 12,
+  "mc_passes_for_oof": 30,
+  "candidate_schedules": {
+    "efficientnetv2": {
+      "phase1_max_epochs": 40,
+      "phase2_max_epochs": 20,
+      "max_total_epochs": 60,
+      "architecture": "EfficientNetV2S_exact_no_fallback"
+    },
+    "resnet50": {
+      "phase1_max_epochs": 40,
+      "phase2_max_epochs": 20,
+      "max_total_epochs": 60,
+      "architecture": "ResNet50"
+    },
+    "xrv": {
+      "max_epochs": 60
+    },
+    "eva_x": {
+      "max_epochs": 60
+    }
+  },
+  "tf_finetuning_policy": {
+    "unfreeze_scope": "exact_last_N_non_batchnorm_layers_inside_nested_backbone",
+    "batchnorm_trainable_layers": 0,
+    "fail_on_count_mismatch": true
+  },
+  "predictive_uncertainty": {
+    "definition": "two_sided_95_predictive_interval_width_equals_2_times_1.96_times_mc_probability_std",
+    "soft_method": "linear_variance_propagation_independent_members",
+    "stacked_method": "logistic_delta_method_independent_members"
+  },
+  "manifest_integrity": {
+    "pair_lock_reverified_on_read": true,
+    "deployment_lock_reverified_on_read": true
+  },
+  "radiomics_fixed_best_design": {
+    "candidates": [
+      "knn",
+      "histgb",
+      "lgbm",
+      "svm"
+    ],
+    "screening": {
+      "rows": 4000,
+      "folds": 3,
+      "inner_folds": 2,
+      "population": 8,
+      "iterations": 8,
+      "seeds": "42,123",
+      "top_k": 2,
+      "ranking": "per-seed top2 frequency then mean rank then pooled metrics"
+    },
+    "final_refinement": {
+      "fixed_global_top_k": 2,
+      "each_candidate_on_all_outer_folds": true,
+      "outer_folds": 5,
+      "inner_folds": 3,
+      "population": 15,
+      "iterations": 15,
+      "full_outer_training_rows": true
+    },
+    "selected_oof_and_deployment_family_identical": true,
+    "outer_holdout_used_for_tuning": false
+  },
+  "fairness_policy": "same patient folds, same inner-validation rule, same 60-epoch maximum, same patience, and same OOF MC passes; architecture-specific batch sizes/optimizers are prespecified",
+  "test_or_kermany_used_for_budget": false
+}

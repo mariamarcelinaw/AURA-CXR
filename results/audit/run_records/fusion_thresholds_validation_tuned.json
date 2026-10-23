@@ -1,0 +1,11 @@
+{
+  "stacked_ensemble": 0.47000000000000003,
+  "soft_voting": 0.435,
+  "individual_models": {
+    "xrv": 0.495,
+    "eva_x": 0.47000000000000003,
+    "radiomics": 0.225
+  },
+  "selection_split": "development_oof",
+  "test_set_used_for_selection": false
+}

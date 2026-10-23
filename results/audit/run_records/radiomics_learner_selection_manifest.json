@@ -1,0 +1,201 @@
+{
+  "schema": "aura_cxr_radiomics_fixed_best_q1_v17",
+  "selection_scope": "development_outer_oof_fixed_best_radiomics",
+  "selection_metric": "f1_macro",
+  "selection_tolerance": 0.002,
+  "selection_tolerance_policy": "retain learners within tolerance of best primary metric, then AUC/AUPRC/Brier/fold-stability/complexity tie-break",
+  "procedure": "screen four learners with per-seed stability; evaluate the same global top two on all five outer folds; select one fixed learner from aggregate outer OOF",
+  "candidate_estimators": [
+    "knn",
+    "histgb",
+    "lgbm",
+    "svm"
+  ],
+  "screening": {
+    "rows": 4000,
+    "folds": 3,
+    "inner_folds": 2,
+    "population": 8,
+    "iterations": 8,
+    "seeds": [
+      42,
+      123
+    ],
+    "top_k": 2,
+    "promotion_policy": "top2_seed_frequency_desc_mean_rank_asc_pooled_metric_tiebreak",
+    "global_top2": [
+      "lgbm",
+      "histgb"
+    ],
+    "global_stability_summary_path": "${AURA_PROJECT_DIR}/results_aura_cxr/reports/radiomics_global_screening_stability.csv",
+    "global_stability_summary_sha256": "b24d1d10a5f50b262b2a9e5bd6530a6dcc98da74b4a319ea953d1614775cf351",
+    "purpose": "candidate_reduction_only",
+    "outer_holdout_accessed": false
+  },
+  "final_refinement": {
+    "fixed_candidate_families": [
+      "lgbm",
+      "histgb"
+    ],
+    "each_candidate_evaluated_on_all_outer_folds": true,
+    "outer_folds": 5,
+    "inner_folds": 3,
+    "population": 15,
+    "iterations": 15,
+    "subsample_rows": 0,
+    "outer_holdout_used_for_tuning": false
+  },
+  "candidate_oof_results": [
+    {
+      "estimator": "lgbm",
+      "display_name": "LightGBM",
+      "complexity_rank": 2,
+      "auc": 0.7855949606088833,
+      "auprc": 0.5081822285442029,
+      "brier": 0.1579838766555708,
+      "crossfitted_f1_macro": 0.590816231366389,
+      "fold_auc_mean": 0.7880876895717209,
+      "fold_auc_sd": 0.007217325808150685,
+      "crossfitted_thresholds": [
+        {
+          "outer_fold": 0,
+          "threshold_from_other_outer_folds": 0.23500000000000001
+        },
+        {
+          "outer_fold": 1,
+          "threshold_from_other_outer_folds": 0.225
+        },
+        {
+          "outer_fold": 2,
+          "threshold_from_other_outer_folds": 0.225
+        },
+        {
+          "outer_fold": 3,
+          "threshold_from_other_outer_folds": 0.21000000000000002
+        },
+        {
+          "outer_fold": 4,
+          "threshold_from_other_outer_folds": 0.23
+        }
+      ],
+      "selection_tolerance": 0.002,
+      "best_primary_value": 0.5917491864988241,
+      "within_selection_tolerance": true,
+      "selected_fixed_best": true
+    },
+    {
+      "estimator": "histgb",
+      "display_name": "HistGradientBoosting",
+      "complexity_rank": 1,
+      "auc": 0.7813959542231699,
+      "auprc": 0.49495721631016826,
+      "brier": 0.1653968588146109,
+      "crossfitted_f1_macro": 0.5917491864988241,
+      "fold_auc_mean": 0.7827328993184693,
+      "fold_auc_sd": 0.008860740374276744,
+      "crossfitted_thresholds": [
+        {
+          "outer_fold": 0,
+          "threshold_from_other_outer_folds": 0.255
+        },
+        {
+          "outer_fold": 1,
+          "threshold_from_other_outer_folds": 0.265
+        },
+        {
+          "outer_fold": 2,
+          "threshold_from_other_outer_folds": 0.28
+        },
+        {
+          "outer_fold": 3,
+          "threshold_from_other_outer_folds": 0.255
+        },
+        {
+          "outer_fold": 4,
+          "threshold_from_other_outer_folds": 0.265
+        }
+      ],
+      "selection_tolerance": 0.002,
+      "best_primary_value": 0.5917491864988241,
+      "within_selection_tolerance": true,
+      "selected_fixed_best": false
+    }
+  ],
+  "candidate_oof_artifacts": {
+    "lgbm": {
+      "path": "${AURA_PROJECT_DIR}/results_aura_cxr/probs/oof_radiomics_lgbm.npz",
+      "sha256": "f180acec675977caa304d2b88e66c3392bdfa6d8b359b7843a488c2a75a0b1bb"
+    },
+    "histgb": {
+      "path": "${AURA_PROJECT_DIR}/results_aura_cxr/probs/oof_radiomics_histgb.npz",
+      "sha256": "2dbc0c4dd0a3d7acb850875fc4713c4512068c27dd797498730bb92956dd18dd"
+    }
+  },
+  "selected_estimator": "lgbm",
+  "selected_display_name": "LightGBM",
+  "oof_model_family_policy": "single_global_fixed_best_learner",
+  "deployment_family_policy": "same_fixed_best_learner_refit_on_full_development",
+  "oof_deployment_family_identical": true,
+  "selected_branch_oof_metrics": {
+    "auc": 0.7855949606088833,
+    "auprc": 0.5081822285442029,
+    "brier": 0.1579838766555708,
+    "crossfitted_f1_macro": 0.590816231366389,
+    "fold_auc_mean": 0.7880876895717209,
+    "fold_auc_sd": 0.007217325808150685,
+    "crossfitted_thresholds": [
+      {
+        "outer_fold": 0,
+        "threshold_from_other_outer_folds": 0.23500000000000001
+      },
+      {
+        "outer_fold": 1,
+        "threshold_from_other_outer_folds": 0.225
+      },
+      {
+        "outer_fold": 2,
+        "threshold_from_other_outer_folds": 0.225
+      },
+      {
+        "outer_fold": 3,
+        "threshold_from_other_outer_folds": 0.21000000000000002
+      },
+      {
+        "outer_fold": 4,
+        "threshold_from_other_outer_folds": 0.23
+      }
+    ]
+  },
+  "feature_config": {
+    "wavelet_levels": 3,
+    "glcm_distances": [
+      1,
+      2,
+      3
+    ],
+    "glcm_angles_deg": [
+      0.0,
+      45.0,
+      90.0,
+      135.0
+    ],
+    "lbp_radius": 3,
+    "lbp_n_points": 24,
+    "feature_dimension": 746,
+    "image_size": 224
+  },
+  "feature_cache": "${AURA_PROJECT_DIR}/results_aura_cxr/cache/radiomic_v3_development_adaptive_L3_glcm_lbp.joblib",
+  "feature_cache_sha256": "18442202a80092bf8ac57547b425b5985dba4843d22a3baefe7930ee3a9d744b",
+  "development_patient_sha256": "7c72ff0aae636deede4c7c87032d1c906e083050e45d0896a122faa8cde36e76",
+  "development_label_sha256": "910f1c115ed750f6d7470c42e42284644a50cae8f9afa650c3f8fe8c7439ee1c",
+  "selected_oof_path": "${AURA_PROJECT_DIR}/results_aura_cxr/probs/oof_radiomics.npz",
+  "selected_oof_sha256": "804a8be03ac8394e699140244642896f3b7e2ea28a8505b7d0be4759c1eb8722",
+  "selected_candidate_oof_path": "${AURA_PROJECT_DIR}/results_aura_cxr/probs/oof_radiomics_lgbm.npz",
+  "selected_candidate_oof_sha256": "f180acec675977caa304d2b88e66c3392bdfa6d8b359b7843a488c2a75a0b1bb",
+  "outer_holdout_used_for_hyperparameter_tuning": false,
+  "test_predictions_generated": false,
+  "test_images_accessed": false,
+  "external_kermany_used_for_selection": false,
+  "test_set_used_for_selection": false,
+  "created_at": "2026-07-30T08:16:11"
+}

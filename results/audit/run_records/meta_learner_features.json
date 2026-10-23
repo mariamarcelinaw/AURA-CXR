@@ -1,0 +1,12 @@
+{
+  "feature_order": [
+    "p_xrv",
+    "p_eva_x",
+    "p_radiomics"
+  ],
+  "n_features": 3,
+  "training_probabilities": "patient-level development out-of-fold",
+  "test_set_used_for_meta_training": false,
+  "external_set_used_for_meta_training": false,
+  "selection_lock_id": "2bb402e76854bcf6b892cc8ec896088e575cdd0da6dc832a725bcedd18ddb7b3"
+}

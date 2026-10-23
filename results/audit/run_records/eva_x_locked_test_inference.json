@@ -1,0 +1,12 @@
+{
+  "schema": "aura_cxr_dl_pair_selection_q1_v17",
+  "source_model": "${AURA_PROJECT_DIR}/results_aura_cxr/models/eva_x_development_refit.pt",
+  "source_sha256": "83a46553743f12a8bbb64f900ece2efa312a6b75d5638e8fae519ec0d31418a6",
+  "development_refit_only": true,
+  "test_inference_started_after_pair_lock": true,
+  "test_labels_used": false,
+  "test_set_used_for_selection": false,
+  "predictive_uncertainty_definition": "two_sided_95_predictive_interval_width_equals_2_times_1.96_times_mc_probability_std",
+  "predictive_interval_width_path": "${AURA_PROJECT_DIR}/results_aura_cxr/probs/eva_x_development_refit_test_predictive_interval_width_95.npy",
+  "created_at": "2026-07-30T21:27:25"
+}

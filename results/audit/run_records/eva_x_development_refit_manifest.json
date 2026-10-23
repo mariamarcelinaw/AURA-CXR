@@ -1,0 +1,14 @@
+{
+  "schema": "aura_cxr_dl_pair_selection_q1_v17",
+  "model": "eva_x",
+  "training_scope": "full_development_train_plus_validation",
+  "epoch_policy": "median_best_epoch_from_outer_OOF_inner_validation",
+  "refit_epochs": 2,
+  "parameter_count": 21667970,
+  "model_path": "${AURA_PROJECT_DIR}/results_aura_cxr/models/eva_x_development_refit.pt",
+  "model_sha256": "83a46553743f12a8bbb64f900ece2efa312a6b75d5638e8fae519ec0d31418a6",
+  "official_repo": "${EVAX_REPO_DIR}",
+  "pretrained_checkpoint": "${EVAX_REPO_DIR}/checkpoints/eva_x_small_patch16_merged520k_mim.pt",
+  "test_images_accessed": false,
+  "created_at": "2026-07-30T15:06:12"
+}

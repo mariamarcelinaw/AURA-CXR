@@ -1,0 +1,430 @@
+{
+  "schema": "aura_cxr_q1_v17_protocol_check",
+  "require_runtime_checks": true,
+  "overall_pass": true,
+  "checks_passed": 70,
+  "checks_failed": 0,
+  "checks_skipped": 0,
+  "checks": [
+    {
+      "check": "file:aura_dl_pair_selection.py",
+      "pass": true,
+      "detail": "${AURA_PROJECT_DIR}/aura_dl_pair_selection.py",
+      "kind": "static"
+    },
+    {
+      "check": "file:train_aura.py",
+      "pass": true,
+      "detail": "${AURA_PROJECT_DIR}/train_aura.py",
+      "kind": "static"
+    },
+    {
+      "check": "file:train_xrv_backbone.py",
+      "pass": true,
+      "detail": "${AURA_PROJECT_DIR}/train_xrv_backbone.py",
+      "kind": "static"
+    },
+    {
+      "check": "file:train_eva_x_backbone.py",
+      "pass": true,
+      "detail": "${AURA_PROJECT_DIR}/train_eva_x_backbone.py",
+      "kind": "static"
+    },
+    {
+      "check": "file:eval_only_xai.py",
+      "pass": true,
+      "detail": "${AURA_PROJECT_DIR}/eval_only_xai.py",
+      "kind": "static"
+    },
+    {
+      "check": "file:external_validation_kermany.py",
+      "pass": true,
+      "detail": "${AURA_PROJECT_DIR}/external_validation_kermany.py",
+      "kind": "static"
+    },
+    {
+      "check": "file:q1_stats_report.py",
+      "pass": true,
+      "detail": "${AURA_PROJECT_DIR}/q1_stats_report.py",
+      "kind": "static"
+    },
+    {
+      "check": "file:ablation_mrfo_learner.py",
+      "pass": true,
+      "detail": "${AURA_PROJECT_DIR}/ablation_mrfo_learner.py",
+      "kind": "static"
+    },
+    {
+      "check": "file:run_aura_cxr.sh",
+      "pass": true,
+      "detail": "${AURA_PROJECT_DIR}/run_aura_cxr.sh",
+      "kind": "static"
+    },
+    {
+      "check": "compile:aura_dl_pair_selection.py",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "compile:train_aura.py",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "compile:train_xrv_backbone.py",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "compile:train_eva_x_backbone.py",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "compile:eval_only_xai.py",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "compile:external_validation_kermany.py",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "compile:q1_stats_report.py",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "compile:ablation_mrfo_learner.py",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "bash_syntax",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "global_image_size_224",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "tf_default_40_plus_20",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "runner_40_plus_20",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "xrv_eva_60_patience12",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "screening_defaults_8x8_4000_two_seed",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "final_refinement_defaults_15x15_inner3",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "per_seed_screening_stability",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "global_top2_fixed_across_outer_folds",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "candidate_specific_complete_oof_artifacts",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "fixed_best_selected_from_aggregate_oof",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "oof_deployment_family_identity",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "fixed_best_scope_guard",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "no_foldwise_mixed_winner_policy",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "dynamic_refit_inner_fold_provenance",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "radiomics_selection_tolerance_applied",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "radiomics_refit_family_assertion",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "efficientnetv2_fail_fast_no_architecture_fallback",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "nested_backbone_explicit_inference_bn",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "exact_internal_last_n_unfreeze",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "mc_dropout_bn_helper",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "mc_cache_full_provenance",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "mc_cache_rejects_mismatch",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "predictive_uncertainty_definition_consistent",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "xrv_eva_predictive_width_formula",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "ensemble_uncertainty_propagation",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "pair_manifest_lock_reverified",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "deployment_manifest_lock_reverified",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "existing_pair_manifest_path_reverifies_lock",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "statistics_timestamp_is_non_scientific_mutable_audit_field",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "external_generic_png_loader",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "external_xrv_uses_external_dataset",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "external_eva_uses_external_dataset",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "external_test_only",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "external_manifest_radiomics_config",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "external_radiomics_family_assertion",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "statistics_reports_predictive_interval_width",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "xai_schema_v17",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "xai_default_trainer_names",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "ablation_a8_crossfitted",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "ablation_a9_a10_exploratory",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "holm_delong",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "immutable_test_lock",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "runner_requires_runtime_protocol_check",
+      "pass": true,
+      "detail": "",
+      "kind": "static"
+    },
+    {
+      "check": "intermodule_import_contract",
+      "pass": true,
+      "detail": "[]",
+      "kind": "static"
+    },
+    {
+      "check": "runtime_kermany_png_loader",
+      "pass": true,
+      "detail": "(224, 224)",
+      "kind": "runtime"
+    },
+    {
+      "check": "runtime_pair_manifest_tamper_detection",
+      "pass": true,
+      "detail": "threshold mutation rejected",
+      "kind": "runtime"
+    },
+    {
+      "check": "runtime_deployment_manifest_tamper_detection",
+      "pass": true,
+      "detail": "threshold mutation rejected",
+      "kind": "runtime"
+    },
+    {
+      "check": "runtime_statistics_audit_field_allowed",
+      "pass": true,
+      "detail": "scientific lock unchanged",
+      "kind": "runtime"
+    },
+    {
+      "check": "runtime_ensemble_uncertainty",
+      "pass": true,
+      "detail": "['soft_predictive_interval_width_95', 'soft_std', 'stacked_predictive_interval_width_95', 'stacked_std']",
+      "kind": "runtime"
+    },
+    {
+      "check": "runtime_mc_dropout_bn_isolation",
+      "pass": true,
+      "detail": "variance=0.133471",
+      "kind": "runtime"
+    },
+    {
+      "check": "runtime_mc_cache_provenance_sensitivity",
+      "pass": true,
+      "detail": "order and MC-pass changes alter expected provenance",
+      "kind": "runtime"
+    },
+    {
+      "check": "runtime_exact_last_n_unfreeze",
+      "pass": true,
+      "detail": "{'backbone_layer_name': 'efficientnet_mock', 'requested_unfreeze_last_n': 3, 'available_backbone_non_bn_layers': 7, 'actual_backbone_layers_unfrozen': 3, 'batchnorm_layers_total': 6, 'batchnorm_layers_trainable': 0, 'batchnorm_policy': 'all_model_batchnorm_frozen_inference'}",
+      "kind": "runtime"
+    }
+  ]
+}

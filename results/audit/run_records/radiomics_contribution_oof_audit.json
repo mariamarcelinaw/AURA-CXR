@@ -1,0 +1,75 @@
+{
+  "schema": "aura_cxr_radiomics_contribution_oof_audit_v1",
+  "purpose": "post-lock development-only audit; does not alter selection, stacker, threshold, or any lock",
+  "data": "patient-level development out-of-fold probabilities only",
+  "test_set_accessed": false,
+  "external_set_accessed": false,
+  "selection_lock_id": "2bb402e76854bcf6b892cc8ec896088e575cdd0da6dc832a725bcedd18ddb7b3",
+  "n_development": 21346,
+  "n_folds": 5,
+  "seed": 42,
+  "stack_recipe": "crossfit_meta_predictions: LogisticRegression(class_weight=balanced, lbfgs, max_iter=5000)",
+  "with_radiomics": {
+    "features": [
+      "p_xrv",
+      "p_eva_x",
+      "p_radiomics"
+    ],
+    "auc": 0.8892396192345255,
+    "auprc": 0.7140242938294771,
+    "brier": 0.13986204319476483,
+    "ece": 0.14735517886063737,
+    "log_loss": 0.42295224154198624,
+    "fold_auc_mean": 0.8915555364611162,
+    "fold_auc_sd": 0.006623620935516688,
+    "threshold": 0.47000000000000003,
+    "full_development_coefficients": {
+      "intercept": -6.22883556957103,
+      "beta_xrv": 7.964391214167865,
+      "beta_eva_x": 4.559219751627475,
+      "beta_radiomics": -0.03641402783417562
+    }
+  },
+  "without_radiomics": {
+    "features": [
+      "p_xrv",
+      "p_eva_x"
+    ],
+    "auc": 0.8894096884742712,
+    "auprc": 0.7143745266855348,
+    "brier": 0.13970876818375658,
+    "ece": 0.14730948928505203,
+    "log_loss": 0.4225977903855741,
+    "fold_auc_mean": 0.89164802603497,
+    "fold_auc_sd": 0.006520296921892948,
+    "threshold": 0.47500000000000003,
+    "full_development_coefficients": {
+      "intercept": -6.221157853436782,
+      "beta_xrv": 7.9478714395776695,
+      "beta_eva_x": 4.530713394344979
+    }
+  },
+  "comparison": {
+    "pooled_auc_with": 0.8892396192345254,
+    "pooled_auc_without": 0.8894096884742712,
+    "pooled_auc_delta_with_minus_without": -0.0001700692397457182,
+    "delong_p_two_sided": 7.020273540270239e-06,
+    "fold_auc_mean_delta": -9.248957385366019e-05,
+    "fold_auc_delta_sd": 0.00011409914670795547,
+    "folds_with_positive_delta": 2,
+    "decision_disagreement_rate_at_own_oof_thresholds": 0.004028857865642275
+  },
+  "locked_meta_learner_consistency": {
+    "available": true,
+    "path": "${AURA_PROJECT_DIR}/results_aura_cxr/models/selected_pair_meta_learner.pkl",
+    "locked_coefficients": {
+      "intercept": -6.22883556957103,
+      "beta_xrv": 7.964391214167865,
+      "beta_eva_x": 4.559219751627475,
+      "beta_radiomics": -0.03641402783417562
+    },
+    "max_abs_difference_vs_refit": 0.0,
+    "matches_locked_meta_learner": true
+  },
+  "created_at": "2026-09-21T13:00:38"
+}

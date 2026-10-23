@@ -1,0 +1,157 @@
+{
+ "project": "AURA-CXR",
+ "artifacts": [
+  "train_aura.py",
+  "aura_dl_pair_selection.py",
+  "train_xrv_backbone.py",
+  "train_eva_x_backbone.py",
+  "q1_stats_report.py",
+  "eval_only_xai.py",
+  "external_validation_kermany.py",
+  "external_validation_kermany_stage19.py"
+ ],
+ "relationships": [
+  {
+   "input": "train_aura.py",
+   "process": "original development source; machine-specific example paths replaced and comments translated to English (executable code unchanged, see source_equivalence)",
+   "output": "scripts/train_aura.py",
+   "origin": "original_study"
+  },
+  {
+   "input": "aura_dl_pair_selection.py",
+   "process": "original development source; machine-specific example paths replaced and comments translated to English (executable code unchanged, see source_equivalence)",
+   "output": "scripts/aura_dl_pair_selection.py",
+   "origin": "original_study"
+  },
+  {
+   "input": "train_xrv_backbone.py",
+   "process": "original development source; machine-specific example paths replaced and comments translated to English (executable code unchanged, see source_equivalence)",
+   "output": "scripts/train_xrv_backbone.py",
+   "origin": "original_study"
+  },
+  {
+   "input": "train_eva_x_backbone.py",
+   "process": "original development source; machine-specific example paths replaced and comments translated to English (executable code unchanged, see source_equivalence)",
+   "output": "scripts/train_eva_x_backbone.py",
+   "origin": "original_study"
+  },
+  {
+   "input": "q1_stats_report.py",
+   "process": "original development source; machine-specific example paths replaced and comments translated to English (executable code unchanged, see source_equivalence)",
+   "output": "scripts/q1_stats_report.py",
+   "origin": "original_study"
+  },
+  {
+   "input": "eval_only_xai.py",
+   "process": "original development source; machine-specific example paths replaced and comments translated to English (executable code unchanged, see source_equivalence)",
+   "output": "scripts/eval_only_xai.py",
+   "origin": "original_study"
+  },
+  {
+   "input": "external_validation_kermany.py",
+   "process": "original development source; machine-specific example paths replaced and comments translated to English (executable code unchanged, see source_equivalence)",
+   "output": "scripts/external_validation_kermany.py",
+   "origin": "original_study"
+  },
+  {
+   "input": "external_validation_kermany_stage19.py",
+   "process": "original development source; machine-specific example paths replaced and comments translated to English (executable code unchanged, see source_equivalence)",
+   "output": "scripts/external_validation_kermany_stage19.py",
+   "origin": "original_study"
+  },
+  {
+   "input": "splits.zip verified splits",
+   "process": "remove machine-specific image_path only",
+   "output": "data/splits/*.csv",
+   "origin": "derived_reproduction"
+  },
+  {
+   "input": "test_predictions_full.csv",
+   "process": "derive explicit A4=(XRV+EVA)/2 and retain A8",
+   "output": "results/predictions/locked_rsna.csv",
+   "origin": "derived_reproduction"
+  },
+  {
+   "input": "external_validation_kermany_predictions.csv",
+   "process": "schema normalization",
+   "output": "results/predictions/kermany.csv",
+   "origin": "derived_reproduction"
+  },
+  {
+   "input": "scripts/train_aura.py",
+   "process": "implementation audit",
+   "output": "configs/specs/radiomics_specification.json",
+   "origin": "derived_reproduction",
+   "selection_eligible": false
+  },
+  {
+   "input": "configs/specs/radiomics_specification.json",
+   "process": "Deterministic schema expansion",
+   "output": "configs/specs/feature_schema_746.csv",
+   "origin": "derived_reproduction",
+   "selection_eligible": false
+  },
+  {
+   "input": "scripts/train_aura.py",
+   "process": "MRFO decoder/search-space extraction",
+   "output": "configs/specs/mrfo_search_space.csv",
+   "origin": "derived_reproduction",
+   "selection_eligible": false
+  }
+ ],
+ "source_equivalence": {
+  "what_changed": "Comments, docstrings, CLI help text and console/plot labels in the canonical source snapshot were translated into English. No executable statement, constant used in computation, parameter default, or control-flow construct was modified.",
+  "how_it_was_verified": "For each file, the abstract syntax tree was parsed before and after the change, module/class/function docstrings were removed, and every string literal was replaced by the empty string. The resulting trees are identical, so the code path is unchanged. The signature below is the SHA-256 of that normalized AST dump and can be recomputed from the released file.",
+  "files": [
+   {
+    "path": "scripts/aura_dl_pair_selection.py",
+    "released_sha256": "60c422d342d9652a3751d38436a0d138878e51c0f02e366f8053f8c0855c38ad",
+    "pre_translation_sha256": "60c422d342d9652a3751d38436a0d138878e51c0f02e366f8053f8c0855c38ad",
+    "normalized_ast_sha256": "a9f69c026a40eb046947c9e21bd3a279ee7c9a3a93ee0d447d846abcc9d173ad"
+   },
+   {
+    "path": "scripts/eval_only_xai.py",
+    "released_sha256": "05d139257e88860c0bf33e3aa0a061999a7125f36f74a699027423fde6bc74a0",
+    "pre_translation_sha256": "c16eb7a455a036a8810108f2ce9c0181d66ee25b1965a5651e31a2ad737bcbd2",
+    "normalized_ast_sha256": "b9346dbf1e0251306fbdef917b9fea05eabf0f5b622cb115b31ffb04cee36463"
+   },
+   {
+    "path": "scripts/external_validation_kermany.py",
+    "released_sha256": "fe650089f602a2317344605ecc44f07200006a3416c743b68620f907e561df66",
+    "pre_translation_sha256": "fe650089f602a2317344605ecc44f07200006a3416c743b68620f907e561df66",
+    "normalized_ast_sha256": "1fa05c1d5593162bdf1f501273fda2e49a6f6b84d039de8c06c8d8badbe8f38e"
+   },
+   {
+    "path": "scripts/external_validation_kermany_stage19.py",
+    "released_sha256": "9ebb614423a5cca399d96af7d1ebeac149b9ac3696a5cb56f9fca8e8ed35cbde",
+    "pre_translation_sha256": "873ff96ba745067cd618166529f64a3d710fddd94daa5e0a3361428c5eef937e",
+    "normalized_ast_sha256": "ae2f855ddcd742a797314fc28b1a19f2998180695c121a956ed633826b29b6df"
+   },
+   {
+    "path": "scripts/q1_stats_report.py",
+    "released_sha256": "0c1a8612dcd3308d69a930587ce95b9dd46976a9e6dadc07f47071c71e70c9a2",
+    "pre_translation_sha256": "c4d9b8a73c34b473a8d5b59ff0d278a6d8c555df636ce105915a2a8a30c626db",
+    "normalized_ast_sha256": "bf2a33a2029338689586c09e4301df15f38e8be680f0c8b90633a387d9c76f09"
+   },
+   {
+    "path": "scripts/train_aura.py",
+    "released_sha256": "356245615a9ee6c70caaceddaa4386aea1f903c1bc3dd8509a921b9ef1a98ddd",
+    "pre_translation_sha256": "ef83a312230304b1ca2d6632ef0f853abe2702b82658b124f69d87cf6ac1c77f",
+    "normalized_ast_sha256": "ac790a37818691f309749381eda015efc990f82ef0799e2037c5a431b8c1dc46"
+   },
+   {
+    "path": "scripts/train_eva_x_backbone.py",
+    "released_sha256": "60cb3e730e37f75084d1861288d62b9b166c7c2c1a8a82c0ed3cae0eb82ebb5c",
+    "pre_translation_sha256": "60cb3e730e37f75084d1861288d62b9b166c7c2c1a8a82c0ed3cae0eb82ebb5c",
+    "normalized_ast_sha256": "37313125bebc7f93eedf904e546be2b7f62ca54feb6fa1f072d5b88406cf2727"
+   },
+   {
+    "path": "scripts/train_xrv_backbone.py",
+    "released_sha256": "ccf59eb33d9d7d72c788f64f766ac2f3bd70fa66c420370a07e4e63618836f80",
+    "pre_translation_sha256": "ccf59eb33d9d7d72c788f64f766ac2f3bd70fa66c420370a07e4e63618836f80",
+    "normalized_ast_sha256": "b09d99a3493c3fe6d2ffd01bcab59d19fdda0c3cfec59ba06bee2c5b46186217"
+   }
+  ]
+ },
+ "source_policy": "scripts/ holds the implementation that generated the reported artifacts. Machine-specific example paths were replaced and comments, docstrings and CLI help text were translated into English; the executable code is unchanged (source_equivalence)."
+}

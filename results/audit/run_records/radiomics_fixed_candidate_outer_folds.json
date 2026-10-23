@@ -1,0 +1,212 @@
+[
+  {
+    "outer_fold": 0,
+    "estimator": "lgbm",
+    "best_inner_cv_score": 0.686453490296795,
+    "best_params": {
+      "learning_rate": 0.01502,
+      "max_leaf_nodes": 255,
+      "max_depth": 12,
+      "l2_regularization": 0.00038,
+      "min_samples_leaf_frac": 0.0041
+    },
+    "model_path": "${AURA_PROJECT_DIR}/results_aura_cxr/models/fixed_best_radiomics/lgbm/outer_fold_0/model.pkl",
+    "model_sha256": "9788e5d2f86714cddfff35fcf6d031aa75c35e36bc1e7bc95e51c4e92965d3c1",
+    "outer_train_rows": 17076,
+    "outer_holdout_rows": 4270,
+    "outer_holdout_used_for_selection": false,
+    "auc": 0.78804831480164,
+    "auprc": 0.4964926758455289,
+    "f1_macro": 0.6905336497058568,
+    "brier": 0.15038583667955366
+  },
+  {
+    "outer_fold": 0,
+    "estimator": "histgb",
+    "best_inner_cv_score": 0.6813236347234285,
+    "best_params": {
+      "learning_rate": 0.06139,
+      "max_leaf_nodes": 51,
+      "max_depth": 10,
+      "l2_regularization": 10.0,
+      "min_samples_leaf_frac": 0.0062
+    },
+    "model_path": "${AURA_PROJECT_DIR}/results_aura_cxr/models/fixed_best_radiomics/histgb/outer_fold_0/model.pkl",
+    "model_sha256": "bc38122dad66e7cf396a36a637497e218c4cd4b766ff421a25ec16da7aee6449",
+    "outer_train_rows": 17076,
+    "outer_holdout_rows": 4270,
+    "outer_holdout_used_for_selection": false,
+    "auc": 0.7823898216884915,
+    "auprc": 0.4797027655048969,
+    "f1_macro": 0.6798175851955819,
+    "brier": 0.17435769022553482
+  },
+  {
+    "outer_fold": 1,
+    "estimator": "lgbm",
+    "best_inner_cv_score": 0.686433790467399,
+    "best_params": {
+      "learning_rate": 0.03721,
+      "max_leaf_nodes": 216,
+      "max_depth": 10,
+      "l2_regularization": 1.92579,
+      "min_samples_leaf_frac": 0.0116
+    },
+    "model_path": "${AURA_PROJECT_DIR}/results_aura_cxr/models/fixed_best_radiomics/lgbm/outer_fold_1/model.pkl",
+    "model_sha256": "6aa6f6e14ebefc75c92def11a26581bed44a1ae48374eadf2ca36cb8308408af",
+    "outer_train_rows": 17077,
+    "outer_holdout_rows": 4269,
+    "outer_holdout_used_for_selection": false,
+    "auc": 0.7891727181113332,
+    "auprc": 0.5184788266073979,
+    "f1_macro": 0.6845662071793022,
+    "brier": 0.1573753565459061
+  },
+  {
+    "outer_fold": 1,
+    "estimator": "histgb",
+    "best_inner_cv_score": 0.6786763071619734,
+    "best_params": {
+      "learning_rate": 0.03149,
+      "max_leaf_nodes": 227,
+      "max_depth": 12,
+      "l2_regularization": 0.00019,
+      "min_samples_leaf_frac": 0.0046
+    },
+    "model_path": "${AURA_PROJECT_DIR}/results_aura_cxr/models/fixed_best_radiomics/histgb/outer_fold_1/model.pkl",
+    "model_sha256": "a71849825774b0121d92fd97b31ffd33b3e4f2b35fbeb33b5cafe5c6ac62997c",
+    "outer_train_rows": 17077,
+    "outer_holdout_rows": 4269,
+    "outer_holdout_used_for_selection": false,
+    "auc": 0.779396630470111,
+    "auprc": 0.5052907930616934,
+    "f1_macro": 0.6755019996068609,
+    "brier": 0.1632023985836963
+  },
+  {
+    "outer_fold": 2,
+    "estimator": "lgbm",
+    "best_inner_cv_score": 0.6882858082605517,
+    "best_params": {
+      "learning_rate": 0.03873,
+      "max_leaf_nodes": 90,
+      "max_depth": 9,
+      "l2_regularization": 0.01433,
+      "min_samples_leaf_frac": 0.012
+    },
+    "model_path": "${AURA_PROJECT_DIR}/results_aura_cxr/models/fixed_best_radiomics/lgbm/outer_fold_2/model.pkl",
+    "model_sha256": "de85694d0c46f6e9a3e1994fd62e12137f233a5f10ede5c063aa11ca4ae8d612",
+    "outer_train_rows": 17077,
+    "outer_holdout_rows": 4269,
+    "outer_holdout_used_for_selection": false,
+    "auc": 0.7879716496287406,
+    "auprc": 0.5330640141323366,
+    "f1_macro": 0.6908970907886971,
+    "brier": 0.1591590495694629
+  },
+  {
+    "outer_fold": 2,
+    "estimator": "histgb",
+    "best_inner_cv_score": 0.6800890815370951,
+    "best_params": {
+      "learning_rate": 0.06618,
+      "max_leaf_nodes": 103,
+      "max_depth": 12,
+      "l2_regularization": 0.00012,
+      "min_samples_leaf_frac": 0.0029
+    },
+    "model_path": "${AURA_PROJECT_DIR}/results_aura_cxr/models/fixed_best_radiomics/histgb/outer_fold_2/model.pkl",
+    "model_sha256": "999fd3579bb0e2c5d5edab415f7827b456daa39824c3d32e482a56d787c831ac",
+    "outer_train_rows": 17077,
+    "outer_holdout_rows": 4269,
+    "outer_holdout_used_for_selection": false,
+    "auc": 0.7816680046797978,
+    "auprc": 0.5048361443339934,
+    "f1_macro": 0.6893227371296573,
+    "brier": 0.15786268843097745
+  },
+  {
+    "outer_fold": 3,
+    "estimator": "lgbm",
+    "best_inner_cv_score": 0.6881154385742047,
+    "best_params": {
+      "learning_rate": 0.00837,
+      "max_leaf_nodes": 255,
+      "max_depth": 11,
+      "l2_regularization": 10.0,
+      "min_samples_leaf_frac": 0.001
+    },
+    "model_path": "${AURA_PROJECT_DIR}/results_aura_cxr/models/fixed_best_radiomics/lgbm/outer_fold_3/model.pkl",
+    "model_sha256": "f973d367ac69f3e50638602d4f3af3a39b2655e446a069cba4f2a49bc007d749",
+    "outer_train_rows": 17077,
+    "outer_holdout_rows": 4269,
+    "outer_holdout_used_for_selection": false,
+    "auc": 0.7977898579652436,
+    "auprc": 0.5240324590360975,
+    "f1_macro": 0.6877427513841796,
+    "brier": 0.15909507360322334
+  },
+  {
+    "outer_fold": 3,
+    "estimator": "histgb",
+    "best_inner_cv_score": 0.6803890181855895,
+    "best_params": {
+      "learning_rate": 0.04412,
+      "max_leaf_nodes": 255,
+      "max_depth": 12,
+      "l2_regularization": 1.73678,
+      "min_samples_leaf_frac": 0.0051
+    },
+    "model_path": "${AURA_PROJECT_DIR}/results_aura_cxr/models/fixed_best_radiomics/histgb/outer_fold_3/model.pkl",
+    "model_sha256": "f5d3e4c2bad255dd4341a47f9c3bb4ada40ad2f9975e93458e1b43dd063d300b",
+    "outer_train_rows": 17077,
+    "outer_holdout_rows": 4269,
+    "outer_holdout_used_for_selection": false,
+    "auc": 0.7971552185341119,
+    "auprc": 0.516169847610098,
+    "f1_macro": 0.6860036081947027,
+    "brier": 0.16262172158616606
+  },
+  {
+    "outer_fold": 4,
+    "estimator": "lgbm",
+    "best_inner_cv_score": 0.6898156632286763,
+    "best_params": {
+      "learning_rate": 0.06527,
+      "max_leaf_nodes": 255,
+      "max_depth": 7,
+      "l2_regularization": 10.0,
+      "min_samples_leaf_frac": 0.0147
+    },
+    "model_path": "${AURA_PROJECT_DIR}/results_aura_cxr/models/fixed_best_radiomics/lgbm/outer_fold_4/model.pkl",
+    "model_sha256": "fb0ac514ded7af0008aaeb84bc3d909bb3f27247cdcfbdec6eef3a37f1edef7b",
+    "outer_train_rows": 17077,
+    "outer_holdout_rows": 4269,
+    "outer_holdout_used_for_selection": false,
+    "auc": 0.7774559073516478,
+    "auprc": 0.4916875307875442,
+    "f1_macro": 0.6813939493835437,
+    "brier": 0.1639058466969897
+  },
+  {
+    "outer_fold": 4,
+    "estimator": "histgb",
+    "best_inner_cv_score": 0.6818706582302978,
+    "best_params": {
+      "learning_rate": 0.08926,
+      "max_leaf_nodes": 255,
+      "max_depth": 10,
+      "l2_regularization": 1.82153,
+      "min_samples_leaf_frac": 0.0055
+    },
+    "model_path": "${AURA_PROJECT_DIR}/results_aura_cxr/models/fixed_best_radiomics/histgb/outer_fold_4/model.pkl",
+    "model_sha256": "86adac724213563b8a4c4719983dcacdbc9f4b875b03669c436803ad85b9c9ad",
+    "outer_train_rows": 17077,
+    "outer_holdout_rows": 4269,
+    "outer_holdout_used_for_selection": false,
+    "auc": 0.7730548212198347,
+    "auprc": 0.4803400967620549,
+    "f1_macro": 0.6732254077645285,
+    "brier": 0.16893769619973412
+  }
+]

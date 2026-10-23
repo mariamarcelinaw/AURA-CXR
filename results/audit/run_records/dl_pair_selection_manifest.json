@@ -1,0 +1,138 @@
+{
+  "schema": "aura_cxr_dl_pair_selection_q1_v17",
+  "selection_status": "LOCKED",
+  "selection_data": "development_oof",
+  "patient_disjoint_folds": true,
+  "n_development": 21346,
+  "n_splits": 5,
+  "seed": 42,
+  "candidate_models": [
+    "efficientnetv2",
+    "resnet50",
+    "xrv",
+    "eva_x"
+  ],
+  "candidate_display_names": {
+    "efficientnetv2": "EfficientNetV2S",
+    "resnet50": "ResNet50",
+    "xrv": "DenseNet121-XRV",
+    "eva_x": "EVA-X-S"
+  },
+  "candidate_parameter_counts": {
+    "efficientnetv2": 21170946,
+    "resnet50": 24823586,
+    "xrv": 6968084,
+    "eva_x": 21667970
+  },
+  "candidate_parameter_count_sources": {
+    "efficientnetv2": "actual_checkpoint_model_count",
+    "resnet50": "actual_checkpoint_model_count",
+    "xrv": "actual_checkpoint_model_count",
+    "eva_x": "actual_checkpoint_model_count"
+  },
+  "best_individual_oof_model": "xrv",
+  "best_individual_oof_display": "DenseNet121-XRV",
+  "radiomics_member": "radiomics",
+  "radiomics_selected_estimator": "lgbm",
+  "radiomics_selected_display_name": "LightGBM",
+  "radiomics_hyperparameter_policy": "screen four families with two-seed stability, evaluate the same global top two on all outer folds, select one fixed best learner from aggregate development OOF, and refit that same family",
+  "radiomics_selection_manifest": "${AURA_PROJECT_DIR}/results_aura_cxr/reports/radiomics_learner_selection_manifest.json",
+  "radiomics_selection_manifest_sha256": "0ebd547d71a159c4cc1b4732f9c5252d8cc42f01ba87b73043b8e8fda56b8b76",
+  "radiomics_refit_per_outer_fold": true,
+  "radiomics_oof_deployment_family_identical": true,
+  "selected_dl_models": [
+    "xrv",
+    "eva_x"
+  ],
+  "selected_pair_id": "xrv+eva_x",
+  "selected_pair_display": "DenseNet121-XRV + EVA-X-S",
+  "meta_features": [
+    "p_xrv",
+    "p_eva_x",
+    "p_radiomics"
+  ],
+  "meta_feature_count": 3,
+  "meta_learner": "LogisticRegression(class_weight=balanced)",
+  "meta_learner_path": "${AURA_PROJECT_DIR}/results_aura_cxr/models/selected_pair_meta_learner.pkl",
+  "meta_learner_sha256": "f8b1781ef805c0c27dbe12ec4dd5bda7dec8452e62a3c7db728b3b8c68ef345e",
+  "threshold": 0.47000000000000003,
+  "threshold_source": "development_oof",
+  "individual_thresholds": {
+    "xrv": 0.495,
+    "eva_x": 0.47000000000000003,
+    "radiomics": 0.225
+  },
+  "soft_voting_threshold": 0.435,
+  "soft_voting_members": [
+    "xrv",
+    "eva_x",
+    "radiomics"
+  ],
+  "soft_voting_weights": {
+    "xrv": 0.3694867855722349,
+    "eva_x": 0.3571925056178238,
+    "radiomics": 0.2733207088099412
+  },
+  "selection_rule": {
+    "primary": "mean_patient_level_5fold_oof_auc",
+    "auc_tolerance": 0.002,
+    "tie_breakers": [
+      "oof_auprc_desc",
+      "brier_asc",
+      "ece_asc",
+      "fold_auc_sd_asc",
+      "actual_total_parameters_asc"
+    ],
+    "pair_diversity_reported_not_primary": true
+  },
+  "candidate_training_budget_policy": {
+    "policy": "prespecified_architecture_specific_training_with_identical_OOF_folds_and_MC_passes",
+    "fairness_audit_required": true,
+    "test_or_external_feedback_used": false
+  },
+  "selected_pair_metrics": {
+    "pair_id": "xrv+eva_x",
+    "model_1": "xrv",
+    "model_2": "eva_x",
+    "display_pair": "DenseNet121-XRV + EVA-X-S",
+    "oof_auc": 0.8892396192345255,
+    "oof_auprc": 0.7140242938294771,
+    "brier": 0.13986204319476483,
+    "ece": 0.14735517886063737,
+    "log_loss": 0.42295224154198624,
+    "fold_auc_mean": 0.8915555364611162,
+    "fold_auc_sd": 0.006623620935516688,
+    "total_parameters": 28636054,
+    "parameter_count_source": "xrv:actual_checkpoint_model_count;eva_x:actual_checkpoint_model_count",
+    "best_individual_model": "xrv",
+    "delta_auc_vs_best_individual": 0.0031599933571773153,
+    "delong_p_vs_best_individual": 1.291011391790775e-06,
+    "pearson_probability": 0.8804082711764387,
+    "spearman_probability": 0.8857999020155908,
+    "disagreement_rate": 0.12072519441581561,
+    "error_overlap_rate": 0.15393984821512227,
+    "double_fault_rate": 0.15393984821512227,
+    "q_statistic": 0.9371557861658736
+  },
+  "selection_primary_value": 0.8915555364611162,
+  "pooled_oof_auc_reported_secondary": 0.8892396192345255,
+  "oof_artifact_sha256": {
+    "efficientnetv2": "9b00525a980a26365f7c4940cb5b9ae2a37862a6e8e5ba63c7d4964a2b9e5ca4",
+    "resnet50": "2ada738cacf0cfb1dba900fa51ec2924a61894bf658cd386966366b69b12f2dc",
+    "xrv": "739b2d79b84715a2dcc18aad98f8072d7367cc531e207c4e88cdb692f7c71ab7",
+    "eva_x": "97a3fe1b207ccb5777fcd28d6de9047d438fd7d2a61313191cf43302a8df7895",
+    "radiomics": "804a8be03ac8394e699140244642896f3b7e2ea28a8505b7d0be4759c1eb8722"
+  },
+  "fold_manifest_sha256": "ac49ec3d8fee6440182b36ec3c9554636caabd8503d12c8cae2dadff578f454b",
+  "test_set_used_for_selection": false,
+  "test_images_accessed_before_selection": false,
+  "external_set_used_for_selection": false,
+  "kermany_used_for_selection": false,
+  "chexpert_used_for_selection": false,
+  "pair_selection_rule_prespecified": true,
+  "final_test_evaluated_once": true,
+  "created_at": "2026-07-30T14:05:55",
+  "selection_lock_id": "2bb402e76854bcf6b892cc8ec896088e575cdd0da6dc832a725bcedd18ddb7b3",
+  "locked_test_probabilities_generated_at": "2026-07-30T21:27:31",
+  "locked_test_labels_read_during_fusion": false
+}
