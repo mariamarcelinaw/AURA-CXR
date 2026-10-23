@@ -1,0 +1,3 @@
+branch,hook_index,activation_shape,gradient_shape,target,channel_axis,spatial_grid,module_path,module_type,layer_weight,historical_prefix_tokens_dropped,embedding_dim,retained_patch_tokens
+eva_x,1,"[1, 197, 384]","[1, 197, 384]",pre_softmax_logit_class_1,,"[14, 14]",blocks.11.mlp,GluMlp,0.75,1.0,384.0,196.0
+eva_x,2,"[1, 197, 384]","[1, 197, 384]",pre_softmax_logit_class_1,,"[14, 14]",blocks.11,EvaBlock,0.25,1.0,384.0,196.0

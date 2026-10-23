@@ -1,0 +1,39 @@
+{
+  "spatial_xai_scope": "hybrid_cnn_vit_branch_only",
+  "title_xai_phrase": "KEEP_WITH_SCOPE_CLARIFICATION",
+  "localization_baseline_family": {
+    "size": 16,
+    "primary_correction": "Holm",
+    "alpha": 0.05,
+    "holm_significant": 16,
+    "status": "ALL_16_SURVIVE_HOLM"
+  },
+  "tp_fn_family": {
+    "size": 5,
+    "primary_correction": "Holm",
+    "alpha": 0.05,
+    "holm_significant": 5,
+    "note": "canonical inferential report contains 5 metrics; Fig.6 displays 4"
+  },
+  "transformer_sensitivity_family": {
+    "size": 4,
+    "primary_correction": "Holm",
+    "holm_significant": 4,
+    "status": "METHOD_DEPENDENT",
+    "double_adjustment": false
+  },
+  "ig_tp_fn_supporting_family": {
+    "size": 4,
+    "primary_correction": "Holm",
+    "holm_significant": 2,
+    "manuscript_location": "Section 5.4 (text)",
+    "reported_result": "TP > FN preserved for pointing_hit and energy_inside_gt (Holm p < 0.001); not for iou_at_thr (p = 0.68) or localization_score (p = 0.15)"
+  },
+  "faithfulness_multiplicity": "NOT_REQUIRED_DESCRIPTIVE",
+  "outside_lung_multiplicity": "NOT_REQUIRED_DESCRIPTIVE",
+  "segmentation_claim_allowed": false,
+  "causal_explanation_claim_allowed": false,
+  "full_A8_spatial_explanation_allowed": false,
+  "lightgbm_explained_by_spatial_xai": false,
+  "lr_meta_learner_explained_by_spatial_xai": false
+}

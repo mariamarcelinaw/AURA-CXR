@@ -1,0 +1,16 @@
+{
+  "cohort": "Kermany official test partition (frozen external evaluation)",
+  "images": 624,
+  "pneumonia_images": 390,
+  "normal_images": 234,
+  "children": 427,
+  "pneumonia_children": 202,
+  "normal_children": 225,
+  "max_images_per_child": 9,
+  "bootstrap": "class-stratified child-level, 2000 resamples, seed 42",
+  "a8_image_level_ci_reported": [
+    0.9103,
+    0.9498
+  ],
+  "analysis_origin": "post_hoc; released per-case predictions; frozen models and thresholds; no retraining"
+}

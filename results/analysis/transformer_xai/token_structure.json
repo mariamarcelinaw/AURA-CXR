@@ -1,0 +1,60 @@
+{
+  "block0_input_shape": [
+    1,
+    197,
+    384
+  ],
+  "sequence_length": 197,
+  "embedding_dim": 384,
+  "num_patches": 196,
+  "grid": [
+    14,
+    14
+  ],
+  "patch_size": [
+    16,
+    16
+  ],
+  "prefix_tokens_from_shape": 1,
+  "num_prefix_tokens_attribute": 1,
+  "has_cls_token_parameter": true,
+  "cls_token_shape": [
+    1,
+    1,
+    384
+  ],
+  "historical_heuristic_prefix_tokens": 1,
+  "historical_heuristic_equivalent": true,
+  "row_major_tests": [
+    {
+      "patch_row": 0,
+      "patch_col": 0,
+      "observed_token_index": 1,
+      "expected_row_major_index": 1,
+      "pass": true
+    },
+    {
+      "patch_row": 0,
+      "patch_col": 1,
+      "observed_token_index": 2,
+      "expected_row_major_index": 2,
+      "pass": true
+    },
+    {
+      "patch_row": 1,
+      "patch_col": 0,
+      "observed_token_index": 15,
+      "expected_row_major_index": 15,
+      "pass": true
+    },
+    {
+      "patch_row": 13,
+      "patch_col": 13,
+      "observed_token_index": 196,
+      "expected_row_major_index": 196,
+      "pass": true
+    }
+  ],
+  "row_major_verified": true,
+  "other_prefix_tokens": 0
+}

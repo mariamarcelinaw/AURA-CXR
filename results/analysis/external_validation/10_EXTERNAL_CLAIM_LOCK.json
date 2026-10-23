@@ -1,0 +1,42 @@
+{
+  "schema": "aura_cxr_stage10_external_claim_lock_v1",
+  "created_at": "2026-10-02",
+  "external_cohorts": [
+    {
+      "name": "Kermany pediatric chest X-ray official test partition",
+      "population": "pediatric 1–5 years (source literature)",
+      "status": "independent_external_test",
+      "n": 624,
+      "normal": 234,
+      "pneumonia": 390,
+      "adaptation": false
+    }
+  ],
+  "second_external_cohort": {
+    "status": "not_added_path_B",
+    "name": null
+  },
+  "evidence_level": "E2_LIMITED_ONE_DEMOGRAPHICALLY_DISTINCT_EXTERNAL_COHORT",
+  "allowed_claims": {
+    "frozen_cross_dataset_evaluation": true,
+    "cohort_specific_transportability": true,
+    "retained_discrimination_on_evaluated_pediatric_cohort": true,
+    "broad_adult_generalization": false,
+    "multicenter_generalization": false,
+    "universal_generalization": false,
+    "prospective_validation": false,
+    "clinical_validation_in_real_world": false,
+    "clinical_deployment_readiness": false,
+    "external_fairness_validated": false
+  },
+  "unresolved_shifts": [
+    "age",
+    "institution",
+    "acquisition",
+    "prevalence",
+    "case_mix",
+    "label_definition",
+    "image_format/processing"
+  ],
+  "causal_shift_attribution_allowed": false
+}

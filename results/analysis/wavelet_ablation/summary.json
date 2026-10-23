@@ -1,0 +1,137 @@
+{
+  "project": "AURA-CXR",
+  "stage": 4,
+  "analysis_origin": "post_hoc",
+  "cohort": {
+    "name": "RSNA_development",
+    "n": 21346,
+    "positive": 4809,
+    "negative": 16537,
+    "outer_folds": 5
+  },
+  "policies": {
+    "adaptive": {
+      "auc": 0.7855949606088833,
+      "auprc": 0.5081822285442029,
+      "brier": 0.1579838766555708,
+      "macro_f1": 0.590816231366389,
+      "fold_auc_mean": 0.7880876895717209,
+      "fold_auc_sd": 0.0072173258081506
+    },
+    "fixed_haar": {
+      "auc": 0.7990882729519629,
+      "auprc": 0.5323211130769727,
+      "brier": 0.153841546631353,
+      "macro_f1": 0.6061592445458202,
+      "fold_auc_mean": 0.8013578035035966,
+      "fold_auc_sd": 0.0071546102120358
+    },
+    "fixed_db4": {
+      "auc": 0.7927593583884242,
+      "auprc": 0.5223596871606795,
+      "brier": 0.1550616081945358,
+      "macro_f1": 0.598803963992163,
+      "fold_auc_mean": 0.7951979155275665,
+      "fold_auc_sd": 0.0059147071082048
+    },
+    "fixed_sym4": {
+      "auc": 0.7954562604360741,
+      "auprc": 0.5267033578852172,
+      "brier": 0.1542949378839277,
+      "macro_f1": 0.6055948051356238,
+      "fold_auc_mean": 0.7975726112516701,
+      "fold_auc_sd": 0.0066232777201139
+    },
+    "fixed_coif3": {
+      "auc": 0.7877701241799692,
+      "auprc": 0.5151642416288559,
+      "brier": 0.1573000472166234,
+      "macro_f1": 0.5944534166532613,
+      "fold_auc_mean": 0.7901245857621806,
+      "fold_auc_sd": 0.0077030631089059
+    }
+  },
+  "paired_auc": {
+    "adaptive_vs_haar": {
+      "delta": -0.0134933123430796,
+      "ci_low": -0.017588614934518385,
+      "ci_high": -0.009398009751640814,
+      "p_raw": 1.0627694854416784e-10,
+      "p_holm": 4.2510779417667135e-10
+    },
+    "adaptive_vs_db4": {
+      "delta": -0.00716439777954081,
+      "ci_low": -0.010629602570275749,
+      "ci_high": -0.0036991929888058705,
+      "p_raw": 5.072206570317109e-05,
+      "p_holm": 0.00010144413140634217
+    },
+    "adaptive_vs_sym4": {
+      "delta": -0.00986129982719075,
+      "ci_low": -0.013434207386742912,
+      "ci_high": -0.0062883922676385895,
+      "p_raw": 6.318623064856418e-08,
+      "p_holm": 1.8955869194569251e-07
+    },
+    "adaptive_vs_coif3": {
+      "delta": -0.0021751635710858253,
+      "ci_low": -0.005253290850964026,
+      "ci_high": 0.0009029637087923752,
+      "p_raw": 0.16604889348604224,
+      "p_holm": 0.16604889348604224
+    }
+  },
+  "adaptive_selection_distribution": {
+    "haar": 0.08741684624754052,
+    "db4": 0.2975264686592336,
+    "sym4": 0.0093694368968425,
+    "coif3": 0.6056872481963834
+  },
+  "adaptive_selection_counts": {
+    "haar": 1866,
+    "db4": 6351,
+    "sym4": 200,
+    "coif3": 12929
+  },
+  "entropy_margin": {
+    "n": 21346,
+    "exact_max_entropy_ties": 0,
+    "near_tie_tolerance": "NOT_PRESPECIFIED_NO_POST_HOC_THRESHOLD_APPLIED",
+    "margin_mean": 0.07746627861765655,
+    "margin_sd": 0.075259788455391,
+    "margin_min": 1.9073486328125e-06,
+    "margin_q1": 0.0320544242858886,
+    "margin_median": 0.0638604164123535,
+    "margin_q3": 0.0972557067871093,
+    "margin_max": 1.0328187942504885,
+    "winner_entropy_mean": 14.054497735118124,
+    "second_best_entropy_mean": 13.977031456500468
+  },
+  "controls": {
+    "same_patients": true,
+    "same_folds": true,
+    "same_preprocessing": true,
+    "same_feature_schema": true,
+    "feature_dimension": 746,
+    "same_glcm": true,
+    "same_lbp": true,
+    "same_lightgbm": true,
+    "mrfo_retuned_per_policy": false,
+    "leakage_detected": false
+  },
+  "adaptive_golden_equivalence": {
+    "float32_exact": true,
+    "max_abs_difference_vs_original_float32": 2.9798099543398848e-08,
+    "level": "E1_after_float32_roundtrip"
+  },
+  "novelty_classification": "FIXED_WAVELET_SUPERIOR_IN_SOME_COMPARISONS",
+  "best_fixed_by_oof_auc": "fixed_haar",
+  "locked_test_extension": {
+    "status": "NOT_RUN",
+    "decision": "DO_NOT_RUN"
+  },
+  "a8_reselected": false,
+  "locked_threshold_retuned": false,
+  "external_adaptation": false,
+  "stage_4_gate": "PASS"
+}
