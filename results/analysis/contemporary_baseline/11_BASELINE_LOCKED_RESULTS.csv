@@ -1,0 +1,10 @@
+metric,point_estimate,CI_low,CI_high,threshold,ci_method
+ROC_AUC,0.8921613740738843,0.8822811270895714,0.9019261047301135,0.455,"2000 class-stratified percentile bootstrap, seed 42; positive class sampled first"
+AUPRC,0.7261297686778314,0.7033955670979182,0.7485506541971992,0.455,"2000 class-stratified percentile bootstrap, seed 42; positive class sampled first"
+Sensitivity,0.8254364089775561,0.8038237738985868,0.8470490440565254,0.455,"2000 class-stratified percentile bootstrap, seed 42; positive class sampled first"
+Specificity,0.7915356711003627,0.7789600967351874,0.803869407496977,0.455,"2000 class-stratified percentile bootstrap, seed 42; positive class sampled first"
+Accuracy,0.7991757212439116,0.7888722367928063,0.8100412139378044,0.455,"2000 class-stratified percentile bootstrap, seed 42; positive class sampled first"
+F1,0.6494440810987574,0.6338613976598518,0.6653427978484273,0.455,"2000 class-stratified percentile bootstrap, seed 42; positive class sampled first"
+Balanced_Accuracy,0.8084860400389594,0.7959815696550643,0.821123021245757,0.455,"2000 class-stratified percentile bootstrap, seed 42; positive class sampled first"
+MCC,0.5413615260314341,0.5190656429733358,0.5638924817849205,0.455,"2000 class-stratified percentile bootstrap, seed 42; positive class sampled first"
+Brier,0.12580589532571032,0.12201040388841096,0.12970208866060343,0.455,"2000 class-stratified percentile bootstrap, seed 42; positive class sampled first"

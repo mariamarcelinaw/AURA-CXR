@@ -1,0 +1,14 @@
+{
+  "baseline_id": "C1_CONVNEXTV2_TINY",
+  "oof_sha256": "884a79c500e77971b6e7e564f00c0325f822942248044a729001022adfe06c15",
+  "threshold": 0.47000000000000003,
+  "threshold_source": "development_oof",
+  "final_refit_epochs": 5,
+  "final_training_population": 21346,
+  "final_checkpoint": "${AURA_PROJECT_DIR}/STAGE8_RESULTS/contemporary_baseline/checkpoints/final_convnextv2_tiny.pt",
+  "final_checkpoint_sha256": "0b5885bc16baf21119d36a95d015537d47148284760c906d579ee054c5a44ef4",
+  "training_config_sha256": "7e05cdf9aa343552712507efabb4bb25ca99b015650dcbf96e265ee3aee75072",
+  "locked_test_patient_list_sha256": "c69d76990714350302766587bf06f4bc49308c3bdfafc3d92138fa559e63b8ea",
+  "created_before_locked_test": true,
+  "locked_test_tuning": false
+}

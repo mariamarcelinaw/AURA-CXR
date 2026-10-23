@@ -1,0 +1,100 @@
+{
+  "project": "AURA-CXR",
+  "stage": 3,
+  "analysis_origin": "post_hoc",
+  "primary_comparison": {
+    "model_1": "A4",
+    "model_2": "A8",
+    "difference_orientation": "A8_minus_A4",
+    "cohort": "RSNA_locked_test",
+    "n": 5338,
+    "positive": 1203,
+    "negative": 4135
+  },
+  "auc": {
+    "A4": 0.8995679885333019,
+    "A8": 0.8987752304044404,
+    "delta": -0.0007927581288615926,
+    "ci_low": -0.0015655863663767919,
+    "ci_high": -1.9929891346393306e-05,
+    "standard_error": 0.0003943073666716174,
+    "p_value": 0.04437744669007063,
+    "method": "paired_DeLong"
+  },
+  "auprc": {
+    "A4": 0.7365069518711118,
+    "A8": 0.7337712172642205,
+    "delta": -0.00273573460689136,
+    "ci_low": -0.00488846872493622,
+    "ci_high": -0.0006749221981835014,
+    "method": "paired_stratified_bootstrap"
+  },
+  "threshold_metrics": {
+    "Sensitivity": {
+      "A4": 0.8520365752285952,
+      "A8": 0.8512053200332502,
+      "delta": -0.0008312551953449931,
+      "ci_low": -0.006650041562759723,
+      "ci_high": 0.004987531172069848
+    },
+    "Specificity": {
+      "A4": 0.7767835550181379,
+      "A8": 0.7714631197097944,
+      "delta": -0.005320435308343474,
+      "ci_low": -0.009189842805320425,
+      "ci_high": -0.0014510278113664093
+    },
+    "Accuracy": {
+      "A4": 0.7937429748969651,
+      "A8": 0.7894342450355939,
+      "delta": -0.004308729861371208,
+      "ci_low": -0.007493443237167496,
+      "ci_high": -0.00111933308355183
+    },
+    "Balanced_Accuracy": {
+      "A4": 0.8144100651233666,
+      "A8": 0.8113342198715223,
+      "delta": -0.0030758452518442336,
+      "ci_low": -0.006484471509658074,
+      "ci_high": 0.0004684982425033901
+    },
+    "F1": {
+      "A4": 0.6505871152015233,
+      "A8": 0.6456494325346784,
+      "delta": -0.004937682666844911,
+      "ci_low": -0.009197596934490793,
+      "ci_high": -0.00042012097387545165
+    },
+    "MCC": {
+      "A4": 0.5457612307508461,
+      "A8": 0.5392051864630275,
+      "delta": -0.006556044287818641,
+      "ci_low": -0.012680872760596481,
+      "ci_high": -0.0001551492030984062
+    }
+  },
+  "radiomics_coefficient": -0.03641402783417562,
+  "disagreement": {
+    "A4_correct_A8_wrong": 50,
+    "A4_wrong_A8_correct": 27,
+    "both_correct": 4187,
+    "both_wrong": 1074,
+    "mcnemar_exact_p": 0.011672721024383069
+  },
+  "incremental_value_classification": "NEGATIVE_NUMERICAL_INCREMENT",
+  "external_secondary": {
+    "status": "COMPLETED",
+    "comparison": "A8_vs_EVA_XS",
+    "n": 624,
+    "delta_auc": -0.004317335086565954,
+    "ci_low": -0.017991039556494205,
+    "ci_high": 0.009356369383362298,
+    "p_value": 0.5360224425877035,
+    "A8_auc": 0.9308568923953539,
+    "EVA_XS_auc": 0.9351742274819198
+  },
+  "model_reselection": false,
+  "threshold_retuning": false,
+  "external_adaptation": false,
+  "stage_3_gate": "PASS"
+}

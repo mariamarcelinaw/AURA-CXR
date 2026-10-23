@@ -1,0 +1,14 @@
+{
+  "development_csv_sha256": "bb02dabcbb8831edaafd4bf7d1842ffa3fcd0eb726bfd05f8d307475fc7d68bc",
+  "development_oof_folds_csv_sha256": "0b195b012b4719fb0a457e60d6cc48d8c4cb17128b92a1e8908a4f0dc736353a",
+  "locked_rsna_csv_sha256": "fabe28d7443b6aeb41ab4cdf605979029ba63e1a7464b2da3dc48163c13930a9",
+  "test_csv_sha256": "c69d76990714350302766587bf06f4bc49308c3bdfafc3d92138fa559e63b8ea",
+  "training_config_sha256": "b846063163a954ea56da32227c9a989e7c9e38ea7119e5215cc8e104d3d76d48",
+  "baseline_implementation_sha256": "92ffe8dbe304f069cb6705d77fded4d5973e9fca5f215e910d47d4e78da00c64",
+  "runner_sha256": "2ccbc5a4a87a4be66a642eab9f219a05c02ddae908e462e8466e723026f80532",
+  "pretrained_checkpoint_state_hash": "f932cb959aebe4e018f3a60b2902a4d81a9edd2350d1ae441e291443d7f6101c",
+  "final_checkpoint_sha256": "457ef9a05f5ff23272d9534779b842f6ac699ecf626be3d50945d4b41108c709",
+  "a8_probability_source_sha256": "646f9f4334bb0ac9310e523961edd86c58adb460357d07d00f9409e07417e538",
+  "baseline_locked_predictions_sha256": "3201e2dfb3f21c8eeccb421df83a174fa04fd6fbe061ac6418bc574433b01dfc",
+  "baseline_oof_predictions_sha256": "d193df7ee27dd2f581a12ddbbfb7ffaf70839e89af5ece249145450628168ab9"
+}

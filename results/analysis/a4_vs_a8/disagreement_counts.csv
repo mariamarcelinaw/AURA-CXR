@@ -1,0 +1,4 @@
+group,n,both_correct,A4_correct_A8_wrong,A4_wrong_A8_correct,both_wrong,discordant,mcnemar_exact_p
+all,5338,4187,50,27,1074,77,0.011672721024383069
+positive,1203,1018,7,6,172,13,
+negative,4135,3169,43,21,902,64,

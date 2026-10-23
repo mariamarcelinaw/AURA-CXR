@@ -1,0 +1,5 @@
+model,parameters,trainable_parameters,input_size,FLOPs_if_verified,checkpoint_size_bytes,peak_VRAM_bytes,inference_locked_seconds_total,training_GPU_hours_if_measured,note
+C1_CONVNEXTV2_TINY,27868034,27868034,224x224,,111552093,5889938944,46.700095653533936,2.731784115632375,
+DenseNet121-XRV (A8 deep component),6968084,6968084,224x224,,,,,,
+EVA-X-S (A8 deep component),21667970,21667970,224x224,,,,,,
+A8 composite,28636054,,224x224 deep branches + radiomics,,,,,,"28,636,054 is the sum of verified XRV+EVA deep parameters only; A8 also includes LightGBM radiomics and a Logistic Regression meta-learner, so this is not a full-system parameter count."

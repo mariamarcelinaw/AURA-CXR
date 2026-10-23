@@ -1,0 +1,106 @@
+{
+  "baseline_id": "C1_CONVNEXTV2_TINY",
+  "timm_model_id": "convnextv2_tiny.fcmae_ft_in1k",
+  "num_classes": 2,
+  "input_size": 224,
+  "channels": 3,
+  "pretrained": true,
+  "full_finetune": true,
+  "freeze_policy": "none",
+  "drop_path_rate": 0.2,
+  "base_preprocessing": {
+    "dicom_rescale": true,
+    "monochrome1_inversion": true,
+    "per_image_minmax": true,
+    "resize": "PIL_BILINEAR",
+    "size": [
+      224,
+      224
+    ],
+    "rgb_policy": "repeat_grayscale_3x"
+  },
+  "normalization": {
+    "mean": [
+      0.485,
+      0.456,
+      0.406
+    ],
+    "std": [
+      0.229,
+      0.224,
+      0.225
+    ]
+  },
+  "augmentation": {
+    "training_only": true,
+    "horizontal_flip_p": 0.5,
+    "brightness_additive_max_delta": 0.15,
+    "contrast_factor": [
+      0.85,
+      1.15
+    ],
+    "clip": [
+      0.0,
+      1.0
+    ],
+    "mixup": false,
+    "cutmix": false
+  },
+  "loss": {
+    "name": "weighted_focal_cross_entropy",
+    "gamma": 2.0,
+    "class_weights": "N/(2*N_c)",
+    "label_smoothing": 0.0
+  },
+  "optimizer": {
+    "name": "AdamW",
+    "lr": 0.0001,
+    "weight_decay": 0.05,
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08
+  },
+  "scheduler": {
+    "name": "CosineAnnealingLR",
+    "T_max": "max_epochs_per_fold",
+    "eta_min": 1e-06
+  },
+  "gradient_clip_norm": 5.0,
+  "batch_size": 32,
+  "max_epochs": 60,
+  "early_stopping": {
+    "monitor": "inner_val_auc",
+    "mode": "max",
+    "patience": 12,
+    "min_delta": 1e-05,
+    "restore_best": true
+  },
+  "inner_validation": {
+    "fraction": 0.1,
+    "stratified": true,
+    "seed_formula": "42+outer_fold"
+  },
+  "precision": "AMP float16 on CUDA; final softmax float32",
+  "num_workers": 4,
+  "seed": 42,
+  "oof_folds": 5,
+  "threshold": {
+    "min_sensitivity": 0.85,
+    "grid_start": 0.01,
+    "grid_stop": 0.99,
+    "grid_points": 197
+  },
+  "final_refit": {
+    "epoch_rule": "round(median(outer_fold_best_epochs))",
+    "data": "full development only",
+    "validation": false
+  },
+  "locked_test": {
+    "deterministic": true,
+    "test_time_augmentation": false,
+    "calibration": false,
+    "threshold_tuning": false
+  }
+}
