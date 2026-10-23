@@ -1,0 +1,51 @@
+{
+  "origin": "derived_reproduction",
+  "selection_eligible": false,
+  "files": [
+    {
+      "filename": "train.csv",
+      "row_count": 18678,
+      "unique_patient_count": 18678,
+      "sha256": "fc377cab088091256c9adff6737b87e150dee689ab09f862fba968cdba1d5995",
+      "source_raw_sha256": "8975cafc7a1eedae3128fb1a8c83ea90c8d742660808cc9a7e5b6dc87e3e5592",
+      "role": "train",
+      "source_provenance": "Stage1 verified canonical split; private image_path removed only."
+    },
+    {
+      "filename": "val.csv",
+      "row_count": 2668,
+      "unique_patient_count": 2668,
+      "sha256": "4c95610c9ff17a8cde520e72b7bccd4506950a68a479b11676a772324f572318",
+      "source_raw_sha256": "faaeee0125182df7d31bbf2683a138894226bcdf4c97570b7a5d11d90c4e1140",
+      "role": "val",
+      "source_provenance": "Stage1 verified canonical split; private image_path removed only."
+    },
+    {
+      "filename": "test.csv",
+      "row_count": 5338,
+      "unique_patient_count": 5338,
+      "sha256": "c69d76990714350302766587bf06f4bc49308c3bdfafc3d92138fa559e63b8ea",
+      "source_raw_sha256": "ab88fb7871fe24870f1c8b1aea40496908b9ab519da741c13d2ff7aec341c00f",
+      "role": "test",
+      "source_provenance": "Stage1 verified canonical split; private image_path removed only."
+    },
+    {
+      "filename": "development.csv",
+      "row_count": 21346,
+      "unique_patient_count": 21346,
+      "sha256": "bb02dabcbb8831edaafd4bf7d1842ffa3fcd0eb726bfd05f8d307475fc7d68bc",
+      "source_raw_sha256": "1282ea659e78c639251f8991339f18c34a7af2274a969e520c6f6cecd3b8d624",
+      "role": "development",
+      "source_provenance": "Stage1 verified canonical split; private image_path removed only."
+    },
+    {
+      "filename": "development_oof_folds.csv",
+      "row_count": 21346,
+      "unique_patient_count": 21346,
+      "sha256": "0b195b012b4719fb0a457e60d6cc48d8c4cb17128b92a1e8908a4f0dc736353a",
+      "source_raw_sha256": "0b195b012b4719fb0a457e60d6cc48d8c4cb17128b92a1e8908a4f0dc736353a",
+      "role": "development_oof_folds",
+      "source_provenance": "Stage1 verified canonical split; private image_path removed only."
+    }
+  ]
+}
